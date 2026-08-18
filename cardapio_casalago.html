@@ -492,7 +492,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 .bebida:hover .bebida__preco, .bebida:focus-visible .bebida__preco{ color:#C99F71; }
 
 .gaveta-bebidas{ position:absolute; width:0; height:0; overflow:hidden; opacity:0; pointer-events:none; }
-.ficha__foto image-slot{ position:absolute; inset:0; width:100%; height:100%; }
+.ficha__foto img, .ficha__foto image-slot{ position:absolute; inset:0; width:100%; height:100%; }
 
 /* a miniseção do prato: abre por cima da carta, no verde da casa */
 .ficha{
@@ -758,8 +758,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-qtd="" data-preco=""
                data-desc="Massa crocante feita na casa, recheada com queijo cremoso e camarões refogados no azeite com alho-poró. Servido com molho de pimenta da casa (2 unidades)." data-foto="./img/prato-pastel-camarao.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-1" shape="rect" fit="cover" src="./img/prato-pastel-camarao.webp"
-                      placeholder="Pastel de camarão"></image-slot>
+          <img id="cl-prato-1" src="./img/prato-pastel-camarao.webp" alt="Pastel de camarão" loading="lazy" decoding="async">
         </div>
         <h3>Pastel de camarão</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -771,8 +770,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Queijo brie brasileiro de terroir empanado e regado com mel de abelhas selvagens trufado. Acompanha torradas de ervas finas."
                data-foto="./img/prato-brie-mel.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-2" shape="rect" fit="cover" src="./img/prato-brie-mel.webp"
-                      placeholder="Brie brasileiro ao mel"></image-slot>
+          <img id="cl-prato-2" src="./img/prato-brie-mel.webp" alt="Brie brasileiro ao mel" loading="lazy" decoding="async">
         </div>
         <h3>Brie brasileiro ao mel</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -784,8 +782,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Filé mignon cortado na ponta da faca, temperado com alcaparras, ervas frescas do nosso quintal, molho de mostarda Dijon e flor de sal. Finalizado com gema caipira e servido com chips crocantes de batata inglesa."
                data-foto="./img/prato-tartar-mignon.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-3" shape="rect" fit="cover" src="./img/prato-tartar-mignon.webp"
-                      placeholder="Tartar de mignon"></image-slot>
+          <img id="cl-prato-3" src="./img/prato-tartar-mignon.webp" alt="Tartar de mignon" loading="lazy" decoding="async">
         </div>
         <h3>Tartar de mignon</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -797,8 +794,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Burrata artesanal, tomate assado, rúcula selvagem e pesto de manjericão. Acompanha pães da casa."
                data-foto="./img/prato-burrata.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-4" shape="rect" fit="cover" src="./img/prato-burrata.webp"
-                      placeholder="Burrata"></image-slot>
+          <img id="cl-prato-4" src="./img/prato-burrata.webp" alt="Burrata" loading="lazy" decoding="async">
         </div>
         <h3>Burrata</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -810,8 +806,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Croquete de costela desfiada, crocante por fora e macio por dentro, servido com molho agridoce de goiaba, cebola caramelizada e pimenta (4 unidades)."
                data-foto="./img/prato-croquetas-costela.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-croqueta" shape="rect" fit="cover" src="./img/prato-croquetas-costela.webp"
-                      placeholder="Croquetas de costela"></image-slot>
+          <img id="cl-prato-croqueta" src="./img/prato-croquetas-costela.webp" alt="Croquetas de costela" loading="lazy" decoding="async">
         </div>
         <h3>Croquetas de costela</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -823,8 +818,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Seleção de pães de fermentação natural acompanhados de manteiga de ervas, queijo de terroir, cream cheese com cebola caramelizada e paté de alho-poró da casa."
                data-foto="./img/prato-couvert.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-couvert" shape="rect" fit="cover" src="./img/prato-couvert.webp"
-                      placeholder="Couvert da estação"></image-slot>
+          <img id="cl-prato-couvert" src="./img/prato-couvert.webp" alt="Couvert da estação" loading="lazy" decoding="async">
         </div>
         <h3>Couvert da estação</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -836,8 +830,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Lascas de bacalhau Gadus Morhua, arroz jasmim, confit de pimentão, tomate, alho frito, tapenade de olivas pretas, ovos caipiras mexidos, azeite siciliano e crispies de cebola."
                data-foto="./img/prato-arroz-bacalhau.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-bacalhau" shape="rect" fit="cover" src="./img/prato-arroz-bacalhau.webp"
-                      placeholder="Arroz de bacalhau"></image-slot>
+          <img id="cl-prato-bacalhau" src="./img/prato-arroz-bacalhau.webp" alt="Arroz de bacalhau" loading="lazy" decoding="async">
         </div>
         <h3>Arroz de bacalhau</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -849,8 +842,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Filé mignon alto, grelhado na manteiga de ervas frescas da horta, servido com massa fresca envolta em fonduta cremosa de queijo curado da Serra e finalizado com crocante de charcutaria artesanal."
                data-foto="./img/prato-file-pasta.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-file" shape="rect" fit="cover" src="./img/prato-file-pasta.webp"
-                      placeholder="Filé com pasta"></image-slot>
+          <img id="cl-prato-file" src="./img/prato-file-pasta.webp" alt="Filé com pasta" loading="lazy" decoding="async">
         </div>
         <h3>Filé com pasta</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -862,8 +854,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Camarões VM da Costa Verde salteados no azeite de ervas brasileiras, servidos sobre arroz cremoso de queijo brie da Mantiqueira com crocante de alho-poró."
                data-foto="./img/prato-camarao-arroz.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-camarao-arroz" shape="rect" fit="cover" src="./img/prato-camarao-arroz.webp"
-                      placeholder="Camarões com arroz cremoso"></image-slot>
+          <img id="cl-prato-camarao-arroz" src="./img/prato-camarao-arroz.webp" alt="Camarões com arroz cremoso" loading="lazy" decoding="async">
         </div>
         <h3>Camarões, ervas brasileiras, arroz cremoso, alho-poró</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -875,8 +866,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Escalopes de filé mignon ao molho de vinho tinto com risoto cremoso de cogumelos."
                data-foto="./img/prato-escalopes.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-escalopes" shape="rect" fit="cover" src="./img/prato-escalopes.webp"
-                      placeholder="Escalopes ao molho de vinho tinto"></image-slot>
+          <img id="cl-prato-escalopes" src="./img/prato-escalopes.webp" alt="Escalopes ao molho de vinho tinto" loading="lazy" decoding="async">
         </div>
         <h3>Escalopes ao molho de vinho tinto</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -888,8 +878,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Massa fresca ao molho de queijo gorgonzola com pêras glaciadas e nozes."
                data-foto="./img/prato-pappardelle.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-pappardelle" shape="rect" fit="cover" src="./img/prato-pappardelle.webp"
-                      placeholder="Pappardelle de pêra ao gorgonzola"></image-slot>
+          <img id="cl-prato-pappardelle" src="./img/prato-pappardelle.webp" alt="Pappardelle de pêra ao gorgonzola" loading="lazy" decoding="async">
         </div>
         <h3>Pappardelle de pêra ao gorgonzola</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -901,8 +890,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Filé de tilápia de pesca artesanal na manteiga de ervas, musseline de batata-baroa, banana de jardim grelhada, vagem sauté e farofa crocante de castanha com toque de limão-cravo."
                data-foto="./img/prato-peixe.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-peixe" shape="rect" fit="cover" src="./img/prato-peixe.webp"
-                      placeholder="Peixe da casa"></image-slot>
+          <img id="cl-prato-peixe" src="./img/prato-peixe.webp" alt="Peixe da casa" loading="lazy" decoding="async">
         </div>
         <h3>Peixe da casa</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -914,8 +902,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Arroz cremoso de queijo azul com emincé de filé mignon e cebola crispy."
                data-foto="./img/prato-risoto-gorgonzola.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-risoto-gorgonzola" shape="rect" fit="cover" src="./img/prato-risoto-gorgonzola.webp"
-                      placeholder="Risoto de gorgonzola com mignon"></image-slot>
+          <img id="cl-prato-risoto-gorgonzola" src="./img/prato-risoto-gorgonzola.webp" alt="Risoto de gorgonzola com mignon" loading="lazy" decoding="async">
         </div>
         <h3>Risoto de gorgonzola com mignon</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -927,8 +914,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Arroz cremoso de queijo branco fresco, tomates confitados e pesto de manjericão."
                data-foto="./img/prato-risoto-caprese.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-risoto-caprese" shape="rect" fit="cover" src="./img/prato-risoto-caprese.webp"
-                      placeholder="Risotto caprese"></image-slot>
+          <img id="cl-prato-risoto-caprese" src="./img/prato-risoto-caprese.webp" alt="Risotto caprese" loading="lazy" decoding="async">
         </div>
         <h3>Risotto caprese</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -940,8 +926,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Sorvetinho caseiro de queijo com calda quente de goiabada cascão e farofa de castanha."
                data-foto="./img/prato-romeu-julieta.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-romeu-julieta" shape="rect" fit="cover" src="./img/prato-romeu-julieta.webp"
-                      placeholder="Romeu e Julieta"></image-slot>
+          <img id="cl-prato-romeu-julieta" src="./img/prato-romeu-julieta.webp" alt="Romeu e Julieta" loading="lazy" decoding="async">
         </div>
         <h3>Romeu e Julieta</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -953,8 +938,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Cocada cremosa brûlée com sorvete de milho verde e paçoca."
                data-foto="./img/prato-coco-milho.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-coco-milho" shape="rect" fit="cover" src="./img/prato-coco-milho.webp"
-                      placeholder="Coco e milho verde"></image-slot>
+          <img id="cl-prato-coco-milho" src="./img/prato-coco-milho.webp" alt="Coco e milho verde" loading="lazy" decoding="async">
         </div>
         <h3>Coco e milho verde</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -966,8 +950,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
                data-desc="Rabanada de pão Petrópolis, bananas carameladas, doce de leite regional e gelato sabor banoffee."
                data-foto="./img/prato-rabanada.webp">
         <div class="cartao__foto grao">
-          <image-slot id="cl-prato-rabanada" shape="rect" fit="cover" src="./img/prato-rabanada.webp"
-                      placeholder="Rabanada, doce de leite e banana caramelada"></image-slot>
+          <img id="cl-prato-rabanada" src="./img/prato-rabanada.webp" alt="Rabanada, doce de leite e banana caramelada" loading="lazy" decoding="async">
         </div>
         <h3>Rabanada, doce de leite e banana caramelada</h3>
         <span class="cartao__ver">Ver informações</span>
@@ -1166,12 +1149,10 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   <section class="convite">
     <div class="convite__foto">
       <div class="grao">
-        <image-slot id="cl-convite" shape="rect" fit="cover" src="./img/convite-mesa-dentro.webp"
-                    placeholder="A mesa posta, dentro da casa"></image-slot>
+        <img id="cl-convite" src="./img/convite-mesa-dentro.webp" alt="A mesa posta, dentro da casa" loading="lazy" decoding="async">
       </div>
       <div class="grao">
-        <image-slot id="cl-convite-2" shape="rect" fit="cover" src="./img/convite-mesa-fogo.webp"
-                    placeholder="A mesa posta, junto à fogueira"></image-slot>
+        <img id="cl-convite-2" src="./img/convite-mesa-fogo.webp" alt="A mesa posta, junto à fogueira" loading="lazy" decoding="async">
       </div>
     </div>
     <div class="convite__veu"></div>
@@ -1260,42 +1241,24 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 
 <!-- os lugares de foto das bebidas: ficam guardados e entram na ficha ao abrir -->
 <div class="gaveta-bebidas" id="gaveta-bebidas" aria-hidden="true">
-    <image-slot id="bebida-agua" shape="rect" fit="cover"
-                placeholder="Água"></image-slot>
-    <image-slot id="bebida-refrigerante" shape="rect" fit="cover"
-                placeholder="Refrigerante"></image-slot>
-    <image-slot id="bebida-mate-da-casa" shape="rect" fit="cover"
-                placeholder="Mate da casa"></image-slot>
-    <image-slot id="bebida-suco-de-uva-integral" shape="rect" fit="cover"
-                placeholder="Suco de uva integral"></image-slot>
-    <image-slot id="bebida-cerveja" shape="rect" fit="cover"
-                placeholder="Cerveja"></image-slot>
-    <image-slot id="bebida-whisky-johnnie-walker" shape="rect" fit="cover"
-                placeholder="Whisky Johnnie Walker"></image-slot>
-    <image-slot id="bebida-suco-natural" shape="rect" fit="cover"
-                placeholder="Suco natural"></image-slot>
-    <image-slot id="bebida-caipirinha" shape="rect" fit="cover"
-                placeholder="Caipirinha"></image-slot>
-    <image-slot id="bebida-negroni" shape="rect" fit="cover"
-                placeholder="Negroni"></image-slot>
-    <image-slot id="bebida-soda-italiana" shape="rect" fit="cover"
-                placeholder="Soda italiana"></image-slot>
-    <image-slot id="bebida-gasshoper" shape="rect" fit="cover"
-                placeholder="Gasshoper"></image-slot>
-    <image-slot id="bebida-fitzgerald" shape="rect" fit="cover"
-                placeholder="Fitzgerald"></image-slot>
-    <image-slot id="bebida-brisa" shape="rect" fit="cover"
-                placeholder="Brisa"></image-slot>
-    <image-slot id="bebida-fresh-basil" shape="rect" fit="cover"
-                placeholder="Fresh Basil"></image-slot>
-    <image-slot id="bebida-cha-de-ervas-frescas-do-jardim" shape="rect" fit="cover"
-                placeholder="Chá de ervas frescas do jardim"></image-slot>
-    <image-slot id="bebida-cointreau" shape="rect" fit="cover"
-                placeholder="Cointreau"></image-slot>
-    <image-slot id="bebida-licor-43" shape="rect" fit="cover"
-                placeholder="Licor 43"></image-slot>
-    <image-slot id="bebida-licor-da-casa" shape="rect" fit="cover"
-                placeholder="Licor da casa"></image-slot>
+    <img id="bebida-agua" alt="Água" decoding="async">
+    <img id="bebida-refrigerante" alt="Refrigerante" decoding="async">
+    <img id="bebida-mate-da-casa" alt="Mate da casa" decoding="async">
+    <img id="bebida-suco-de-uva-integral" alt="Suco de uva integral" decoding="async">
+    <img id="bebida-cerveja" alt="Cerveja" decoding="async">
+    <img id="bebida-whisky-johnnie-walker" alt="Whisky Johnnie Walker" decoding="async">
+    <img id="bebida-suco-natural" alt="Suco natural" decoding="async">
+    <img id="bebida-caipirinha" alt="Caipirinha" decoding="async">
+    <img id="bebida-negroni" alt="Negroni" decoding="async">
+    <img id="bebida-soda-italiana" alt="Soda italiana" decoding="async">
+    <img id="bebida-gasshoper" alt="Gasshoper" decoding="async">
+    <img id="bebida-fitzgerald" alt="Fitzgerald" decoding="async">
+    <img id="bebida-brisa" alt="Brisa" decoding="async">
+    <img id="bebida-fresh-basil" alt="Fresh Basil" decoding="async">
+    <img id="bebida-cha-de-ervas-frescas-do-jardim" alt="Chá de ervas frescas do jardim" decoding="async">
+    <img id="bebida-cointreau" alt="Cointreau" decoding="async">
+    <img id="bebida-licor-43" alt="Licor 43" decoding="async">
+    <img id="bebida-licor-da-casa" alt="Licor da casa" decoding="async">
 </div>
 
 <div class="chef" id="chef" role="dialog" aria-modal="true" aria-labelledby="chef-nome" hidden>
@@ -1321,7 +1284,6 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 
-<script src="./js/image-slot.js"></script>
 <script>
 (function () {
   'use strict';
@@ -1352,6 +1314,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
       var foto = c.getAttribute('data-foto');
       var slot = c.getAttribute('data-slot');
       var lugar = slot ? document.getElementById(slot) : null;
+      if (lugar && !lugar.getAttribute('src')) lugar = null;
       img.hidden = !!lugar;
       if (lugar) { vao.appendChild(lugar); slotAberto = lugar; }
       if (foto) img.src = foto; else img.removeAttribute('src');
