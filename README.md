@@ -39,9 +39,9 @@ a Vila Botané (busque por `github.io` nas páginas).
 - Não use travessão (—) nos textos: decisão do cliente.
 - Os formulários não vão a servidor nenhum: montam a mensagem e abrem o
   WhatsApp (reservas (24) 99930-9828, cerimonial +55 22 98159-5317).
-- As fotos dos pratos (`img/prato-*.webp`) ainda não vieram do pacote de
-  design; enquanto não entrarem na pasta `img/`, as fichas do cardápio e as
-  duas fotos da seção 03 ficam sem imagem.
+- As bebidas do cardápio ainda não têm foto: a ficha abre no layout sem
+  imagem. Para dar foto a uma delas, basta pôr um `src` no `<img>` que leva o
+  id dela, dentro da gaveta no fim da página.
 
 Este site é gerado a partir do pacote de design pelo script
 `ferramentas/montar-sites.mjs`, um nível acima desta pasta.
