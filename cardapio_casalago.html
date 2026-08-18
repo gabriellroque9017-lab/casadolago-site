@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cardápio — Casa do Lago · Vassouras, Vale do Café</title>
+<meta name="description" content="Casa do Lago, bistrô em Vassouras, no Vale do Café. Cozinha de pequenos produtores, adega de curadoria e experiências no lago.">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
+<link rel="preload" as="image" href="./img/lago.jpeg" fetchpriority="high">
+<link rel="preload" as="image" href="./img/casa-cor-topo-recorte.png">
+<link rel="preload" as="image" href="./img/casa-cor-agua-recorte.png">
+<link rel="preload" as="image" href="./img/casa-marca-topo.png">
+<link rel="preload" as="image" href="./img/casa-marca-agua.png">
+
+<style>
+/* ==========================================================
+   CASA DO LAGO — esboço de arquitetura e layout
+   Irmã da Vila Botané: mesma base tinta/marfim do portal, com o
+   acento deslocado do líquen (sage) para a água do lago.
+   ========================================================== */
+:root{
+  --tinta:#12100E; --tinta-alta:#1B1815;
+  --papel:#FBF8F4;                         /* o creme da carta */
+  --grafite:#2B1A1A; --grafite-mudo:#6E5959;
+  --fio:#D3CCC9; --preco:#ABA09E; --bronze:#A46C32;
+  --marfim:#EDE7DA; --marfim-mudo:#8F887C;
+  --agua:#7A9A99;                  /* acento da casa: o lago */
+  --casca:#3A322A;
+  --brasa:#B0552C;                 /* uso pontual: fogo, forno */
+  --serifa:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --grot:"Jost","Helvetica Neue",Arial,sans-serif;
+  --margem:8vw; --gutter:24px; --secao:150px;
+  --ease:cubic-bezier(.65,0,.35,1);
+  --grao:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (max-width:760px){ :root{ --margem:24px; --secao:84px; } }
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ background:var(--papel); -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:var(--papel); color:var(--grafite);
+  font-family:var(--serifa); font-size:18px; line-height:1.8;
+  -webkit-font-smoothing:antialiased; text-wrap:pretty; overflow-x:hidden;
+}
+img,svg{ display:block; max-width:100%; height:auto; }
+h1,h2,h3,p,dl,dd,figure,ul{ margin:0; }
+ul{ list-style:none; padding:0; }
+a{ color:var(--grafite); text-decoration:none; }
+a:hover{ color:var(--bronze); }
+:focus-visible{ outline:1px solid var(--bronze); outline-offset:4px; }
+::selection{ background:rgba(164,108,50,.22); }
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; }
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+
+.rotulo{
+  font-family:var(--grot); font-weight:400; font-size:11px;
+  letter-spacing:.35em; text-indent:.35em; text-transform:uppercase; color:var(--grafite-mudo);
+}
+.rotulo--claro{ color:var(--grafite); }
+.rotulo--agua{ color:var(--bronze); }
+.num{ font-variant-numeric:tabular-nums; }
+.mudo{ color:var(--grafite-mudo); }
+.prosa{ max-width:62ch; }
+.prosa p + p{ margin-top:1.4em; }
+
+/* elo com sublinhado que cresce da esquerda */
+.elo{
+  position:relative; display:inline-block;
+  font-family:var(--grot); font-size:12px; letter-spacing:.32em; text-indent:.32em;
+  text-transform:uppercase; padding-bottom:8px;
+}
+.elo::after{
+  content:""; position:absolute; left:0; bottom:0; width:100%; height:1px;
+  background:currentColor; transform:scaleX(0); transform-origin:left;
+  transition:transform .6s var(--ease);
+}
+.elo:hover::after,.elo:focus-visible::after{ transform:scaleX(1); }
+
+.pill{
+  display:inline-block; padding:14px 28px;
+  border:1px solid var(--fio); border-radius:999px;
+  font-family:var(--grot); font-size:11px; letter-spacing:.35em; text-indent:.35em;
+  text-transform:uppercase;
+  transition:background .6s var(--ease), border-color .6s var(--ease), color .6s var(--ease);
+}
+.pill:hover{ background:var(--bronze); border-color:var(--bronze); color:var(--papel); }
+
+/* foto com grão estático */
+.grao{ position:relative; overflow:hidden; background:#EFE9E3; }
+.grao > img, .grao > image-slot{ width:100%; height:100%; object-fit:cover; }
+.grao::after{
+  content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background-image:var(--grao); background-size:220px 220px; opacity:.08; mix-blend-mode:overlay;
+}
+
+/* nota de esboço — remover quando o conteúdo real entrar */
+.esboco{
+  position:fixed; left:0; right:0; bottom:0; z-index:80;
+  padding:8px var(--margem); background:var(--tinta-alta);
+  border-top:1px solid var(--casca); text-align:center;
+}
+
+/* ---------- chrome ---------- */
+.chrome{
+  position:fixed; top:0; left:0; right:0; z-index:70;
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+  padding:22px var(--margem); pointer-events:none;
+}
+.chrome > *{ pointer-events:auto; }
+.chrome__menu{ font-family:var(--grot); font-size:11px; letter-spacing:.35em; text-indent:.35em; text-transform:uppercase; mix-blend-mode:difference; color:var(--marfim); }
+.chrome__reservar{
+  font-family:var(--grot); font-size:11px; letter-spacing:.3em; text-indent:.3em; text-transform:uppercase;
+  padding:11px 22px; border:1px solid rgba(237,231,218,.34); border-radius:2px;
+  background:rgba(18,16,14,.5); backdrop-filter:blur(6px);
+  transition:border-color .5s var(--ease), color .5s var(--ease), background .5s var(--ease);
+}
+.chrome__reservar:hover{ border-color:var(--agua); color:var(--agua); background:rgba(18,16,14,.75); }
+
+.veu{
+  position:fixed; inset:0; z-index:75; background:var(--tinta);
+  display:grid; place-items:center; clip-path:inset(0 0 100% 0);
+  transition:clip-path .9s var(--ease); visibility:hidden;
+}
+.veu.is-aberto{ clip-path:inset(0 0 0 0); visibility:visible; }
+.veu__lista{ display:flex; flex-direction:column; gap:clamp(12px,2.4vh,24px); text-align:center; }
+.veu__lista a{ font-family:var(--serifa); font-weight:300; font-size:clamp(1.8rem,5.4vw,3.8rem); line-height:1.05; }
+.veu__fechar{ position:absolute; top:22px; right:var(--margem); font-family:var(--grot); font-size:11px; letter-spacing:.35em; text-indent:.35em; text-transform:uppercase; color:var(--marfim-mudo); }
+.veu__pe{ position:absolute; left:var(--margem); right:var(--margem); bottom:28px; display:flex; gap:26px; flex-wrap:wrap; justify-content:center; }
+
+/* ==========================================================
+   A SOLEIRA · a passagem para a casa irmã
+   Última sala antes de sair. A parede de 1px entre a marca e o texto
+   é literalmente o muro entre as duas casas; atravessá-lo colore a marca.
+   ========================================================== */
+.soleira{ border-top:1px solid var(--casca); background:var(--tinta-alta); }
+.soleira__vao{
+  display:grid; grid-template-columns:auto 1px 1fr;
+  align-items:center; gap:clamp(26px,5vw,78px);
+  padding:clamp(54px,8vw,108px) var(--margem);
+  color:var(--marfim);
+}
+.soleira__marca{ position:relative; display:block; width:clamp(72px,8vw,116px); }
+.soleira__marca img{ position:absolute; left:0; top:0; width:100%; }
+.soleira__marca img:first-child{ position:relative; }
+.soleira__marca .traco{ opacity:.85; transition:opacity .55s var(--ease); }
+.soleira__marca .cor{ opacity:0; transition:opacity .55s var(--ease); }
+.soleira__vao:hover .traco,
+.soleira__vao:focus-visible .traco{ opacity:0; }
+.soleira__vao:hover .cor,
+.soleira__vao:focus-visible .cor{ opacity:1; }
+.soleira__vao:hover .elo::after,
+.soleira__vao:focus-visible .elo::after{ transform:scaleX(1); }
+.soleira__vao:hover .elo,
+.soleira__vao:focus-visible .elo{ color:var(--agua); }
+.soleira__parede{ display:block; width:1px; height:clamp(78px,11vw,148px); background:var(--casca); }
+.soleira__texto{ display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
+.soleira__nome{ font-family:var(--serifa); font-weight:300; font-size:clamp(28px,4.4vw,56px); line-height:1.04; }
+.soleira__linha{ color:var(--marfim-mudo); max-width:46ch; }
+/* o pássaro que sai voando ao atravessar: a folha de 50 quadros da landpage */
+.voo-soleira{
+  position:fixed; left:0; top:0; display:block;
+  width:150px; height:113px;
+  background:url(./img/voo-sheet-aquarela-site.png) 0 0/800% 700% no-repeat;
+  opacity:0; z-index:70; pointer-events:none; transform-origin:50% 50%;
+}
+.cortina-soleira{
+  position:fixed; inset:0; z-index:90; background:var(--tinta);
+  opacity:0; pointer-events:none; transition:opacity .8s var(--ease);
+}
+.cortina-soleira.is-fechando{ opacity:1; }
+@media (prefers-reduced-motion:reduce){ .voo-soleira{ display:none; } }
+@media (max-width:760px){
+  .soleira__vao{ grid-template-columns:1fr; gap:24px; }
+  .soleira__parede{ width:clamp(56px,30vw,120px); height:1px; }
+}
+
+/* ==========================================================
+   00 · CAPA — entrada visual, pouco texto, manifesto
+   FOTO REAL: escolha da Aninha, tela cheia, poética
+   ========================================================== */
+.capa{ position:relative; height:100svh; min-height:540px; }
+.capa__foto{ position:absolute; inset:0; }
+.capa__foto img{ object-position:50% 68%; }   /* sobe o enquadramento: menos copa, mais lago */
+
+/* --- a água do lago ---
+   Um canvas por cima da foto: mesma imagem, com a superfície da água deformada
+   por uma soma de senoides de comprimento e amplitude FIXOS, cuja fase avança
+   no tempo. É onda que viaja, não turbulência respirando — a frequência não
+   muda em instante nenhum. O recorte vem da máscara pintada. */
+.capa__agua{ position:absolute; inset:0; z-index:1; display:block; width:100%; height:100%; }
+.capa__veu{
+  position:absolute; inset:0; z-index:3;
+  background:linear-gradient(180deg, rgba(18,16,14,.66) 0%, rgba(18,16,14,.14) 32%, rgba(18,16,14,.72) 80%, var(--tinta) 100%);
+}
+/* a marca chega colorida e perde a cor, parando no traço branco estático
+   (o inverso da saída do portal, sem a ondulação da água) */
+.capa__marca{
+  position:absolute; top:74px; left:50%; transform:translateX(-50%); z-index:5;
+  width:clamp(75px,9.35vw,139px);
+  filter:drop-shadow(0 2px 12px rgba(18,16,14,.6));
+}
+@media (max-width:760px){ .capa__marca{ width:clamp(61px,18.7vw,102px); } }
+.capa__marca img{ position:absolute; left:0; top:0; width:100%; }
+.capa__marca .base{ position:relative; }        /* dá altura ao conjunto */
+.capa__marca .cor{ opacity:0; }
+.capa__marca .traco{ opacity:.9; }
+/* depois que a marca perde a cor, o mouse traz de volta — !important porque
+   as animações de chegada seguram o estado final das duas camadas */
+.capa__marca.is-pronta{ cursor:default; }
+.capa__marca.is-pronta .cor,
+.capa__marca.is-pronta .traco{ transition:opacity .45s var(--ease), filter .45s var(--ease); }
+.capa__marca.is-pronta:hover .cor{ opacity:1 !important; filter:saturate(1) !important; }
+.capa__marca.is-pronta:hover .traco{ opacity:0 !important; }
+.js .capa__marca .cor{ animation:perdeCor 1.5s var(--ease) .85s both; }
+.js .capa__marca .traco{ animation:ganhaTraco 1.5s var(--ease) .85s both; }
+@keyframes perdeCor{
+  0%   { opacity:1; filter:saturate(1) }
+  55%  { opacity:1; filter:saturate(.18) }
+  100% { opacity:0; filter:saturate(0) }
+}
+@keyframes ganhaTraco{
+  0%   { opacity:0 }
+  55%  { opacity:.35 }
+  100% { opacity:.9 }
+}
+.capa__base{
+  position:absolute; left:var(--margem); right:var(--margem); bottom:clamp(96px,15vh,150px); z-index:4;
+  display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center;
+}
+.capa__fio{ position:absolute; left:50%; bottom:34px; z-index:4; width:1px; height:clamp(26px,5vh,48px); background:var(--marfim-mudo); transform-origin:top; }
+.js .capa__fio{ animation:pulsa 2.8s var(--ease) infinite; }
+@keyframes pulsa{ 0%,100%{transform:scaleY(.55);opacity:.45} 50%{transform:scaleY(1);opacity:1} }
+
+/* ---------- seções ---------- */
+.secao{ padding:var(--secao) var(--margem); }
+.secao--alt{ background:var(--tinta-alta); }
+.cabeca{ display:flex; align-items:baseline; gap:20px; margin-bottom:clamp(34px,5vw,68px); }
+.cabeca h2{ font-weight:300; font-size:clamp(30px,4.8vw,64px); line-height:1.04; }
+.duas{ display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(28px,5vw,84px); align-items:start; }
+.duas--invertida{ grid-template-columns:.95fr 1.05fr; }
+@media (max-width:860px){ .duas,.duas--invertida{ grid-template-columns:1fr; } }
+.retrato{ aspect-ratio:4/5; }
+.faixa{ aspect-ratio:16/7; margin-top:clamp(36px,6vw,80px); }
+/* a casa em três noites: cada foto sobe no seu tempo, sem recorte */
+.galeria{
+  margin-top:clamp(48px,8vw,120px);
+  display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(18px,3vw,44px);
+  align-items:stretch;
+}
+.galeria__peca{ margin:0; display:grid; gap:14px; will-change:transform; }
+.galeria__foto{ aspect-ratio:639 / 843; }
+.js .galeria__peca{ opacity:.001; clip-path:inset(100% 0 0 0); transition:clip-path 1.1s var(--ease), opacity 1.1s var(--ease); }
+.js .galeria__peca.is-vis{ opacity:1; clip-path:inset(0 0 0 0); }
+.galeria figcaption{ color:var(--marfim-mudo); }
+@media (max-width:860px){
+  .galeria{ grid-template-columns:1fr; gap:clamp(26px,6vw,44px); }
+}
+
+/* a assinatura de quem recebe, no fim da página */
+.assinatura{ padding:clamp(56px,8vw,110px) var(--margem); background:var(--tinta-alta); border-top:1px solid var(--casca); }
+.assinatura__vao{
+  margin:0 auto; max-width:820px;
+  display:grid; grid-template-columns:minmax(0,.4fr) minmax(0,1fr);
+  gap:clamp(26px,5vw,60px); align-items:center;
+}
+.assinatura__retrato{ aspect-ratio:4/5; }
+.assinatura__texto{ display:grid; gap:12px; }
+.assinatura__nome{ font-size:clamp(28px,3.6vw,46px); font-weight:300; line-height:1.05; }
+.assinatura__linha{ color:var(--marfim-mudo); max-width:42ch; }
+@media (max-width:760px){ .assinatura__vao{ grid-template-columns:1fr; } }
+
+/* pilares da cozinha */
+.pilares{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(22px,4vw,60px); margin-top:clamp(34px,5vw,64px); }
+@media (max-width:860px){ .pilares{ grid-template-columns:1fr; } }
+.pilar{ border-top:1px solid var(--casca); padding-top:22px; }
+.pilar h3{ font-weight:400; font-size:22px; margin:14px 0 10px; }
+
+/* ==========================================================
+   03 · CARDÁPIO — colunas de carta sobre papel, filete entre elas
+   ========================================================== */
+.menu-cabeca{ padding:clamp(64px,9vw,132px) var(--margem) 0; text-align:center; }
+.menu-cabeca h1{
+  font-weight:400; font-size:clamp(38px,6vw,84px); line-height:1.06;
+  max-width:22ch; margin-inline:auto; letter-spacing:-.01em;
+}
+.menu-cabeca h1 em{ font-style:italic; color:var(--bronze); }
+.menu-cabeca .rotulo{ margin-bottom:20px; }
+.menu-linha{ margin-top:24px; color:var(--grafite-mudo); max-width:52ch; margin-inline:auto; }
+
+.filtros{
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:18px 34px;
+  padding:clamp(40px,6vw,76px) var(--margem) 0;
+}
+.filtros button{
+  font-family:var(--grot); font-size:13px; letter-spacing:.16em; text-indent:.16em;
+  text-transform:uppercase; color:var(--grafite); white-space:nowrap;
+  transition:color .45s var(--ease);
+}
+.filtros button:hover{ color:var(--bronze); }
+.filtros button[aria-pressed="true"]{ color:var(--bronze); }
+
+.pratos{
+  --vao:clamp(20px,2.2vw,32px);
+  display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start;
+  gap:var(--vao);
+  padding:clamp(32px,4.4vw,58px) var(--margem) 0;
+}
+.cartao{ flex:0 1 calc((100% - 2 * var(--vao)) / 3); }
+@media (max-width:1000px){ .cartao{ flex-basis:calc((100% - var(--vao)) / 2); } }
+@media (max-width:640px){ .cartao{ flex-basis:100%; } }
+.cartao{
+  display:grid; align-content:start; text-align:center; cursor:pointer;
+  border:1px solid var(--fio); padding-bottom:clamp(30px,3.4vw,46px);
+  transition:background .55s var(--ease), border-color .55s var(--ease), color .55s var(--ease);
+}
+/* o mesmo verde de mata que preenche as fichas dos vinhos da Vila */
+.cartao:hover, .cartao:focus-visible{ background:#183534; border-color:#183534; color:#C2CDC9; }
+.cartao:hover h3, .cartao:focus-visible h3{ color:#F1EDE4; }
+.cartao__qtd{
+  font-family:var(--grot); font-size:12px; letter-spacing:.16em; text-indent:.16em;
+  text-transform:uppercase; color:var(--preco); transition:color .55s var(--ease);
+}
+.cartao__ver{
+  justify-self:center; margin-top:clamp(18px,2.2vw,28px);
+  font-family:var(--grot); font-size:11px; letter-spacing:.28em; text-indent:.28em;
+  text-transform:uppercase; color:var(--grafite-mudo); white-space:nowrap;
+  padding-bottom:7px; border-bottom:1px solid var(--fio);
+  transition:color .55s var(--ease), border-color .55s var(--ease);
+}
+.cartao:hover .cartao__qtd, .cartao:focus-visible .cartao__qtd{ color:rgba(194,205,201,.8); }
+.cartao:hover .cartao__ver, .cartao:focus-visible .cartao__ver{ color:#C99F71; border-color:rgba(201,159,113,.6); }
+.cartao:hover p, .cartao:focus-visible p{ color:#C2CDC9; }
+.cartao__foto{ position:relative; aspect-ratio:11/9; border-bottom:1px solid var(--fio); }
+.cartao__foto > img, .cartao__foto > image-slot{ transition:transform 1.2s var(--ease); }
+.cartao:hover .cartao__foto > img, .cartao:hover .cartao__foto > image-slot{ transform:scale(1.04); }
+.cartao__preco{
+  display:block; margin-top:clamp(20px,2.4vw,32px);
+  font-family:var(--serifa); font-weight:400; font-size:clamp(19px,1.7vw,24px);
+  color:var(--preco); white-space:nowrap;
+}
+.cartao__cat{ display:none; }
+.cartao h3{
+  font-weight:600; font-size:clamp(21px,1.9vw,28px); line-height:1.22;
+  margin:clamp(10px,1.2vw,16px) clamp(18px,2vw,28px) clamp(12px,1.4vw,18px);
+}
+.cartao p{
+  color:var(--grafite-mudo); font-size:16px; line-height:1.66;
+  max-width:34ch; margin-inline:auto; padding-inline:clamp(18px,2vw,28px);
+}
+.cartao[hidden]{ display:none; }
+
+/* ---------- o menu do chef: uma fileira inteira, no dourado da casa ---------- */
+.cartao--chef{
+  flex-basis:100%; grid-template-columns:minmax(0,1fr) auto; align-items:center;
+  text-align:left; padding:clamp(24px,2.6vw,38px) clamp(24px,2.8vw,44px);
+  border-color:rgba(164,108,50,.42); gap:clamp(18px,3vw,48px);
+}
+.cartao--chef:hover, .cartao--chef:focus-visible{ background:#A46C32; border-color:#A46C32; }
+.cartao--chef__vao{ display:grid; gap:10px; }
+.cartao--chef .rotulo{ color:var(--bronze); transition:color .55s var(--ease); }
+.cartao--chef h3{
+  margin:0; font-size:clamp(24px,2.4vw,36px); font-weight:400; line-height:1.1;
+  transition:color .55s var(--ease);
+}
+.cartao--chef p{ margin:0; padding:0; max-width:62ch; }
+.cartao--chef__ver{
+  justify-self:end; align-self:center; white-space:nowrap;
+  font-family:var(--grot); font-size:11px; letter-spacing:.28em; text-indent:.28em;
+  text-transform:uppercase; color:var(--bronze);
+  padding-bottom:7px; border-bottom:1px solid rgba(164,108,50,.5);
+  transition:color .55s var(--ease), border-color .55s var(--ease);
+}
+.cartao--chef:hover .rotulo, .cartao--chef:focus-visible .rotulo,
+.cartao--chef:hover h3, .cartao--chef:focus-visible h3,
+.cartao--chef:hover .cartao--chef__ver, .cartao--chef:focus-visible .cartao--chef__ver{ color:#FBF3E6; }
+.cartao--chef:hover .cartao--chef__ver, .cartao--chef:focus-visible .cartao--chef__ver{ border-color:rgba(251,243,230,.55); }
+.cartao--chef:hover p, .cartao--chef:focus-visible p{ color:rgba(251,243,230,.86); }
+@media (max-width:780px){
+  .cartao--chef{ grid-template-columns:1fr; text-align:center; }
+  .cartao--chef__ver{ justify-self:center; }
+  .cartao--chef p{ margin-inline:auto; }
+}
+
+/* a sala do menu do chef: fotos passando e a sequência ao lado */
+.chef{
+  position:fixed; inset:0; z-index:96; display:grid; place-items:center;
+  padding:clamp(14px,3vw,40px); background:rgba(18,12,6,.76); backdrop-filter:blur(4px);
+}
+.chef[hidden]{ display:none; }
+.chef__caixa::-webkit-scrollbar{ width:0; height:0; }
+.chef__caixa{
+  position:relative; width:min(1180px,100%); max-height:92svh;
+  overflow-y:auto; overflow-x:hidden; scrollbar-width:none; -ms-overflow-style:none;
+  background:#241A12; color:#E3D6C4;
+  display:grid; grid-template-columns:minmax(0,.62fr) minmax(0,1fr);
+  gap:clamp(28px,4.4vw,72px);
+  padding:clamp(28px,4vw,60px) clamp(28px,4.4vw,72px);
+}
+@media (max-width:860px){ .chef__caixa{ grid-template-columns:1fr; } }
+.chef__carrossel{
+  position:relative; align-self:start; aspect-ratio:52/79;
+  border-radius:999px; overflow:hidden; background:#1A120B;
+}
+.chef__carrossel img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0; transform:scale(1.06); transition:opacity 1.4s var(--ease), transform 6s linear;
+}
+.chef__carrossel img.is-visivel{ opacity:1; transform:scale(1); }
+.chef__pontos{
+  position:absolute; left:0; right:0; bottom:18px; z-index:2;
+  display:flex; justify-content:center; gap:8px;
+}
+.chef__pontos span{
+  width:5px; height:5px; border-radius:999px; background:rgba(251,243,230,.35);
+  transition:background .5s var(--ease), transform .5s var(--ease);
+}
+.chef__pontos span.is-ativo{ background:#D8A46A; transform:scale(1.5); }
+.chef__prosa{ display:grid; gap:clamp(18px,2.2vw,28px); align-content:center; justify-items:start; }
+.chef__topo{
+  display:flex; align-items:center; gap:clamp(14px,2vw,26px);
+  font-family:var(--grot); font-size:12px; letter-spacing:.26em; text-indent:.26em;
+  text-transform:uppercase; color:#D8A46A;
+}
+.chef__risco{ width:1px; height:16px; background:rgba(216,164,106,.5); }
+.chef__prosa h3{
+  margin:0; font-weight:400; font-size:clamp(28px,3.2vw,46px); line-height:1.08; color:#FBF3E6;
+}
+.chef__linha{ margin:0; max-width:50ch; font-size:clamp(16px,1.25vw,19px); line-height:1.78; color:#E3D6C4; }
+.chef__etapas{ display:grid; gap:14px; width:100%; max-width:52ch; }
+.chef__etapas li{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:14px; align-items:baseline; }
+.chef__etapas .num-etapa{
+  font-family:var(--grot); font-size:11px; letter-spacing:.18em; color:#D8A46A;
+}
+.chef__etapas strong{ font-weight:600; font-size:16px; color:#FBF3E6; }
+.chef__etapas em{ display:block; font-style:normal; font-size:15px; line-height:1.6; color:#BFAF99; }
+.chef__pe{ margin:0; font-size:15px; line-height:1.7; color:#BFAF99; max-width:46ch; }
+.chef__x{
+  position:absolute; top:14px; left:16px; z-index:3;
+  width:44px; height:44px; display:grid; place-items:center;
+  font-size:19px; color:rgba(216,164,106,.85); background:none;
+  transition:color .35s var(--ease), transform .35s var(--ease);
+}
+.chef__x:hover, .chef__x:focus-visible{ color:#FBF3E6; transform:rotate(90deg); }
+@media (prefers-reduced-motion:reduce){
+  .chef__carrossel img{ transition:opacity .01s; transform:none; }
+}
+
+/* ---------- a carta de bebidas: só letra, como a folha impressa ---------- */
+.carta-bebidas{
+  display:grid; gap:clamp(44px,5.2vw,84px);
+  padding:clamp(36px,4.4vw,62px) var(--margem) 0;
+}
+.carta-bebidas[hidden]{ display:none; }
+.carta-bebidas__titulo{
+  font-family:var(--grot); font-size:13px; font-weight:600;
+  letter-spacing:.34em; text-indent:.34em; text-transform:uppercase;
+  text-align:center; color:var(--grafite);
+}
+.carta-bebidas__lista{
+  margin-top:clamp(22px,2.6vw,34px);
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2px clamp(30px,4vw,64px);
+}
+@media (max-width:780px){ .carta-bebidas__lista{ grid-template-columns:1fr; } }
+.bebida{
+  display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:baseline;
+  gap:6px clamp(16px,2vw,28px); text-align:left; cursor:pointer;
+  padding:clamp(14px,1.5vw,20px) clamp(12px,1.4vw,18px);
+  border-bottom:1px solid var(--fio);
+  transition:background .5s var(--ease), color .5s var(--ease), border-color .5s var(--ease);
+}
+.bebida:hover, .bebida:focus-visible{ background:#183534; border-color:#183534; }
+.bebida__nome{
+  font-family:var(--grot); font-size:14px; font-weight:600;
+  letter-spacing:.14em; text-indent:.14em; text-transform:uppercase; color:var(--grafite);
+  transition:color .5s var(--ease);
+}
+.bebida__preco{
+  font-family:var(--serifa); font-size:clamp(17px,1.5vw,21px); color:var(--preco);
+  white-space:nowrap; transition:color .5s var(--ease);
+}
+.bebida__linha{
+  grid-column:1 / -1; font-size:15px; line-height:1.6; color:var(--grafite-mudo);
+  max-width:46ch; transition:color .5s var(--ease);
+}
+.bebida:hover .bebida__nome, .bebida:focus-visible .bebida__nome{ color:#F1EDE4; }
+.bebida:hover .bebida__linha, .bebida:focus-visible .bebida__linha{ color:#C2CDC9; }
+.bebida:hover .bebida__preco, .bebida:focus-visible .bebida__preco{ color:#C99F71; }
+
+.gaveta-bebidas{ position:absolute; width:0; height:0; overflow:hidden; opacity:0; pointer-events:none; }
+.ficha__foto image-slot{ position:absolute; inset:0; width:100%; height:100%; }
+
+/* a miniseção do prato: abre por cima da carta, no verde da casa */
+.ficha{
+  position:fixed; inset:0; z-index:95; display:grid; place-items:center;
+  padding:clamp(14px,3vw,40px); background:rgba(10,20,18,.72); backdrop-filter:blur(4px);
+}
+.ficha[hidden]{ display:none; }
+.ficha__caixa{
+  position:relative; width:min(1180px,100%); max-height:92svh; overflow:auto;
+  background:#183534; color:#C2CDC9;
+  display:grid; grid-template-columns:minmax(0,.52fr) minmax(0,1fr);
+  gap:clamp(28px,4vw,64px);
+  padding:clamp(28px,4vw,60px) clamp(28px,4.4vw,72px);
+}
+@media (max-width:860px){ .ficha__caixa{ grid-template-columns:1fr; } }
+/* a foto em cápsula, como na referência */
+.ficha__foto{
+  position:relative; align-self:start; aspect-ratio:52/79;
+  border-radius:999px; overflow:hidden; background:#12241F;
+}
+.ficha__foto img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.ficha__prosa{
+  display:grid; gap:clamp(18px,2.2vw,30px); align-content:center; justify-items:start;
+  padding-block:clamp(6px,2vw,28px);
+}
+.ficha__linha-topo{
+  display:flex; align-items:center; gap:clamp(16px,2vw,28px);
+  font-family:var(--grot); font-size:clamp(12px,1vw,14px); letter-spacing:.26em; text-indent:.26em;
+  text-transform:uppercase; color:#C99F71;
+}
+.ficha__linha-topo span{ white-space:nowrap; }
+.ficha__risco{ width:1px; height:16px; background:rgba(201,159,113,.5); }
+.ficha__prosa h3{
+  font-weight:400; font-size:clamp(34px,4.4vw,62px); line-height:1.04;
+  color:#F1EDE4; text-wrap:balance;
+}
+.ficha__desc{ max-width:none; font-size:clamp(18px,1.75vw,26px); line-height:1.62; color:#C2CDC9; }
+.ficha__notas{ display:flex; flex-direction:column; gap:14px; margin:clamp(2px,.6vw,8px) 0; }
+.ficha__notas li{ display:flex; align-items:baseline; gap:14px; line-height:1.5; }
+.ficha__notas li::before{
+  content:"✽"; flex:0 0 auto; color:#C99F71; font-size:clamp(15px,1.15vw,18px); line-height:1.4;
+}
+.ficha__notas strong{ font-family:var(--grot); font-size:clamp(15px,1.15vw,18px); font-weight:600; letter-spacing:.02em; color:#F1EDE4; }
+.ficha__preco{
+  font-family:var(--serifa); font-size:clamp(26px,2.8vw,40px); line-height:1; color:#C99F71;
+}
+.ficha__x{
+  position:absolute; top:14px; left:16px; z-index:3;
+  width:44px; height:44px; display:grid; place-items:center;
+  font-size:19px; color:rgba(201,159,113,.85); background:none;
+  transition:color .35s var(--ease), transform .35s var(--ease);
+}
+.ficha__x:hover, .ficha__x:focus-visible{ color:#F1EDE4; transform:rotate(90deg); }
+.ficha--sem-foto .ficha__caixa{ grid-template-columns:1fr; }
+.ficha--sem-foto .ficha__prosa{ justify-items:start; }
+
+/* ---------- cursor customizado (desktop) — o mesmo da Casa do Lago ---------- */
+.cursor{
+  position:fixed; top:0; left:0; z-index:120;
+  width:34px; height:34px; margin:-17px 0 0 -17px;
+  border:1px solid rgba(99,107,47,.5); border-radius:50%;
+  pointer-events:none; opacity:0; will-change:transform;
+}
+@media (max-width:900px),(hover:none){ .cursor{ display:none; } }
+@media (prefers-reduced-motion:reduce){ .cursor{ display:none; } }
+
+/* o convite ao fim da carta, sobre foto */
+.convite{ position:relative; margin-top:clamp(72px,10vw,140px); display:grid; }
+/* duas fotos lado a lado formam o fundo do convite */
+.convite__foto{
+  position:absolute; inset:0;
+  display:grid; grid-template-columns:1fr 1fr; gap:0;
+}
+.convite__foto > .grao{ position:relative; min-height:0; }
+.convite__veu{ position:absolute; inset:0; z-index:2; background:none; }
+.convite__foto .grao::after{ opacity:0; }        /* sem grão: a fotografia como veio */
+.convite h2{ color:#F1EDE4; }
+.convite .rotulo{ color:rgba(237,231,218,.8); }
+.convite .pill{ color:var(--marfim); border-color:rgba(237,231,218,.5); }
+.convite .pill:hover{ background:var(--marfim); border-color:var(--marfim); color:var(--tinta); }
+.convite__vao{
+  position:relative; z-index:3; display:grid; gap:28px; justify-items:center; text-align:center;
+  text-shadow:0 1px 3px rgba(12,10,8,.7), 0 2px 20px rgba(12,10,8,.8);
+  padding:clamp(150px,24vw,320px) var(--margem) clamp(74px,12vw,150px);
+}
+.convite h2{ font-weight:300; font-size:clamp(28px,4.2vw,58px); line-height:1.1; max-width:none; color:#C99F71; }
+.convite h2 span{ display:block; white-space:nowrap; }
+.convite .pill{ white-space:nowrap; }
+
+/* ==========================================================
+   04 · ADEGA
+   ========================================================== */
+.garrafas{ border-top:1px solid var(--casca); margin-top:clamp(30px,5vw,54px); }
+.garrafa{
+  display:grid; grid-template-columns:minmax(120px,.3fr) 1fr minmax(90px,auto);
+  gap:clamp(14px,3vw,40px); align-items:baseline;
+  padding:clamp(18px,2.4vw,28px) 0; border-bottom:1px solid var(--casca);
+}
+@media (max-width:760px){ .garrafa{ grid-template-columns:1fr; gap:6px; } }
+.garrafa__nome{ font-size:22px; }
+
+/* ==========================================================
+   05 · EXPERIÊNCIAS
+   ========================================================== */
+.agenda{ border-top:1px solid var(--casca); margin-top:clamp(30px,5vw,54px); }
+.evento{
+  display:grid; grid-template-columns:minmax(96px,.22fr) 1fr minmax(150px,auto);
+  gap:clamp(16px,3vw,44px); align-items:center;
+  padding:clamp(20px,2.6vw,32px) 0; border-bottom:1px solid var(--casca);
+}
+@media (max-width:860px){ .evento{ grid-template-columns:1fr; gap:10px; align-items:start; } }
+.evento__dia{ font-size:clamp(26px,3.4vw,42px); font-weight:300; line-height:1; }
+.evento__dia small{ display:block; font-size:.3em; letter-spacing:.3em; color:var(--marfim-mudo); margin-top:8px; }
+.evento h3{ font-weight:400; font-size:23px; margin-bottom:6px; }
+
+/* ==========================================================
+   06 · RESERVAS
+   ========================================================== */
+.reservas{ padding:var(--secao) var(--margem); background:var(--tinta-alta); }
+.campo{ position:relative; padding-top:24px; }
+.campo label{
+  position:absolute; top:0; left:0;
+  font-family:var(--grot); font-size:11px; letter-spacing:.35em; text-indent:.35em;
+  text-transform:uppercase; color:var(--marfim-mudo); transition:color .4s var(--ease);
+}
+.campo input,.campo select,.campo textarea{
+  width:100%; background:none; border:0; border-bottom:1px solid var(--casca);
+  color:var(--marfim); font-family:var(--serifa); font-size:18px; line-height:1.6;
+  padding:8px 0 12px; border-radius:0;
+}
+.campo select{ appearance:none; }
+.campo select option{ background:var(--tinta); }
+.campo input:focus,.campo select:focus,.campo textarea:focus{ outline:0; border-bottom-color:var(--agua); }
+.campo:focus-within label{ color:var(--agua); }
+.formulario{ display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.formulario .largo{ grid-column:1/-1; }
+@media (max-width:640px){ .formulario{ grid-template-columns:1fr; } }
+.pratica{ border-top:1px solid var(--casca); }
+.pratica__linha{ display:flex; justify-content:space-between; gap:20px; padding:15px 0; border-bottom:1px solid var(--casca); }
+
+/* ---------- rodapé: mesma arquitetura da Vila Botané, com os horários ---------- */
+.rodape{ padding:clamp(54px,7vw,92px) var(--margem) 56px; background:var(--tinta-alta); color:var(--marfim); }
+.rodape a{ color:var(--marfim); }
+.rodape a:hover{ color:var(--agua); }
+.rodape .rotulo{ color:rgba(237,231,218,.72); }
+.rodape .mudo{ color:rgba(237,231,218,.6); }
+.rodape__serra{
+  width:100%; height:clamp(44px,6.4vw,104px); color:rgba(237,231,218,.2);
+  margin-bottom:clamp(40px,6vw,72px);
+}
+/* as duas cristas balançam de leve quando o mouse passa */
+.rodape__serra path{
+  transform-box:fill-box; transform-origin:50% 50%;
+  transition:transform 1.1s var(--ease); will-change:transform;
+}
+.rodape__serra:hover path:nth-of-type(1){ animation:serraBalanco 4.8s ease-in-out infinite; }
+.rodape__serra:hover path:nth-of-type(2){ animation:serraBalanco 6.2s ease-in-out .4s infinite; }
+@keyframes serraBalanco{
+  0%,100%{ transform:translate3d(0,0,0) }
+  25%    { transform:translate3d(-7px,-3px,0) }
+  50%    { transform:translate3d(0,2.5px,0) }
+  75%    { transform:translate3d(7px,-2px,0) }
+}
+@media (prefers-reduced-motion:reduce){
+  .rodape__serra:hover path{ animation:none; }
+}
+.rodape__grade{
+  display:grid; grid-template-columns:minmax(0,1fr) auto auto minmax(0,1fr);
+  column-gap:clamp(28px,3.4vw,56px); row-gap:36px; align-items:start;
+}
+.rodape__meio{ justify-self:center; }
+.rodape__marca{ color:var(--agua); text-align:center; }
+.rodape__endereco{ white-space:nowrap; }
+/* o lema quebra sozinho: com quatro colunas ele não cabe em linha única */
+.rodape__lema{ font-size:clamp(13px,1.3vw,16px); line-height:1.9; max-width:34ch; }
+.rodape__horarios{ display:grid; gap:6px; justify-items:center; }
+.rodape__titulo-hora{ color:var(--brasa); text-align:center; }
+.rodape__hora{ display:grid; grid-template-columns:auto auto; gap:6px 22px; width:100%; }
+.rodape__hora span:last-child{ text-align:right; }
+/* a barra de volta, no topo da página do cardápio */
+.volta{
+  display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
+  padding:clamp(22px,3vw,34px) var(--margem);
+  border-bottom:1px solid var(--fio);
+}
+.pular{
+  position:absolute; left:-9999px; top:0;
+  font-family:var(--grot); font-size:11px; letter-spacing:.3em; text-transform:uppercase;
+}
+.pular:focus{ left:var(--margem); top:12px; z-index:20; color:var(--agua); }
+.rodape__rede{ display:flex; align-items:center; gap:12px; }
+.rodape__rede .elo{ line-height:32.4px; }
+.rodape .elo{ color:var(--agua); }
+.rodape a:hover .elo::after,
+.rodape a:focus-visible .elo::after{ transform:scaleX(1); }
+.rodape__pe{ display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-top:clamp(40px,6vw,72px); padding-top:20px; border-top:1px solid var(--casca); }
+.rodape__credito{
+  margin-top:18px; text-align:center;
+  font-family:var(--grot); font-size:11px; letter-spacing:.16em; line-height:1.7;
+  color:rgba(237,231,218,.5);
+}
+.rodape__autor{
+  color:inherit; text-decoration:none; border-bottom:1px solid transparent;
+  transition:color .45s var(--ease), border-color .45s var(--ease);
+}
+.rodape__autor:hover,
+.rodape__autor:focus-visible{ color:rgba(237,231,218,.86); border-bottom-color:rgba(237,231,218,.42); }
+@media (max-width:1000px){
+  .rodape__grade{ grid-template-columns:1fr 1fr; }
+  .rodape__meio{ justify-self:start; }
+  .rodape__endereco{ white-space:normal; }
+  .rodape__marca{ text-align:left; }
+  .rodape__meio > div{ text-align:left !important; }
+}
+@media (max-width:640px){ .rodape__grade{ grid-template-columns:1fr; } }
+
+/* ---------- entradas ---------- */
+.rev{ transition:clip-path .7s var(--ease), opacity .7s var(--ease); }
+.js .rev{ clip-path:inset(100% 0 0 0); opacity:.001; }
+.js .rev.is-vis{ clip-path:inset(0 0 0 0); opacity:1; }
+.js .rev.sem-transicao{ transition:none; }
+
+@media (max-width:900px),(hover:none){ .cursor{ display:none; } }
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ animation:none !important; transition:none !important; }
+  .capa__agua{ display:none; }
+  .js .rev,.rev{ clip-path:none; opacity:1; }
+  .capa__marca .cor{ opacity:0; }
+  .capa__marca .traco{ opacity:.9; }
+  .cursor{ display:none; }
+}
+</style>
+</head>
+<body>
+
+<a class="pular" href="#cardapio">Ir para o cardápio</a>
+
+<header class="volta">
+  <a class="elo rotulo--agua" href="./index.html">← Casa do Lago</a>
+  <a class="elo rotulo" href="./index.html#reservas">Reservar uma mesa</a>
+</header>
+
+<main>
+  <section class="menu-cabeca" id="cardapio">
+    <p class="rotulo rev">A carta</p>
+    <h1 class="rev">Menu <em>Casa do Lago</em> Bistrô</h1>
+    <p class="menu-linha rev">Menu sazonal</p>
+  </section>
+
+  <div class="filtros rev" role="group" aria-label="Categoria do cardápio">
+    <button data-cat="entradas" aria-pressed="true">Entradas</button>
+    <button data-cat="principais" aria-pressed="false">Principais</button>
+    <button data-cat="doces" aria-pressed="false">Sobremesas</button>
+    <button data-cat="bebidas" aria-pressed="false">Bebidas</button>
+    <button data-cat="chef" aria-pressed="false">Menu do chef</button>
+  </div>
+
+  <section class="pratos" aria-label="Pratos">
+      <article class="cartao rev" data-cat="entradas" role="button" tabindex="0"
+               data-nome="Pastel de camarão" data-cat-nome="Entrada"
+               data-sub="2 unidades" data-notas="Massa crocante da casa|Queijo cremoso e camarão|Molho de pimenta da casa"
+               data-qtd="" data-preco=""
+               data-desc="Massa crocante feita na casa, recheada com queijo cremoso e camarões refogados no azeite com alho-poró. Servido com molho de pimenta da casa (2 unidades)." data-foto="./img/prato-pastel-camarao.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-1" shape="rect" fit="cover" src="./img/prato-pastel-camarao.webp"
+                      placeholder="Pastel de camarão"></image-slot>
+        </div>
+        <h3>Pastel de camarão</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="entradas" role="button" tabindex="0"
+               data-nome="Brie brasileiro ao mel" data-cat-nome="Entrada"
+               data-sub="com torradas" data-notas="Brie brasileiro de terroir|Mel de abelhas selvagens trufado|Torradas de ervas finas"
+               data-qtd="" data-preco=""
+               data-desc="Queijo brie brasileiro de terroir empanado e regado com mel de abelhas selvagens trufado. Acompanha torradas de ervas finas."
+               data-foto="./img/prato-brie-mel.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-2" shape="rect" fit="cover" src="./img/prato-brie-mel.webp"
+                      placeholder="Brie brasileiro ao mel"></image-slot>
+        </div>
+        <h3>Brie brasileiro ao mel</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="entradas" role="button" tabindex="0"
+               data-nome="Tartar de mignon" data-cat-nome="Entrada"
+               data-sub="na ponta da faca" data-notas="Filé mignon cortado à faca|Gema caipira e flor de sal|Chips crocantes de batata"
+               data-qtd="" data-preco=""
+               data-desc="Filé mignon cortado na ponta da faca, temperado com alcaparras, ervas frescas do nosso quintal, molho de mostarda Dijon e flor de sal. Finalizado com gema caipira e servido com chips crocantes de batata inglesa."
+               data-foto="./img/prato-tartar-mignon.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-3" shape="rect" fit="cover" src="./img/prato-tartar-mignon.webp"
+                      placeholder="Tartar de mignon"></image-slot>
+        </div>
+        <h3>Tartar de mignon</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="entradas" role="button" tabindex="0"
+               data-nome="Burrata" data-cat-nome="Entrada"
+               data-sub="com pães da casa" data-notas="Burrata artesanal|Tomate assado e rúcula selvagem|Pesto de manjericão"
+               data-qtd="" data-preco=""
+               data-desc="Burrata artesanal, tomate assado, rúcula selvagem e pesto de manjericão. Acompanha pães da casa."
+               data-foto="./img/prato-burrata.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-4" shape="rect" fit="cover" src="./img/prato-burrata.webp"
+                      placeholder="Burrata"></image-slot>
+        </div>
+        <h3>Burrata</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="entradas" role="button" tabindex="0"
+               data-nome="Croquetas de costela" data-cat-nome="Entrada"
+               data-sub="4 unidades" data-notas="Costela desfiada|Molho agridoce de goiaba|Cebola caramelizada e pimenta"
+               data-qtd="" data-preco=""
+               data-desc="Croquete de costela desfiada, crocante por fora e macio por dentro, servido com molho agridoce de goiaba, cebola caramelizada e pimenta (4 unidades)."
+               data-foto="./img/prato-croquetas-costela.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-croqueta" shape="rect" fit="cover" src="./img/prato-croquetas-costela.webp"
+                      placeholder="Croquetas de costela"></image-slot>
+        </div>
+        <h3>Croquetas de costela</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="entradas" role="button" tabindex="0"
+               data-nome="Couvert da estação" data-cat-nome="Entrada"
+               data-sub="para a mesa" data-notas="Pães de fermentação natural|Manteiga de ervas e queijo de terroir|Cream cheese com cebola caramelizada|Paté de alho-poró da casa"
+               data-qtd="" data-preco=""
+               data-desc="Seleção de pães de fermentação natural acompanhados de manteiga de ervas, queijo de terroir, cream cheese com cebola caramelizada e paté de alho-poró da casa."
+               data-foto="./img/prato-couvert.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-couvert" shape="rect" fit="cover" src="./img/prato-couvert.webp"
+                      placeholder="Couvert da estação"></image-slot>
+        </div>
+        <h3>Couvert da estação</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="principais" role="button" tabindex="0"
+               data-nome="Arroz de bacalhau" data-cat-nome="Principal"
+               data-sub="" data-notas="Lascas de bacalhau Gadus Morhua|Arroz jasmim e ovos caipiras|Tapenade de olivas pretas"
+               data-qtd="" data-preco=""
+               data-desc="Lascas de bacalhau Gadus Morhua, arroz jasmim, confit de pimentão, tomate, alho frito, tapenade de olivas pretas, ovos caipiras mexidos, azeite siciliano e crispies de cebola."
+               data-foto="./img/prato-arroz-bacalhau.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-bacalhau" shape="rect" fit="cover" src="./img/prato-arroz-bacalhau.webp"
+                      placeholder="Arroz de bacalhau"></image-slot>
+        </div>
+        <h3>Arroz de bacalhau</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="principais" role="button" tabindex="0"
+               data-nome="Filé com pasta" data-cat-nome="Principal"
+               data-sub="clássico Casa do Lago" data-notas="Filé mignon alto na manteiga de ervas|Massa fresca em fonduta de queijo curado da Serra|Crocante de charcutaria artesanal"
+               data-qtd="" data-preco=""
+               data-desc="Filé mignon alto, grelhado na manteiga de ervas frescas da horta, servido com massa fresca envolta em fonduta cremosa de queijo curado da Serra e finalizado com crocante de charcutaria artesanal."
+               data-foto="./img/prato-file-pasta.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-file" shape="rect" fit="cover" src="./img/prato-file-pasta.webp"
+                      placeholder="Filé com pasta"></image-slot>
+        </div>
+        <h3>Filé com pasta</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="principais" role="button" tabindex="0"
+               data-nome="Camarões, ervas brasileiras, arroz cremoso, alho-poró" data-cat-nome="Principal"
+               data-sub="" data-notas="Camarões VM da Costa Verde|Azeite de ervas brasileiras|Arroz cremoso de brie da Mantiqueira|Crocante de alho-poró"
+               data-qtd="" data-preco=""
+               data-desc="Camarões VM da Costa Verde salteados no azeite de ervas brasileiras, servidos sobre arroz cremoso de queijo brie da Mantiqueira com crocante de alho-poró."
+               data-foto="./img/prato-camarao-arroz.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-camarao-arroz" shape="rect" fit="cover" src="./img/prato-camarao-arroz.webp"
+                      placeholder="Camarões com arroz cremoso"></image-slot>
+        </div>
+        <h3>Camarões, ervas brasileiras, arroz cremoso, alho-poró</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="principais" role="button" tabindex="0"
+               data-nome="Escalopes ao molho de vinho tinto" data-cat-nome="Principal"
+               data-sub="" data-notas="Escalopes de filé mignon|Molho de vinho tinto|Risoto cremoso de cogumelos"
+               data-qtd="" data-preco=""
+               data-desc="Escalopes de filé mignon ao molho de vinho tinto com risoto cremoso de cogumelos."
+               data-foto="./img/prato-escalopes.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-escalopes" shape="rect" fit="cover" src="./img/prato-escalopes.webp"
+                      placeholder="Escalopes ao molho de vinho tinto"></image-slot>
+        </div>
+        <h3>Escalopes ao molho de vinho tinto</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="principais" role="button" tabindex="0"
+               data-nome="Pappardelle de pêra ao gorgonzola" data-cat-nome="Principal"
+               data-sub="" data-notas="Massa fresca da casa|Molho de gorgonzola|Pêras glaciadas e nozes"
+               data-qtd="" data-preco=""
+               data-desc="Massa fresca ao molho de queijo gorgonzola com pêras glaciadas e nozes."
+               data-foto="./img/prato-pappardelle.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-pappardelle" shape="rect" fit="cover" src="./img/prato-pappardelle.webp"
+                      placeholder="Pappardelle de pêra ao gorgonzola"></image-slot>
+        </div>
+        <h3>Pappardelle de pêra ao gorgonzola</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="principais" role="button" tabindex="0"
+               data-nome="Peixe da casa" data-cat-nome="Principal"
+               data-sub="pesca artesanal" data-notas="Tilápia na manteiga de ervas|Musseline de batata-baroa|Farofa de castanha com limão-cravo"
+               data-qtd="" data-preco=""
+               data-desc="Filé de tilápia de pesca artesanal na manteiga de ervas, musseline de batata-baroa, banana de jardim grelhada, vagem sauté e farofa crocante de castanha com toque de limão-cravo."
+               data-foto="./img/prato-peixe.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-peixe" shape="rect" fit="cover" src="./img/prato-peixe.webp"
+                      placeholder="Peixe da casa"></image-slot>
+        </div>
+        <h3>Peixe da casa</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="principais" role="button" tabindex="0"
+               data-nome="Risoto de gorgonzola com mignon" data-cat-nome="Principal"
+               data-sub="" data-notas="Arroz cremoso de queijo azul|Emincé de filé mignon|Cebola crispy"
+               data-qtd="" data-preco=""
+               data-desc="Arroz cremoso de queijo azul com emincé de filé mignon e cebola crispy."
+               data-foto="./img/prato-risoto-gorgonzola.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-risoto-gorgonzola" shape="rect" fit="cover" src="./img/prato-risoto-gorgonzola.webp"
+                      placeholder="Risoto de gorgonzola com mignon"></image-slot>
+        </div>
+        <h3>Risoto de gorgonzola com mignon</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="principais" role="button" tabindex="0"
+               data-nome="Risotto caprese" data-cat-nome="Principal"
+               data-sub="" data-notas="Queijo branco fresco|Tomates confitados|Pesto de manjericão"
+               data-qtd="" data-preco=""
+               data-desc="Arroz cremoso de queijo branco fresco, tomates confitados e pesto de manjericão."
+               data-foto="./img/prato-risoto-caprese.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-risoto-caprese" shape="rect" fit="cover" src="./img/prato-risoto-caprese.webp"
+                      placeholder="Risotto caprese"></image-slot>
+        </div>
+        <h3>Risotto caprese</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="doces" role="button" tabindex="0"
+               data-nome="Romeu e Julieta" data-cat-nome="Sobremesa"
+               data-sub="quente e gelado" data-notas="Sorvetinho caseiro de queijo|Calda quente de goiabada cascão|Farofa de castanha"
+               data-qtd="" data-preco=""
+               data-desc="Sorvetinho caseiro de queijo com calda quente de goiabada cascão e farofa de castanha."
+               data-foto="./img/prato-romeu-julieta.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-romeu-julieta" shape="rect" fit="cover" src="./img/prato-romeu-julieta.webp"
+                      placeholder="Romeu e Julieta"></image-slot>
+        </div>
+        <h3>Romeu e Julieta</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="doces" role="button" tabindex="0"
+               data-nome="Coco e milho verde" data-cat-nome="Sobremesa"
+               data-sub="Festival Delícias do Vale" data-notas="Cocada cremosa brûlée|Sorvete de milho verde|Paçoca"
+               data-qtd="" data-preco=""
+               data-desc="Cocada cremosa brûlée com sorvete de milho verde e paçoca."
+               data-foto="./img/prato-coco-milho.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-coco-milho" shape="rect" fit="cover" src="./img/prato-coco-milho.webp"
+                      placeholder="Coco e milho verde"></image-slot>
+        </div>
+        <h3>Coco e milho verde</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao rev" data-cat="doces" role="button" tabindex="0"
+               data-nome="Rabanada, doce de leite e banana caramelada" data-cat-nome="Sobremesa"
+               data-sub="receita de família" data-notas="Rabanada de pão Petrópolis|Bananas carameladas|Doce de leite regional|Gelato de banoffee"
+               data-qtd="" data-preco=""
+               data-desc="Rabanada de pão Petrópolis, bananas carameladas, doce de leite regional e gelato sabor banoffee."
+               data-foto="./img/prato-rabanada.webp">
+        <div class="cartao__foto grao">
+          <image-slot id="cl-prato-rabanada" shape="rect" fit="cover" src="./img/prato-rabanada.webp"
+                      placeholder="Rabanada, doce de leite e banana caramelada"></image-slot>
+        </div>
+        <h3>Rabanada, doce de leite e banana caramelada</h3>
+        <span class="cartao__ver">Ver informações</span>
+      </article>
+      <article class="cartao cartao--chef rev" data-cat="chef" role="button" tabindex="0"
+               data-titulo="Fogo lento" data-ordem="Menu do chef I" data-etapas-num="quatro etapas"
+               data-fotos="./img/prato-couvert.webp|./img/prato-tartar-mignon.webp|./img/prato-escalopes.webp|./img/prato-rabanada.webp"
+               data-linha="Uma sequência de inverno, construída em graus: começa fria e crua, passa pelo vinho reduzido e termina em caramelo quente. Tudo o que vem antes prepara o paladar para o que vem depois."
+               data-etapas="Couvert da estação ~ Pães de fermentação natural, manteiga de ervas e paté de alho-poró: o primeiro sal da mesa.|Tartar de mignon ~ Carne crua na ponta da faca, alcaparras e gema caipira — acidez e frescor antes do fogo.|Escalopes ao molho de vinho tinto ~ Redução de tinto e risoto de cogumelos: a nota mais funda da sequência.|Rabanada, doce de leite e banana caramelada ~ Açúcar queimado e gelato de banoffee para fechar em calor."
+               data-harmonia="" data-pe="">
+        <div class="cartao--chef__vao">
+          <p class="rotulo">Menu do chef <span aria-hidden="true">·</span> I</p>
+          <h3>Fogo lento</h3>
+          <p>Couvert, tartar de mignon, escalopes ao vinho tinto e rabanada. Quatro etapas para uma noite fria.</p>
+        </div>
+        <span class="cartao--chef__ver">Ver a sequência</span>
+      </article>
+      <article class="cartao cartao--chef rev" data-cat="chef" role="button" tabindex="0"
+               data-titulo="À beira do lago" data-ordem="Menu do chef II" data-etapas-num="quatro etapas"
+               data-fotos="./img/prato-burrata.webp|./img/prato-pastel-camarao.webp|./img/prato-camarao-arroz.webp|./img/prato-coco-milho.webp"
+               data-linha="A sequência do lago: leite, mar e horta, em pratos claros e de acidez viva. Nada pesa, tudo se emenda. Pensada para as mesas de fora, quando ainda há luz na água."
+               data-etapas="Burrata ~ Tomate assado, rúcula selvagem e pesto de manjericão: leite fresco e verde de horta.|Pastel de camarão ~ Massa crocante da casa, queijo cremoso e camarão no alho-poró, com pimenta da casa.|Camarões, ervas brasileiras e arroz cremoso ~ Camarões da Costa Verde, azeite de ervas e brie da Mantiqueira com crocante de alho-poró.|Coco e milho verde ~ Cocada brûlée, sorvete de milho verde e paçoca: doce de festa, servido morno e gelado."
+               data-harmonia=""
+               data-pe="">
+        <div class="cartao--chef__vao">
+          <p class="rotulo">Menu do chef <span aria-hidden="true">·</span> II</p>
+          <h3>À beira do lago</h3>
+          <p>Burrata, pastel de camarão, camarões com arroz cremoso e coco com milho verde. Quatro etapas de frescor.</p>
+        </div>
+        <span class="cartao--chef__ver">Ver a sequência</span>
+      </article>
+  </section>
+
+  <section class="carta-bebidas" id="carta-bebidas" aria-label="Bebidas, drinks e digestivos" hidden>
+    <div>
+      <h2 class="carta-bebidas__titulo rev">Bebidas</h2>
+      <div class="carta-bebidas__lista">
+      <button class="bebida rev" type="button"
+              data-nome="Água" data-slot="bebida-agua" data-cat-nome="Bebida"
+              data-sub="" data-notas="Com gás|Sem gás"
+              data-preco="R$ 7" data-desc="Água mineral, com ou sem gás." data-foto="">
+        <span class="bebida__nome">Água</span>
+        <span class="bebida__preco num">R$ 7</span>
+        <span class="bebida__linha">c/ e s/ gás</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Refrigerante" data-slot="bebida-refrigerante" data-cat-nome="Bebida"
+              data-sub="" data-notas="Coca-Cola normal e zero|Guaraná normal e zero|Pepsi comum e black"
+              data-preco="R$ 6 a R$ 7" data-desc="Coca-Cola e Guaraná, normal e zero, R$ 7. Pepsi, comum e black, R$ 6." data-foto="">
+        <span class="bebida__nome">Refrigerante</span>
+        <span class="bebida__preco num">R$ 6 a R$ 7</span>
+        <span class="bebida__linha">Coca-Cola e Guaraná (normal e zero) · Pepsi (comum e black)</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Mate da casa" data-slot="bebida-mate-da-casa" data-cat-nome="Bebida"
+              data-sub="" data-notas="Natural|Limão|Pêssego"
+              data-preco="R$ 15" data-desc="Mate da casa, servido gelado, em três versões." data-foto="">
+        <span class="bebida__nome">Mate da casa</span>
+        <span class="bebida__preco num">R$ 15</span>
+        <span class="bebida__linha">Natural | Limão | Pêssego</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Suco de uva integral" data-slot="bebida-suco-de-uva-integral" data-cat-nome="Bebida"
+              data-sub="" data-notas="Uva integral tinta|Servido em taça"
+              data-preco="R$ 22" data-desc="Suco de uva integral tinto, servido em taça." data-foto="">
+        <span class="bebida__nome">Suco de uva integral</span>
+        <span class="bebida__preco num">R$ 22</span>
+        <span class="bebida__linha">Tinto, em taça</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Cerveja" data-slot="bebida-cerveja" data-cat-nome="Bebida"
+              data-sub="" data-notas="Corona e Stella Artois Pure Gold|Heineken|Spaten"
+              data-preco="R$ 14 a R$ 15" data-desc="Long necks geladas: Corona, Stella Artois Pure Gold e Heineken a R$ 15; Spaten a R$ 14." data-foto="">
+        <span class="bebida__nome">Cerveja</span>
+        <span class="bebida__preco num">R$ 14 a R$ 15</span>
+        <span class="bebida__linha">Corona | Stella Artois Pure Gold | Heineken | Spaten — long neck</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Whisky Johnnie Walker" data-slot="bebida-whisky-johnnie-walker" data-cat-nome="Bebida"
+              data-sub="" data-notas="Black Label|Dose"
+              data-preco="R$ 32" data-desc="Johnnie Walker Black Label, servido em dose." data-foto="">
+        <span class="bebida__nome">Whisky Johnnie Walker</span>
+        <span class="bebida__preco num">R$ 32</span>
+        <span class="bebida__linha">Black Label, dose</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Suco natural" data-slot="bebida-suco-natural" data-cat-nome="Bebida"
+              data-sub="" data-notas="Laranja|Limão|Abacaxi com hortelã|Abacaxi|Maracujá"
+              data-preco="R$ 15" data-desc="Sucos naturais feitos na hora, com fruta da estação." data-foto="">
+        <span class="bebida__nome">Suco natural</span>
+        <span class="bebida__preco num">R$ 15</span>
+        <span class="bebida__linha">Laranja | Limão | Abacaxi com hortelã | Abacaxi | Maracujá</span>
+      </button>
+      </div>
+    </div>
+    <div>
+      <h2 class="carta-bebidas__titulo rev">Drinks</h2>
+      <div class="carta-bebidas__lista">
+      <button class="bebida rev" type="button"
+              data-nome="Caipirinha" data-slot="bebida-caipirinha" data-cat-nome="Drink"
+              data-sub="" data-notas="Cachaça Pindorama|Fruta fresca da estação|Sabores do dia"
+              data-preco="R$ 35" data-desc="Cachaça Pindorama e fruta fresca da estação. Consulte os sabores disponíveis." data-foto="">
+        <span class="bebida__nome">Caipirinha</span>
+        <span class="bebida__preco num">R$ 35</span>
+        <span class="bebida__linha">Cachaça Pindorama e fruta fresca da estação</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Negroni" data-slot="bebida-negroni" data-cat-nome="Drink"
+              data-sub="" data-notas="Gin Tanqueray|Campari e Vermouth Rosso|Laranja"
+              data-preco="R$ 35" data-desc="Gin Tanqueray, Campari, Vermouth Rosso e laranja." data-foto="">
+        <span class="bebida__nome">Negroni</span>
+        <span class="bebida__preco num">R$ 35</span>
+        <span class="bebida__linha">Gin Tanqueray, Campari, Vermouth Rosso e laranja</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Soda italiana" data-slot="bebida-soda-italiana" data-cat-nome="Drink"
+              data-sub="" data-notas="Morango e laranja|Hortelã|Água com gás"
+              data-preco="R$ 28" data-desc="Morango, laranja, hortelã e água com gás." data-foto="">
+        <span class="bebida__nome">Soda italiana</span>
+        <span class="bebida__preco num">R$ 28</span>
+        <span class="bebida__linha">Morango, laranja, hortelã e água com gás</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Gasshoper" data-slot="bebida-gasshoper" data-cat-nome="Drink"
+              data-sub="" data-notas="Espumante|Maçã verde e uvas frescas|Ervas"
+              data-preco="R$ 39" data-desc="Espumante, xarope de maçã verde, uvas verdes frescas e ervas." data-foto="">
+        <span class="bebida__nome">Gasshoper</span>
+        <span class="bebida__preco num">R$ 39</span>
+        <span class="bebida__linha">Espumante, xarope de maçã verde, uvas verdes frescas e ervas</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Fitzgerald" data-slot="bebida-fitzgerald" data-cat-nome="Drink"
+              data-sub="" data-notas="Gin Tanqueray|Limão siciliano|Angostura bitter"
+              data-preco="R$ 39" data-desc="Gin Tanqueray, limão siciliano e Angostura bitter." data-foto="">
+        <span class="bebida__nome">Fitzgerald</span>
+        <span class="bebida__preco num">R$ 39</span>
+        <span class="bebida__linha">Gin Tanqueray, limão siciliano e Angostura bitter</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Brisa" data-slot="bebida-brisa" data-cat-nome="Drink"
+              data-sub="" data-notas="Vodka|Pêra e maçã verde|Limão siciliano"
+              data-preco="R$ 40" data-desc="Vodka, pêra, maçã verde e limão siciliano." data-foto="">
+        <span class="bebida__nome">Brisa</span>
+        <span class="bebida__preco num">R$ 40</span>
+        <span class="bebida__linha">Vodka, pêra, maçã verde e limão siciliano</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Fresh Basil" data-slot="bebida-fresh-basil" data-cat-nome="Drink"
+              data-sub="" data-notas="Gin|Manjericão|Tônica e limão"
+              data-preco="R$ 36" data-desc="Gin, manjericão, tônica e toque de limão." data-foto="">
+        <span class="bebida__nome">Fresh Basil</span>
+        <span class="bebida__preco num">R$ 36</span>
+        <span class="bebida__linha">Gin, manjericão, tônica e toque de limão</span>
+      </button>
+      </div>
+    </div>
+    <div>
+      <h2 class="carta-bebidas__titulo rev">Digestivos</h2>
+      <div class="carta-bebidas__lista">
+      <button class="bebida rev" type="button"
+              data-nome="Chá de ervas frescas do jardim" data-slot="bebida-cha-de-ervas-frescas-do-jardim" data-cat-nome="Digestivo"
+              data-sub="" data-notas="Ervas do jardim|Servido quente"
+              data-preco="R$ 20" data-desc="Infusão de ervas frescas colhidas no jardim da casa." data-foto="">
+        <span class="bebida__nome">Chá de ervas frescas do jardim</span>
+        <span class="bebida__preco num">R$ 20</span>
+        <span class="bebida__linha">Colhidas no jardim da casa</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Cointreau" data-slot="bebida-cointreau" data-cat-nome="Digestivo"
+              data-sub="" data-notas="Licor de laranja|Dose"
+              data-preco="R$ 22" data-desc="Cointreau, servido em dose." data-foto="">
+        <span class="bebida__nome">Cointreau</span>
+        <span class="bebida__preco num">R$ 22</span>
+        <span class="bebida__linha">Dose</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Licor 43" data-slot="bebida-licor-43" data-cat-nome="Digestivo"
+              data-sub="" data-notas="Notas de vanilla|Dose"
+              data-preco="R$ 25" data-desc="Licor 43, servido em dose." data-foto="">
+        <span class="bebida__nome">Licor 43</span>
+        <span class="bebida__preco num">R$ 25</span>
+        <span class="bebida__linha">Dose</span>
+      </button>
+      <button class="bebida rev" type="button"
+              data-nome="Licor da casa" data-slot="bebida-licor-da-casa" data-cat-nome="Digestivo"
+              data-sub="" data-notas="Amoras frescas da Casa da Montanha|63 dias de maceração|Envelhecido sob o solo"
+              data-preco="R$ 30" data-desc="Licor artesanal de amoras frescas da Casa da Montanha: 63 dias de maceração e envelhecimento sob o solo. Servido em dose." data-foto="">
+        <span class="bebida__nome">Licor da casa</span>
+        <span class="bebida__preco num">R$ 30</span>
+        <span class="bebida__linha">Amoras frescas da Casa da Montanha, 63 dias de maceração</span>
+      </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="convite">
+    <div class="convite__foto">
+      <div class="grao">
+        <image-slot id="cl-convite" shape="rect" fit="cover" src="./img/convite-mesa-dentro.webp"
+                    placeholder="A mesa posta, dentro da casa"></image-slot>
+      </div>
+      <div class="grao">
+        <image-slot id="cl-convite-2" shape="rect" fit="cover" src="./img/convite-mesa-fogo.webp"
+                    placeholder="A mesa posta, junto à fogueira"></image-slot>
+      </div>
+    </div>
+    <div class="convite__veu"></div>
+    <div class="convite__vao">
+      <p class="rotulo rotulo--agua">Reservas</p>
+      <h2><span>Sentar à mesa sem pressa.</span><span>Ouvir o som da natureza.</span><span>Perceber o vento passando entre as árvores</span><span>e o momento perfeito para isso é sempre agora.</span></h2>
+      <a class="pill" href="./index.html#reservas">Reservar uma mesa</a>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <svg class="rodape__serra" viewBox="0 0 1200 90" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" preserveAspectRatio="none">
+    <path d="M0 82 C 84 78, 128 46, 196 40 C 258 34, 296 62, 356 58 C 420 54, 452 20, 528 22 C 598 24, 628 60, 700 56 C 768 52, 800 26, 872 30 C 942 34, 976 64, 1044 60 C 1108 56, 1146 36, 1200 40" vector-effect="non-scaling-stroke"/>
+    <path d="M0 88 C 96 86, 160 68, 244 66 C 330 64, 384 80, 470 76 C 560 72, 604 54, 700 58 C 790 62, 840 80, 930 76 C 1020 72, 1120 58, 1200 62" vector-effect="non-scaling-stroke"/>
+  </svg>
+
+  <div class="rodape__grade">
+    <div>
+      <p class="rotulo" aria-hidden="true" style="visibility:hidden">·</p>
+      <p class="mudo rodape__lema" style="margin-top:14px">Bistrô de vale, à beira d'água<br>Vale do Café • Vassouras • Brasil<br>Cozinha de pequenos produtores e fogo lento</p>
+    </div>
+
+    <div class="rodape__meio">
+      <p class="rotulo rodape__marca">Casa do Lago</p>
+      <div style="margin-top:14px;text-align:center">
+        <p class="mudo rodape__endereco">Rua Luiz Francisco de Souza, 555<br>Ponte Funda, Vassouras/RJ</p>
+        <a class="elo" href="./index.html#reservas">Reservar</a>
+      </div>
+    </div>
+
+    <div class="rodape__horarios">
+      <p class="rotulo rodape__titulo-hora">Horários</p>
+      <div class="rodape__hora"><span class="mudo">Quinta</span><span class="mudo num">12h às 23h</span></div>
+      <div class="rodape__hora"><span class="mudo">Sexta e sábado</span><span class="mudo num">12h à meia-noite</span></div>
+      <div class="rodape__hora"><span class="mudo">Domingo</span><span class="mudo num">12h às 18h</span></div>
+      <div class="rodape__hora"><span class="mudo">Segunda a quarta</span><span class="mudo">fechado</span></div>
+    </div>
+
+    <div class="rodape__redes">
+      <p class="rotulo" aria-hidden="true" style="visibility:hidden">·</p>
+      <p class="rodape__rede" style="margin-top:14px">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;flex:0 0 auto;color:var(--agua)">
+          <rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4"/>
+          <circle cx="12" cy="12" r="4.6"/>
+          <circle cx="17.4" cy="6.6" r=".95" fill="currentColor" stroke="none"/>
+        </svg>
+        <a class="elo" href="https://www.instagram.com/casadolagobistro/" target="_blank" rel="noopener">Instagram</a>
+      </p>
+      <p class="rodape__rede" style="margin-top:18px">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;flex:0 0 auto;color:var(--agua)">
+          <path d="M3.1 20.9l1.36-4.9a8.4 8.4 0 1 1 3.54 3.54z"/>
+          <path d="M8.9 8.1c.28-.02.5.02.72.5l.62 1.36c.1.24.08.42-.06.62l-.42.56c-.14.18-.16.36-.06.56a6.1 6.1 0 0 0 2.9 2.86c.22.1.42.06.58-.1l.5-.5c.18-.18.38-.22.62-.12l1.44.66c.4.18.48.4.42.72-.1.6-.66 1.36-1.5 1.44-2.36.22-6.62-3.66-6.68-6.32-.02-.9.66-1.68 1.4-1.74z"/>
+        </svg>
+        <a class="elo" href="https://wa.me/5524999309828" target="_blank" rel="noopener">WhatsApp</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="rodape__pe">
+    <span class="rotulo"><span class="num">© 2026</span> Casa do Lago, Vassouras, Rio de Janeiro</span>
+    <span class="rotulo">Aprecie com moderação</span>
+  </div>
+
+  <p class="rodape__credito">Casa do Lago <span aria-hidden="true">·</span>
+    Desenvolvido por <a class="rodape__autor" href="https://www.linkedin.com/in/gabriel-hossana-lopes-roque-18111b246/" target="_blank" rel="noopener noreferrer">Gabriel Hossana</a></p>
+</footer>
+
+<div class="ficha" id="ficha" role="dialog" aria-modal="true" aria-labelledby="ficha-nome" hidden>
+  <div class="ficha__caixa">
+    <button class="ficha__x" type="button" id="ficha-x" aria-label="Fechar">✕</button>
+    <div class="ficha__foto"><img id="ficha-img" alt="" decoding="async"></div>
+    <div class="ficha__prosa">
+      <p class="ficha__linha-topo">
+        <span id="ficha-cat"></span>
+        <span class="ficha__risco" id="ficha-risco" aria-hidden="true"></span>
+        <span id="ficha-sub"></span>
+      </p>
+      <h3 id="ficha-nome"></h3>
+      <p class="ficha__desc" id="ficha-desc"></p>
+      <ul class="ficha__notas" id="ficha-notas"></ul>
+      <p class="ficha__preco num" id="ficha-preco"></p>
+    </div>
+  </div>
+</div>
+
+<!-- os lugares de foto das bebidas: ficam guardados e entram na ficha ao abrir -->
+<div class="gaveta-bebidas" id="gaveta-bebidas" aria-hidden="true">
+    <image-slot id="bebida-agua" shape="rect" fit="cover"
+                placeholder="Água"></image-slot>
+    <image-slot id="bebida-refrigerante" shape="rect" fit="cover"
+                placeholder="Refrigerante"></image-slot>
+    <image-slot id="bebida-mate-da-casa" shape="rect" fit="cover"
+                placeholder="Mate da casa"></image-slot>
+    <image-slot id="bebida-suco-de-uva-integral" shape="rect" fit="cover"
+                placeholder="Suco de uva integral"></image-slot>
+    <image-slot id="bebida-cerveja" shape="rect" fit="cover"
+                placeholder="Cerveja"></image-slot>
+    <image-slot id="bebida-whisky-johnnie-walker" shape="rect" fit="cover"
+                placeholder="Whisky Johnnie Walker"></image-slot>
+    <image-slot id="bebida-suco-natural" shape="rect" fit="cover"
+                placeholder="Suco natural"></image-slot>
+    <image-slot id="bebida-caipirinha" shape="rect" fit="cover"
+                placeholder="Caipirinha"></image-slot>
+    <image-slot id="bebida-negroni" shape="rect" fit="cover"
+                placeholder="Negroni"></image-slot>
+    <image-slot id="bebida-soda-italiana" shape="rect" fit="cover"
+                placeholder="Soda italiana"></image-slot>
+    <image-slot id="bebida-gasshoper" shape="rect" fit="cover"
+                placeholder="Gasshoper"></image-slot>
+    <image-slot id="bebida-fitzgerald" shape="rect" fit="cover"
+                placeholder="Fitzgerald"></image-slot>
+    <image-slot id="bebida-brisa" shape="rect" fit="cover"
+                placeholder="Brisa"></image-slot>
+    <image-slot id="bebida-fresh-basil" shape="rect" fit="cover"
+                placeholder="Fresh Basil"></image-slot>
+    <image-slot id="bebida-cha-de-ervas-frescas-do-jardim" shape="rect" fit="cover"
+                placeholder="Chá de ervas frescas do jardim"></image-slot>
+    <image-slot id="bebida-cointreau" shape="rect" fit="cover"
+                placeholder="Cointreau"></image-slot>
+    <image-slot id="bebida-licor-43" shape="rect" fit="cover"
+                placeholder="Licor 43"></image-slot>
+    <image-slot id="bebida-licor-da-casa" shape="rect" fit="cover"
+                placeholder="Licor da casa"></image-slot>
+</div>
+
+<div class="chef" id="chef" role="dialog" aria-modal="true" aria-labelledby="chef-nome" hidden>
+  <div class="chef__caixa">
+    <button class="chef__x" type="button" id="chef-x" aria-label="Fechar">✕</button>
+    <div class="chef__carrossel" id="chef-carrossel">
+      <div class="chef__pontos" id="chef-pontos" aria-hidden="true"></div>
+    </div>
+    <div class="chef__prosa">
+      <p class="chef__topo">
+        <span id="chef-ordem"></span>
+        <span class="chef__risco" aria-hidden="true"></span>
+        <span id="chef-etapas-num"></span>
+      </p>
+      <h3 id="chef-nome"></h3>
+      <p class="chef__linha" id="chef-linha"></p>
+      <ol class="chef__etapas" id="chef-etapas"></ol>
+      <p class="chef__pe" id="chef-harmonia"></p>
+      <p class="chef__pe" id="chef-pe"></p>
+    </div>
+  </div>
+</div>
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<script src="./js/image-slot.js"></script>
+<script>
+(function () {
+  'use strict';
+  document.querySelectorAll('.rev').forEach(function (b) { b.classList.add('is-vis'); });
+
+  /* a miniseção de cada prato */
+  (function () {
+    var ficha = document.getElementById('ficha');
+    if (!ficha) return;
+    var img = document.getElementById('ficha-img'),
+        cat = document.getElementById('ficha-cat'),
+        sub = document.getElementById('ficha-sub'),
+        risco = document.getElementById('ficha-risco'),
+        notas = document.getElementById('ficha-notas'),
+        nome = document.getElementById('ficha-nome'),
+        desc = document.getElementById('ficha-desc'),
+        preco = document.getElementById('ficha-preco'),
+        x = document.getElementById('ficha-x'),
+        ultimo = null;
+
+    var gaveta = document.getElementById('gaveta-bebidas');
+    var vao = img.parentNode, slotAberto = null;
+    function guardaSlot() {
+      if (slotAberto && gaveta) { gaveta.appendChild(slotAberto); slotAberto = null; }
+    }
+    function abre(c) {
+      guardaSlot();
+      var foto = c.getAttribute('data-foto');
+      var slot = c.getAttribute('data-slot');
+      var lugar = slot ? document.getElementById(slot) : null;
+      img.hidden = !!lugar;
+      if (lugar) { vao.appendChild(lugar); slotAberto = lugar; }
+      if (foto) img.src = foto; else img.removeAttribute('src');
+      img.alt = foto ? c.getAttribute('data-nome') : '';
+      vao.hidden = !foto && !lugar;
+      ficha.classList.toggle('ficha--sem-foto', !foto && !lugar);
+      cat.textContent = c.getAttribute('data-cat-nome') || '';
+      var s = c.getAttribute('data-sub') || c.getAttribute('data-qtd') || '';
+      sub.textContent = s; sub.hidden = !s; risco.hidden = !s;
+      nome.textContent = c.getAttribute('data-nome') || '';
+      desc.textContent = c.getAttribute('data-desc') || '';
+      notas.innerHTML = '';
+      (c.getAttribute('data-notas') || '').split('|').forEach(function (n) {
+        if (!n.trim()) return;
+        var li = document.createElement('li');
+        var st = document.createElement('strong');
+        st.textContent = n.trim();
+        li.appendChild(st); notas.appendChild(li);
+      });
+      notas.hidden = !notas.children.length;
+      var p = c.getAttribute('data-preco') || '';
+      preco.textContent = p; preco.hidden = !p;
+      ultimo = c;
+      ficha.hidden = false;
+      document.body.style.overflow = 'hidden';
+      x.focus();
+    }
+    function fecha() {
+      ficha.hidden = true;
+      guardaSlot();
+      document.body.style.overflow = '';
+      if (ultimo) ultimo.focus();
+    }
+    img.addEventListener('error', function () {
+      img.removeAttribute('src'); img.parentNode.hidden = true;
+      ficha.classList.add('ficha--sem-foto');
+    });
+    document.querySelectorAll('.cartao:not(.cartao--chef), .bebida').forEach(function (c) {
+      c.addEventListener('click', function () { abre(c); });
+      c.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abre(c); }
+      });
+    });
+    x.addEventListener('click', fecha);
+    ficha.addEventListener('click', function (e) { if (e.target === ficha) fecha(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !ficha.hidden) fecha(); });
+  })();
+
+  /* o menu do chef: as fotos passam sozinhas enquanto se lê a sequência */
+  (function () {
+    var sala = document.getElementById('chef');
+    if (!sala) return;
+    var carrossel = document.getElementById('chef-carrossel'),
+        pontos = document.getElementById('chef-pontos'),
+        ordem = document.getElementById('chef-ordem'),
+        etapasNum = document.getElementById('chef-etapas-num'),
+        nome = document.getElementById('chef-nome'),
+        linha = document.getElementById('chef-linha'),
+        etapas = document.getElementById('chef-etapas'),
+        harmonia = document.getElementById('chef-harmonia'),
+        pe = document.getElementById('chef-pe'),
+        x = document.getElementById('chef-x'),
+        reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+        relogio = 0, atual = 0, fotos = [], bolas = [], ultimo = null;
+
+    function mostraFoto(i) {
+      atual = (i + fotos.length) % fotos.length;
+      fotos.forEach(function (f, k) { f.classList.toggle('is-visivel', k === atual); });
+      bolas.forEach(function (b, k) { b.classList.toggle('is-ativo', k === atual); });
+    }
+    function gira() {
+      clearInterval(relogio);
+      if (reduz || fotos.length < 2) return;
+      relogio = setInterval(function () { mostraFoto(atual + 1); }, 3800);
+    }
+
+    function abre(c) {
+      [].slice.call(carrossel.querySelectorAll('img')).forEach(function (n) { n.remove(); });
+      pontos.innerHTML = ''; fotos = []; bolas = [];
+      (c.getAttribute('data-fotos') || '').split('|').forEach(function (src, i) {
+        if (!src.trim()) return;
+        var im = document.createElement('img');
+        im.src = src.trim(); im.alt = ''; im.decoding = 'async';
+        carrossel.insertBefore(im, pontos); fotos.push(im);
+        var b = document.createElement('span'); pontos.appendChild(b); bolas.push(b);
+      });
+      mostraFoto(0); gira();
+
+      ordem.textContent = c.getAttribute('data-ordem') || 'Menu do chef';
+      etapasNum.textContent = c.getAttribute('data-etapas-num') || '';
+      nome.textContent = c.getAttribute('data-titulo') || '';
+      linha.textContent = c.getAttribute('data-linha') || '';
+      etapas.innerHTML = '';
+      (c.getAttribute('data-etapas') || '').split('|').forEach(function (e, i) {
+        if (!e.trim()) return;
+        var partes = e.split('~');
+        var li = document.createElement('li');
+        var n = document.createElement('span');
+        n.className = 'num-etapa'; n.textContent = ('0' + (i + 1)).slice(-2);
+        var vao = document.createElement('span');
+        var st = document.createElement('strong'); st.textContent = (partes[0] || '').trim();
+        vao.appendChild(st);
+        if (partes[1]) { var em = document.createElement('em'); em.textContent = partes[1].trim(); vao.appendChild(em); }
+        li.appendChild(n); li.appendChild(vao); etapas.appendChild(li);
+      });
+      harmonia.textContent = c.getAttribute('data-harmonia') || '';
+      harmonia.hidden = !harmonia.textContent;
+      pe.textContent = c.getAttribute('data-pe') || '';
+      pe.hidden = !pe.textContent;
+
+      ultimo = c;
+      sala.hidden = false;
+      document.body.style.overflow = 'hidden';
+      x.focus();
+    }
+    function fecha() {
+      sala.hidden = true; clearInterval(relogio);
+      document.body.style.overflow = '';
+      if (ultimo) ultimo.focus();
+    }
+    document.querySelectorAll('.cartao--chef').forEach(function (c) {
+      c.addEventListener('click', function () { abre(c); });
+      c.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abre(c); }
+      });
+    });
+    pontos.addEventListener('click', function (e) {
+      var i = bolas.indexOf(e.target); if (i >= 0) { mostraFoto(i); gira(); }
+    });
+    x.addEventListener('click', fecha);
+    sala.addEventListener('click', function (e) { if (e.target === sala) fecha(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !sala.hidden) fecha(); });
+  })();
+
+  var botoes = [].slice.call(document.querySelectorAll('.filtros button'));
+  var cartoes = [].slice.call(document.querySelectorAll('.cartao'));
+  botoes.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var cat = b.dataset.cat;
+      botoes.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      mostra(cat);
+    });
+  });
+  var carta = document.getElementById('carta-bebidas');
+  var grade = document.querySelector('.pratos');
+  function mostra(cat) {
+    cartoes.forEach(function (c) { c.hidden = c.dataset.cat !== cat; });
+    if (carta) carta.hidden = cat !== 'bebidas';
+    if (grade) grade.hidden = cat === 'bebidas';
+  }
+  var inicial = botoes.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0];
+  if (inicial) mostra(inicial.dataset.cat);
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+/* cursor customizado — o mesmo círculo da Casa do Lago */
+(function () {
+  'use strict';
+  var cursor = document.getElementById('cursor');
+  if (!cursor || typeof gsap === 'undefined') return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function desktop() { return window.matchMedia('(min-width:901px) and (hover:hover)').matches; }
+
+  var setX = gsap.quickTo(cursor, 'x', { duration: .35, ease: 'power3.out' });
+  var setY = gsap.quickTo(cursor, 'y', { duration: .35, ease: 'power3.out' });
+
+  window.addEventListener('mousemove', function (e) {
+    if (!desktop()) return;
+    setX(e.clientX); setY(e.clientY);
+    if (gsap.getProperty(cursor, 'opacity') === 0) gsap.to(cursor, { opacity: .55, duration: .4 });
+  }, { passive: true });
+  window.addEventListener('mouseleave', function () { gsap.to(cursor, { opacity: 0, duration: .3 }); });
+
+  var ALVOS = 'a,button,.pill,.elo,.cartao,input,select,textarea,[role="button"]';
+  document.addEventListener('mouseover', function (e) {
+    if (!desktop()) return;
+    if (e.target.closest && e.target.closest(ALVOS)) {
+      gsap.to(cursor, { scale: 2.1, opacity: .9, duration: .5, ease: 'power3.out', overwrite: 'auto' });
+    }
+  });
+  document.addEventListener('mouseout', function (e) {
+    if (!desktop()) return;
+    var de = e.target.closest && e.target.closest(ALVOS);
+    if (de && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(ALVOS))) {
+      gsap.to(cursor, { scale: 1, opacity: .55, duration: .5, ease: 'power3.out', overwrite: 'auto' });
+    }
+  });
+})();
+</script>
+</body>
+</html>

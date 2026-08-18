@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casamentos  Casa do Lago · Vassouras, Vale do Café</title>
+<meta name="description" content="Casamentos na Casa do Lago e na Vila Botané: cerimônias à beira d'água ou entre as videiras, em Vassouras, no Vale do Café.">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
+<link rel="preload" as="image" href="./img/casamentos/w-lago-beijo.jpeg" fetchpriority="high">
+
+<style>
+/* ==========================================================
+   CASAMENTOS  irmã da Casa do Lago: mesmos tokens, uma só
+   ideia de página: uma fotografia grande que se troca, o texto
+   embaixo dela e a conversa com o cerimonial ao fim.
+   ========================================================== */
+:root{
+  --tinta:#F2EDE0; --tinta-alta:#E9E2D0;   /* o creme da 03 · Nossos vinhos */
+  --marfim:#636B2F; --marfim-mudo:#79815A; /* a letra: verde-oliva do vale */
+  --claro:#EDE7DA;                 /* texto que vive sobre fotografia */
+  --agua:#5C7E7D;                  /* acento da casa: o lago */
+  --casca:#CFC8B2;
+  --brasa:#B0552C;                 /* uso pontual: fogo, forno */
+  --serifa:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --grot:"Jost","Helvetica Neue",Arial,sans-serif;
+  --margem:8vw; --gutter:24px; --secao:150px;
+  --ease:cubic-bezier(.65,0,.35,1);
+  --grao:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (max-width:760px){ :root{ --margem:24px; --secao:84px; } }
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ background:var(--tinta); -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:var(--tinta); color:var(--marfim);
+  font-family:var(--serifa); font-size:18px; line-height:1.8;
+  -webkit-font-smoothing:antialiased; text-wrap:pretty; overflow-x:hidden;
+}
+img,svg{ display:block; max-width:100%; height:auto; }
+h1,h2,h3,p,dl,dd,figure,ul{ margin:0; }
+ul{ list-style:none; padding:0; }
+a{ color:var(--marfim); text-decoration:none; }
+a:hover{ color:var(--agua); }
+:focus-visible{ outline:1px solid var(--agua); outline-offset:4px; }
+::selection{ background:rgba(138,148,120,.32); }
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; }
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+
+.rotulo{
+  font-family:var(--grot); font-weight:400; font-size:11px;
+  letter-spacing:.35em; text-indent:.35em; text-transform:uppercase; color:var(--marfim-mudo);
+}
+.rotulo--claro{ color:var(--marfim); }
+.rotulo--agua{ color:var(--agua); }
+.num{ font-variant-numeric:tabular-nums; }
+.mudo{ color:var(--marfim-mudo); }
+.prosa{ max-width:62ch; }
+.prosa p + p{ margin-top:1.4em; }
+
+/* elo com sublinhado que cresce da esquerda */
+.elo{
+  position:relative; display:inline-block;
+  font-family:var(--grot); font-size:12px; letter-spacing:.32em; text-indent:.32em;
+  text-transform:uppercase; padding-bottom:8px;
+}
+.elo::after{
+  content:""; position:absolute; left:0; bottom:0; width:100%; height:1px;
+  background:currentColor; transform:scaleX(0); transform-origin:left;
+  transition:transform .6s var(--ease);
+}
+.elo:hover::after,.elo:focus-visible::after{ transform:scaleX(1); }
+
+.pill{
+  display:inline-block; padding:14px 28px;
+  border:1px solid var(--casca); border-radius:2px;
+  font-family:var(--grot); font-size:11px; letter-spacing:.35em; text-indent:.35em;
+  text-transform:uppercase;
+  transition:background .6s var(--ease), border-color .6s var(--ease), color .6s var(--ease);
+}
+.pill:hover{ background:var(--tinta-alta); border-color:var(--agua); color:var(--agua); }
+
+#cardapio .pill:hover{ background:var(--marfim); border-color:var(--marfim); color:var(--tinta); }
+
+/* foto com grão estático */
+.grao{ position:relative; overflow:hidden; background:var(--tinta-alta); }
+.grao > img, .grao > image-slot{ width:100%; height:100%; object-fit:cover; }
+.grao::after{
+  content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background-image:var(--grao); background-size:220px 220px; opacity:.08; mix-blend-mode:overlay;
+}
+
+/* ---------- chrome ---------- */
+.chrome{
+  position:fixed; top:0; left:0; right:0; z-index:70;
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+  padding:22px var(--margem); pointer-events:none;
+}
+.chrome > *{ pointer-events:auto; }
+.chrome__menu{
+  font-family:var(--grot); font-size:11px; letter-spacing:.35em; text-indent:.35em; text-transform:uppercase;
+  color:#2A2620; transition:color .45s var(--ease);
+}
+.chrome.is-sobre-escuro .chrome__menu{ color:#EDE7DA; }
+.chrome__menu:hover{ color:var(--agua); }
+.chrome__reservar{
+  font-family:var(--grot); font-size:11px; letter-spacing:.3em; text-indent:.3em; text-transform:uppercase;
+  padding:11px 22px; border:1px solid rgba(237,231,218,.34); border-radius:2px;
+  background:rgba(18,16,14,.5); backdrop-filter:blur(6px); color:var(--claro);
+  transition:border-color .5s var(--ease), color .5s var(--ease), background .5s var(--ease);
+}
+.chrome__reservar:hover{ border-color:var(--agua); color:var(--agua); background:rgba(18,16,14,.75); }
+
+/* ---------- a capa: uma foto grande alternando ---------- */
+.capa{ position:relative; height:100svh; min-height:560px; overflow:hidden; background:#12100E; }
+.capa__quadro{ position:absolute; inset:0; opacity:0; }
+.capa__quadro.is-ativo{ opacity:1; }
+.capa__veu{
+  position:absolute; inset:0; z-index:3; pointer-events:none;
+  background:linear-gradient(to top, rgba(18,16,14,.66) 0%, rgba(18,16,14,.10) 48%, rgba(18,16,14,.40) 100%);
+}
+.capa__texto{
+  position:absolute; z-index:4; left:var(--margem); right:var(--margem);
+  bottom:clamp(46px,8vh,104px); color:var(--claro); max-width:38ch;
+}
+.capa__texto h1{
+  font-weight:300; font-size:clamp(44px,8.6vw,104px); line-height:.98;
+  letter-spacing:-.012em; margin-top:16px;
+}
+.capa__texto .rotulo{ color:rgba(237,231,218,.82); }
+.capa__texto p.linha{ margin-top:20px; font-size:clamp(16px,1.5vw,19px); color:rgba(237,231,218,.86); max-width:32ch; }
+.capa__conta{
+  position:absolute; z-index:4; right:var(--margem); bottom:clamp(46px,8vh,104px);
+  display:flex; gap:8px; align-items:center;
+}
+.capa__ponto{
+  width:20px; height:1px; background:rgba(237,231,218,.34);
+  transition:background .7s var(--ease);
+}
+.capa__ponto.is-ativo{ background:rgba(237,231,218,.92); }
+@media (max-width:760px){ .capa__conta{ display:none; } }
+
+/* ---------- seções ---------- */
+.secao{ padding:var(--secao) var(--margem); }
+.secao--creme{ background:var(--tinta-alta); }
+.cabeca{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.55fr); gap:clamp(28px,5vw,84px); align-items:start; }
+@media (max-width:900px){ .cabeca{ grid-template-columns:1fr; } }
+.cabeca h2{ font-weight:300; font-size:clamp(30px,4.2vw,56px); line-height:1.06; letter-spacing:-.008em; }
+.cabeca .prosa{ font-size:clamp(17px,1.6vw,20px); }
+.cabeca .prosa p + p{ margin-top:1.3em; }
+
+.tripe{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(26px,3.4vw,56px); margin-top:clamp(52px,7vw,96px); }
+@media (max-width:900px){ .tripe{ grid-template-columns:1fr; gap:36px; } }
+.tripe h3{ font-weight:400; font-size:22px; margin-top:14px; }
+.tripe p{ font-size:16px; color:var(--marfim-mudo); margin-top:10px; }
+.tripe__fio{ width:100%; height:1px; background:var(--casca); }
+
+/* ---------- as fotografias ---------- */
+.galeria{
+  columns:3; column-gap:clamp(16px,2vw,28px); margin-top:clamp(44px,6vw,80px);
+}
+.peca{
+  position:relative; cursor:pointer; break-inside:avoid;
+  margin:0 0 clamp(16px,2vw,28px);
+}
+.peca::after{
+  content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(92,126,125,0); transition:box-shadow .6s var(--ease);
+}
+.peca:hover::after{ box-shadow:inset 0 0 0 1px rgba(92,126,125,.55); }
+.peca > .grao{ width:100%; }
+@media (max-width:1000px){ .galeria{ columns:2; } }
+@media (max-width:640px){ .galeria{ columns:1; } }
+
+/* ---------- o convite ao cerimonial ---------- */
+.convite{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(28px,5vw,84px); align-items:end; }
+@media (max-width:900px){ .convite{ grid-template-columns:1fr; align-items:start; } }
+.convite h2{ font-weight:300; font-size:clamp(30px,4.4vw,58px); line-height:1.05; letter-spacing:-.008em; }
+.convite .prosa{ font-size:clamp(17px,1.6vw,20px); }
+.convite__acoes{ display:flex; flex-wrap:wrap; gap:18px 26px; align-items:center; margin-top:36px; }
+.convite .pill{ white-space:nowrap; }
+.convite .pill:hover{ background:var(--marfim); border-color:var(--marfim); color:var(--tinta); }
+
+/* ---------- a foto em tamanho cheio ---------- */
+.lupa{
+  position:fixed; inset:0; z-index:120; display:none;
+  align-items:center; justify-content:center; padding:clamp(18px,4vw,56px);
+  background:rgba(10,9,8,.94); opacity:0; transition:opacity .45s var(--ease);
+}
+.lupa.is-montada{ display:flex; }
+.lupa.is-aberta{ opacity:1; }
+.lupa__foto{ max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; background:#0A0908; }
+.lupa__x{
+  position:absolute; top:clamp(14px,2.4vw,28px); right:clamp(14px,2.4vw,28px);
+  width:44px; height:44px; border-radius:50%; background:rgba(242,237,224,.92);
+  display:grid; place-items:center; color:#12100E;
+}
+.lupa__x svg{ width:16px; height:16px; }
+
+/* ---------- revelações ---------- */
+.js .rev{ opacity:0; }
+.js .rev.is-dentro{ opacity:1; }
+@media (prefers-reduced-motion:reduce){
+  .js .rev{ opacity:1 !important; transform:none !important; }
+  .capa__quadro.is-ativo{ transform:none; }
+}
+
+/* ---------- rodapé: mesma arquitetura da Vila Botané, com os horários ---------- */
+.rodape{ padding:clamp(54px,7vw,92px) var(--margem) 56px; background:var(--tinta-alta); }
+.rodape__serra{
+  width:100%; height:clamp(44px,6.4vw,104px); color:rgba(99,107,47,.34);
+  margin-bottom:clamp(40px,6vw,72px);
+}
+/* a serra se desenha ao descer e, pronta, responde ao cursor como corda */
+.rodape__cena{ position:relative; touch-action:none; }
+.js .serra__traco{ stroke-dasharray:1; stroke-dashoffset:1; }
+.rodape__cena.is-viva{ cursor:crosshair; }
+.rodape__cena.is-viva .serra__traco{ stroke-dasharray:none; stroke-dashoffset:0; }
+.rodape__grade{
+  display:grid; grid-template-columns:minmax(0,1fr) auto auto minmax(0,1fr);
+  column-gap:clamp(28px,3.4vw,56px); row-gap:36px; align-items:start;
+}
+.rodape__meio{ justify-self:center; }
+.rodape__marca{ color:var(--agua); text-align:center; }
+.rodape__endereco{ white-space:nowrap; }
+/* o lema quebra sozinho: com quatro colunas ele não cabe em linha única */
+.rodape__lema{ font-size:clamp(13px,1.3vw,16px); line-height:1.9; max-width:34ch; }
+.rodape__horarios{ display:grid; gap:6px; justify-items:center; }
+.rodape__titulo-hora{ color:var(--brasa); text-align:center; }
+.rodape__hora{ display:grid; grid-template-columns:auto auto; gap:6px 22px; width:100%; }
+.rodape__hora span:last-child{ text-align:right; }
+.rodape__rede{ display:flex; align-items:center; gap:12px; }
+.rodape__rede .elo{ line-height:32.4px; }
+.rodape .elo{ color:var(--agua); }
+.rodape a:hover .elo::after,
+.rodape a:focus-visible .elo::after{ transform:scaleX(1); }
+.rodape__pe{ display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-top:clamp(40px,6vw,72px); padding-top:20px; border-top:1px solid var(--casca); }
+.rodape__credito{
+  margin-top:18px; text-align:center;
+  font-family:var(--grot); font-size:11px; letter-spacing:.16em; line-height:1.7;
+  color:rgba(99,107,47,.62);
+}
+.rodape__autor{
+  color:inherit; text-decoration:none; border-bottom:1px solid transparent;
+  transition:color .45s var(--ease), border-color .45s var(--ease);
+}
+.rodape__autor:hover,
+.rodape__autor:focus-visible{ color:rgba(99,107,47,.95); border-bottom-color:rgba(99,107,47,.45); }
+@media (max-width:1000px){
+  .rodape__grade{ grid-template-columns:1fr 1fr; }
+  .rodape__meio{ justify-self:start; }
+  .rodape__endereco{ white-space:normal; }
+  .rodape__marca{ text-align:left; }
+  .rodape__meio > div{ text-align:left !important; }
+}
+@media (max-width:640px){ .rodape__grade{ grid-template-columns:1fr; } }
+</style>
+</head>
+
+<body>
+
+<div class="chrome is-sobre-escuro" id="chrome">
+  <a class="chrome__menu" href="./index.html">Casa do Lago</a>
+</div>
+
+<section class="capa" id="capa">
+  <div class="capa__quadro grao is-ativo">
+    <image-slot id="cas-capa-1" shape="rect" fit="cover" src="./img/casamentos/w-lago-beijo.jpeg"
+                placeholder="Casamento na Casa do Lago: o beijo à beira d'água"></image-slot>
+  </div>
+  <div class="capa__quadro grao">
+    <image-slot id="cas-capa-2" shape="rect" fit="cover" src="./img/casamentos/w-vinhedo-casal-sol.jpeg"
+                placeholder="Casamento na Vila Botané: os noivos entre as videiras"></image-slot>
+  </div>
+  <div class="capa__quadro grao">
+    <image-slot id="cas-capa-3" shape="rect" fit="cover" src="./img/casamentos/w-doces-lanternas.jpeg"
+                placeholder="A mesa de doces sob as lanternas"></image-slot>
+  </div>
+  <div class="capa__quadro grao">
+    <image-slot id="cas-capa-4" shape="rect" fit="cover" src="./img/casamentos/w-salao-estopa.jpeg"
+                placeholder="O salão posto para a festa"></image-slot>
+  </div>
+
+  <div class="capa__quadro grao">
+    <image-slot id="cas-capa-5" shape="rect" fit="cover" src="./img/casa-noite-ceu.webp"
+                placeholder="O céu de Vassouras, cheio de estrelas"></image-slot>
+  </div>
+
+  <div class="capa__veu"></div>
+
+  <div class="capa__texto">
+    <p class="rotulo rotulo--claro">Casa do Lago <span aria-hidden="true">·</span> Vila Botané</p>
+    <h1>Casamentos</h1>
+  </div>
+
+  <div class="capa__conta" id="capa-conta" aria-hidden="true">
+    <span class="capa__ponto is-ativo"></span>
+    <span class="capa__ponto"></span>
+    <span class="capa__ponto"></span>
+    <span class="capa__ponto"></span>
+    <span class="capa__ponto"></span>
+  </div>
+</section>
+
+<section class="secao" id="sonho">
+  <div class="cabeca">
+    <div class="rev">
+      <p class="rotulo">01 <span aria-hidden="true">·</span> O dia</p>
+      <h2 style="margin-top:18px">Um lugar que<br>já tem alma</h2>
+    </div>
+    <div class="prosa rev">
+      <p>Casar aqui é escolher um lugar que não precisa de cenário: a água parada do lago no fim da
+        tarde, a serra ao fundo, as videiras subindo o morro. Não montamos um casamento sobre a casa.
+        Abrimos a casa, e ela recebe.</p>
+      <p>Os sonhos aparecem no detalhe. A mesa comprida sob as árvores. O brinde na hora em que a luz
+        fica dourada. A cozinha trabalhando devagar desde a manhã, com o que a horta deu naquela
+        semana. Nada aqui é feito em série: cada celebração se ajusta ao casal, à estação e ao
+        tamanho da festa que vocês querem.</p>
+      <p>Se você está imaginando esse dia, o próximo passo é simples: conte ao nosso cerimonial o que
+        tem em mente, e a conversa começa por aí.</p>
+    </div>
+  </div>
+
+  <div class="tripe">
+    <div class="rev">
+      <div class="tripe__fio"></div>
+      <h3>Onde</h3>
+      <p>A festa acontece em uma das duas casas: à beira d'água, na Casa do Lago, ou entre as
+        videiras, na Vila Botané. Vocês escolhem qual delas recebe a celebração.</p>
+    </div>
+    <div class="rev">
+      <div class="tripe__fio"></div>
+      <h3>Quando</h3>
+      <p>A luz mais bonita cai entre o fim da tarde e o começo da noite. Os meses secos são os mais
+        procurados, e as datas boas saem cedo, então vale conversar com antecedência.</p>
+    </div>
+    <div class="rev">
+      <div class="tripe__fio"></div>
+      <h3>Com quem</h3>
+      <p>Nosso cerimonial conduz tudo do primeiro contato ao último brinde, em reuniões online: o
+        roteiro do dia, a cozinha, a adega e os fornecedores da região.</p>
+    </div>
+  </div>
+</section>
+
+<section class="secao secao--creme" id="fotos">
+  <div class="cabeca">
+    <div class="rev">
+      <p class="rotulo">02 <span aria-hidden="true">·</span> Celebrações</p>
+      <h2 style="margin-top:18px">O que já<br>aconteceu aqui</h2>
+    </div>
+    <div class="prosa rev">
+      <p>Fotografias de casamentos e festas nas duas casas. Clique em qualquer uma para ver em
+        tamanho cheio e imaginar o seu dia no meio delas.</p>
+    </div>
+  </div>
+
+  <div class="galeria" id="galeria">
+    <div class="peca rev"><div class="grao" style="aspect-ratio:2 / 3">
+      <image-slot id="cas-foto-1" shape="rect" fit="cover" src="./img/casamentos/w-vinhedo-casal-dois.jpeg"
+                  placeholder="Os noivos no vinhedo, ao pôr do sol"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:3 / 2">
+      <image-slot id="cas-foto-2" shape="rect" fit="cover" src="./img/casamentos/w-mesa-gerberas.jpeg"
+                  placeholder="A mesa posta com gérberas"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:3 / 4">
+      <image-slot id="cas-foto-3" shape="rect" fit="cover" src="./img/casamentos/w-vinhedo-caminhada.jpeg"
+                  placeholder="Os noivos caminhando entre as videiras"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:2 / 3">
+      <image-slot id="cas-foto-4" shape="rect" fit="cover" src="./img/casamentos/w-mesa-portas.jpeg"
+                  placeholder="A mesa e as portas antigas"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:2 / 3">
+      <image-slot id="cas-foto-5" shape="rect" fit="cover" src="./img/casamentos/w-buffet-noite.jpeg"
+                  placeholder="O buffet rústico, à noite"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:3 / 4">
+      <image-slot id="cas-foto-6" shape="rect" fit="cover" src="./img/casamentos/w-noiva-vinhedo.jpeg"
+                  placeholder="A noiva, antes da cerimônia"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:3 / 4">
+      <image-slot id="cas-foto-7" shape="rect" fit="cover" src="./img/casamentos/w-salao-estopa.jpeg"
+                  placeholder="O salão pronto para receber"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:3 / 4">
+      <image-slot id="cas-foto-8" shape="rect" fit="cover" src="./img/casamentos/w-tacas-vinhedo.jpeg"
+                  placeholder="As taças de espumante, no vinhedo"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:2 / 3">
+      <image-slot id="cas-foto-9" shape="rect" fit="cover" src="./img/casamentos/w-vinho-tacas.jpeg"
+                  placeholder="O vinho servido à mesa"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:3 / 4">
+      <image-slot id="cas-foto-10" shape="rect" fit="cover" src="./img/casamentos/w-queijo-nozes.jpeg"
+                  placeholder="O brie com nozes e mel"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:3 / 4">
+      <image-slot id="cas-foto-11" shape="rect" fit="cover" src="./img/casamentos/w-vinhedo-luzes.jpeg"
+                  placeholder="O vinhedo aceso ao anoitecer"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:3 / 4">
+      <image-slot id="cas-foto-12" shape="rect" fit="cover" src="./img/casamentos/w-vinhedo-galpao.jpeg"
+                  placeholder="O vinhedo visto do galpão"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:2 / 3">
+      <image-slot id="cas-foto-13" shape="rect" fit="cover" src="./img/casamentos/w-saxofone.jpeg"
+                  placeholder="O sax na festa"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:2 / 3">
+      <image-slot id="cas-foto-14" shape="rect" fit="cover" src="./img/casamentos/w-mesa-orquideas.jpeg"
+                  placeholder="A mesa com orquídeas, de dia"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:2 / 3">
+      <image-slot id="cas-foto-15" shape="rect" fit="cover" src="./img/casamentos/w-canape-figo.jpeg"
+                  placeholder="O canapé de figo com mel"></image-slot>
+    </div></div>
+    <div class="peca rev"><div class="grao" style="aspect-ratio:3 / 4">
+      <image-slot id="cas-foto-16" shape="rect" fit="cover" src="./img/casa-noite-ceu.webp"
+                  placeholder="O céu de Vassouras, cheio de estrelas"></image-slot>
+    </div></div>
+  </div>
+</section>
+
+<section class="secao" id="conversa">
+  <div class="convite">
+    <div class="rev">
+      <p class="rotulo">03 <span aria-hidden="true">·</span> O primeiro contato</p>
+      <h2 style="margin-top:18px">Vamos conversar<br>sobre o seu dia?</h2>
+    </div>
+    <div class="rev">
+      <div class="prosa">
+        <p>Conte a data que você tem em mente, quantas pessoas espera receber e em qual das duas
+          casas imagina a festa. Nosso cerimonial responde pelo WhatsApp e marca uma reunião online
+          com vocês.</p>
+      </div>
+      <div class="convite__acoes">
+        <a class="pill" href="https://wa.me/5522981595317?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20o%20cerimonial%20sobre%20um%20casamento%20na%20Casa%20do%20Lago." target="_blank" rel="noopener">Falar com o cerimonial</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="rodape">
+  <div class="rodape__cena" id="serra-cena">
+  <svg class="rodape__serra" id="serra-svg" viewBox="0 0 1200 90" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" preserveAspectRatio="none">
+    <path class="serra__traco" pathLength="1" d="M0 82 C 84 78, 128 46, 196 40 C 258 34, 296 62, 356 58 C 420 54, 452 20, 528 22 C 598 24, 628 60, 700 56 C 768 52, 800 26, 872 30 C 942 34, 976 64, 1044 60 C 1108 56, 1146 36, 1200 40" vector-effect="non-scaling-stroke"/>
+    <path class="serra__traco" pathLength="1" d="M0 88 C 96 86, 160 68, 244 66 C 330 64, 384 80, 470 76 C 560 72, 604 54, 700 58 C 790 62, 840 80, 930 76 C 1020 72, 1120 58, 1200 62" vector-effect="non-scaling-stroke"/>
+  </svg>
+  </div>
+
+  <div class="rodape__grade">
+    <div>
+      <p class="rotulo" aria-hidden="true" style="visibility:hidden">·</p>
+      <p class="mudo rodape__lema" style="margin-top:14px">Bistrô de vale<br>Vale do Café • Vassouras • Brasil<br>Cozinha de pequenos produtores e fogo lento</p>
+    </div>
+
+    <div class="rodape__meio">
+      <p class="rotulo rodape__marca">Casa do Lago</p>
+      <div style="margin-top:14px;text-align:center">
+        <p class="mudo rodape__endereco">Rua Luiz Francisco de Souza, 555<br>Ponte Funda, Vassouras/RJ</p>
+        <a class="elo" href="./index.html#reservas">Reservar</a>
+      </div>
+    </div>
+
+    <div class="rodape__horarios">
+      <p class="rotulo rodape__titulo-hora">Horários</p>
+      <div class="rodape__hora"><span class="mudo">Quinta</span><span class="mudo num">12h às 23h</span></div>
+      <div class="rodape__hora"><span class="mudo">Sexta e sábado</span><span class="mudo num">12h às 00h</span></div>
+      <div class="rodape__hora"><span class="mudo">Domingo</span><span class="mudo num">12h às 18h</span></div>
+      <div class="rodape__hora"><span class="mudo">Segunda a quarta</span><span class="mudo">fechado</span></div>
+    </div>
+
+    <div class="rodape__redes">
+      <p class="rotulo" aria-hidden="true" style="visibility:hidden">·</p>
+      <p class="rodape__rede" style="margin-top:14px">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;flex:0 0 auto;color:var(--agua)">
+          <rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4"/>
+          <circle cx="12" cy="12" r="4.6"/>
+          <circle cx="17.4" cy="6.6" r=".95" fill="currentColor" stroke="none"/>
+        </svg>
+        <a class="elo" href="https://www.instagram.com/casadolagobistro/" target="_blank" rel="noopener">Instagram</a>
+      </p>
+      <p class="rodape__rede" style="margin-top:18px">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;flex:0 0 auto;color:var(--agua)">
+          <path d="M3.1 20.9l1.36-4.9a8.4 8.4 0 1 1 3.54 3.54z"/>
+          <path d="M8.9 8.1c.28-.02.5.02.72.5l.62 1.36c.1.24.08.42-.06.62l-.42.56c-.14.18-.16.36-.06.56a6.1 6.1 0 0 0 2.9 2.86c.22.1.42.06.58-.1l.5-.5c.18-.18.38-.22.62-.12l1.44.66c.4.18.48.4.42.72-.1.6-.66 1.36-1.5 1.44-2.36.22-6.62-3.66-6.68-6.32-.02-.9.66-1.68 1.4-1.74z"/>
+        </svg>
+        <a class="elo" href="https://wa.me/5524999309828" target="_blank" rel="noopener">WhatsApp</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="rodape__pe">
+    <span class="rotulo"><span class="num">© 2026</span> Casa do Lago, Vassouras, Rio de Janeiro</span>
+  </div>
+
+  <p class="rodape__credito">Casa do Lago <span aria-hidden="true">·</span>
+    Website desenvolvido por <a class="rodape__autor" href="https://www.linkedin.com/in/gabriel-hossana-lopes-roque-18111b246/" target="_blank" rel="noopener noreferrer">Gabriel Hossana</a></p>
+</footer>
+
+<div class="lupa" id="lupa" role="dialog" aria-modal="true" aria-label="Fotografia em tamanho cheio">
+  <img class="lupa__foto" id="lupa-foto" alt="">
+  <button class="lupa__x" id="lupa-x" aria-label="Fechar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+      <path d="M5 5l14 14M19 5L5 19"/>
+    </svg>
+  </button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="./js/image-slot.js"></script>
+<script>
+(function () {
+  var reduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* alguns contextos (molduras de pré-visualização) congelam o relógio de animação:
+     o rAF não bate e as tweens ficam paradas no estado inicial. Aqui o movimento é
+     sempre enfeite: quem garante o estado final é este vigia. */
+  var relogioVivo = null;
+  requestAnimationFrame(function () { relogioVivo = true; });
+  setTimeout(function () { if (relogioVivo === null) relogioVivo = false; }, 400);
+  function anda() { return relogioVivo !== false; }
+  function garante(el, fim) {                    /* fim: função que planta o estado final */
+    setTimeout(function () {
+      if (parseFloat(getComputedStyle(el).opacity) < 0.9) fim();
+    }, 1100);
+  }
+
+  /* ---------- a capa troca de fotografia ---------- */
+  (function () {
+    var quadros = [].slice.call(document.querySelectorAll('.capa__quadro'));
+    var pontos  = [].slice.call(document.querySelectorAll('.capa__ponto'));
+    if (quadros.length < 2 || reduzido) return;
+    var vez = 0, tem = typeof gsap !== 'undefined';
+    if (tem) {
+      quadros.forEach(function (q, i) { gsap.set(q, { opacity: i === 0 ? 1 : 0, scale: 1.015 }); });
+      gsap.to(quadros[0], { scale: 1.075, duration: 8.4, ease: 'none' });
+    }
+    setInterval(function () {
+      var sai = quadros[vez];
+      if (pontos[vez]) pontos[vez].classList.remove('is-ativo');
+      vez = (vez + 1) % quadros.length;
+      var entra = quadros[vez];
+      if (pontos[vez]) pontos[vez].classList.add('is-ativo');
+      function planta() {
+        if (tem) { gsap.set(entra, { opacity: 1 }); gsap.set(sai, { opacity: 0 }); }
+        else { entra.style.opacity = 1; sai.style.opacity = 0; }
+        sai.classList.remove('is-ativo'); entra.classList.add('is-ativo');
+      }
+      if (!tem || !anda()) { planta(); return; }
+      gsap.set(entra, { scale: 1.015 });
+      gsap.to(entra, { opacity: 1, duration: 1.4, ease: 'power2.inOut' });
+      gsap.to(entra, { scale: 1.075, duration: 8.4, ease: 'none' });
+      gsap.to(sai, { opacity: 0, duration: 1.4, ease: 'power2.inOut' });
+      garante(entra, planta);
+    }, 6200);
+  })();
+
+  /* ---------- o chrome lê o fundo que passa atrás ---------- */
+  (function () {
+    var chrome = document.getElementById('chrome');
+    var capa = document.getElementById('capa');
+    if (!chrome || !capa) return;
+    function checa() {
+      var sobreFoto = capa.getBoundingClientRect().bottom > 64;
+      chrome.classList.toggle('is-sobre-escuro', sobreFoto);
+    }
+    checa();
+    addEventListener('scroll', checa, { passive: true });
+    addEventListener('resize', checa);
+  })();
+
+  /* ---------- revelações ---------- */
+  (function () {
+    var alvos = [].slice.call(document.querySelectorAll('.rev'));
+    if (!alvos.length) return;
+    if (reduzido) { alvos.forEach(function (el) { el.classList.add('is-dentro'); }); return; }
+    var comGsap = typeof gsap !== 'undefined';
+    function revela(el, i) {
+      el.classList.add('is-dentro');
+      function planta() {
+        if (comGsap) gsap.set(el, { opacity: 1, y: 0 });
+        else { el.style.opacity = 1; el.style.transform = 'none'; }
+      }
+      if (!comGsap || !anda()) { planta(); return; }
+      gsap.fromTo(el, { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: .9, ease: 'power2.out',
+          delay: 0.04 + (i % 3) * 0.09, overwrite: 'auto' });
+      garante(el, planta);
+    }
+
+    /* checagem por posição: mais confiável que IntersectionObserver dentro de
+       molduras de preview, onde o callback pode nunca ser entregue */
+    var pendentes = alvos.slice();
+    function checa() {
+      var alto = innerHeight || 800;
+      pendentes = pendentes.filter(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.top < alto * 0.9 && r.bottom > 0) { revela(el, pendentes.indexOf(el)); return false; }
+        return true;
+      });
+      if (!pendentes.length) {
+        removeEventListener('scroll', checa);
+        removeEventListener('resize', checa);
+      }
+    }
+    addEventListener('scroll', checa, { passive: true });
+    addEventListener('resize', checa);
+    checa();
+    var t = 0, relogio = setInterval(function () {          /* pega layout tardio (fontes, fotos) */
+      checa();
+      if (++t > 12 || !pendentes.length) clearInterval(relogio);
+    }, 250);
+  })();
+
+  /* ---------- a foto em tamanho cheio ---------- */
+  (function () {
+    var lupa = document.getElementById('lupa');
+    var foto = document.getElementById('lupa-foto');
+    var x = document.getElementById('lupa-x');
+    var galeria = document.getElementById('galeria');
+    if (!lupa || !foto || !galeria) return;
+    var devolve = null;
+
+    function abre(fonte, alt, origem) {
+      if (!fonte) return;
+      foto.src = fonte;
+      foto.alt = alt || '';
+      devolve = origem || null;
+      lupa.classList.add('is-montada');
+      requestAnimationFrame(function () { lupa.classList.add('is-aberta'); });
+      document.body.style.overflow = 'hidden';
+      x.focus();
+    }
+    function fecha() {
+      lupa.classList.remove('is-aberta');
+      document.body.style.overflow = '';
+      setTimeout(function () { lupa.classList.remove('is-montada'); foto.src = ''; }, 460);
+      if (devolve && devolve.focus) devolve.focus();
+      devolve = null;
+    }
+
+    /* só o clique conta  arrastar para ver a foto não abre a lupa */
+    var px = 0, py = 0, candidato = null;
+    galeria.addEventListener('pointerdown', function (e) {
+      candidato = e.target.closest('.peca'); px = e.clientX; py = e.clientY;
+    });
+    galeria.addEventListener('pointerup', function (e) {
+      if (!candidato) return;
+      var alvo = candidato; candidato = null;
+      if (Math.abs(e.clientX - px) > 6 || Math.abs(e.clientY - py) > 6) return;
+      var vaga = alvo.querySelector('image-slot');
+      var fonte = vaga && vaga.getAttribute('src');
+      abre(fonte, vaga && vaga.getAttribute('placeholder'), alvo);
+    });
+    galeria.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var alvo = e.target.closest('.peca');
+      if (!alvo) return;
+      e.preventDefault();
+      var vaga = alvo.querySelector('image-slot');
+      abre(vaga && vaga.getAttribute('src'), vaga && vaga.getAttribute('placeholder'), alvo);
+    });
+
+    x.addEventListener('click', fecha);
+    lupa.addEventListener('click', function (e) { if (e.target === lupa) fecha(); });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape' && lupa.classList.contains('is-aberta')) fecha(); });
+  })();
+})();
+
+/* ---------- a serra do rodapé: desenha ao descer, depois vira corda ----------
+   Duas fases. Na primeira, a rolagem preenche o traço (stroke-dashoffset).
+   Ao completar, os pontos de cada linha ganham física de corda: o cursor bate,
+   a onda corre pela linha, reflete nas pontas presas e volta. */
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var cena = document.getElementById('serra-cena');
+  var svg  = document.getElementById('serra-svg');
+  if (!cena || !svg) return;
+
+  var tracos = [].slice.call(svg.querySelectorAll('.serra__traco'));
+  var VBH = (svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.height) || 96;
+  var reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- fase 1 · o desenho ---- */
+  var pronta = false;
+  function desenha() {
+    var r = cena.getBoundingClientRect();
+    /* de quando a serra assoma no rodapé até um terço acima do fim da tela */
+    var p = (innerHeight - r.top) / (innerHeight * 0.42);
+    p = p < 0 ? 0 : (p > 1 ? 1 : p);
+    tracos.forEach(function (t, i) {
+      var q = (p - i * 0.08) / (1 - i * 0.08);      /* cada linha vem um passo atrás */
+      q = q < 0 ? 0 : (q > 1 ? 1 : q);
+      t.style.strokeDashoffset = 1 - q;
+    });
+    if (p >= 1 && !pronta) { pronta = true; viva(); }
+  }
+
+  if (reduz) { tracos.forEach(function (t) { t.style.strokeDashoffset = 0; }); }
+  else {
+    var pedido = false;
+    addEventListener('scroll', function () {
+      if (pedido || pronta) return;
+      pedido = true;
+      requestAnimationFrame(function () { pedido = false; desenha(); });
+    }, { passive: true });
+    addEventListener('resize', function () { if (!pronta) desenha(); });
+    desenha();
+  }
+
+  /* ---- fase 2 · a corda ---- */
+  function viva() {
+    cena.classList.add('is-viva');
+    if (reduz) return;
+
+    var N = 170, RAIO = 130, TENSAO = 0.30, MOLA = 0.060,
+        ATRITO = 0.955, ARRASTO = 0.72, IMPULSO = 5, TETO = 18;
+
+    var linhas = tracos.map(function (el, i) {
+      var L = el.getTotalLength(), pts = [];
+      for (var k = 0; k <= N; k++) {
+        var p = el.getPointAtLength(L * k / N);
+        pts.push({ bx: p.x, by: p.y, dx: 0, dy: 0, vx: 0, vy: 0 });
+      }
+      el.removeAttribute('pathLength');
+      return { pts: pts, el: el, peso: 1 - i * 0.12,
+               ox: new Float32Array(N + 1), oy: new Float32Array(N + 1) };
+    });
+
+    function tracado(pts) {
+      var s = 'M' + (pts[0].bx + pts[0].dx).toFixed(2) + ' ' + (pts[0].by + pts[0].dy).toFixed(2);
+      for (var i = 1; i < pts.length - 1; i++) {
+        var a = pts[i], b = pts[i + 1];
+        var axx = a.bx + a.dx, ayy = a.by + a.dy;
+        var mx = (axx + b.bx + b.dx) / 2, my = (ayy + b.by + b.dy) / 2;
+        s += ' Q' + axx.toFixed(2) + ' ' + ayy.toFixed(2) + ' ' + mx.toFixed(2) + ' ' + my.toFixed(2);
+      }
+      var u = pts[pts.length - 1];
+      return s + ' L' + (u.bx + u.dx).toFixed(2) + ' ' + (u.by + u.dy).toFixed(2);
+    }
+
+    var px = -9999, py = -9999, ax = 0, ay = 0, dentro = false, raf = 0, vel = 0;
+
+    cena.addEventListener('pointermove', function (ev) {
+      var r = cena.getBoundingClientRect();
+      var x = (ev.clientX - r.left) / r.width * 1200;
+      var y = (ev.clientY - r.top) / r.height * VBH;
+      if (dentro) { ax = x - px; ay = y - py; } else { ax = 0; ay = 0; dentro = true; }
+      px = x; py = y;
+      vel = Math.hypot(ax, ay);
+      if (vel > IMPULSO) { ax *= IMPULSO / vel; ay *= IMPULSO / vel; }
+      toca();
+      liga();
+    });
+    cena.addEventListener('pointerleave', function () { dentro = false; ax = 0; ay = 0; });
+
+    function toca() {
+      linhas.forEach(function (linha) {
+        var pts = linha.pts;
+        for (var i = 0; i < pts.length; i++) {
+          var pt = pts[i];
+          var ex = pt.bx + pt.dx - px, ey = (pt.by + pt.dy - py) * 2.6;
+          var dist = Math.hypot(ex, ey);
+          if (dist > RAIO) continue;
+          var q = 1 - dist / RAIO;
+          var g = q * q * linha.peso * ARRASTO;
+          pt.vx += ax * g; pt.vy += ay * g;
+          if (dist > 0.001) {
+            var e = q * q * linha.peso * 0.10 * (1 + Math.min(vel, IMPULSO) * 0.05);
+            pt.vx += ex / dist * e; pt.vy += ey / dist * e;
+          }
+        }
+      });
+    }
+
+    function passo() {
+      raf = 0;
+      var vivo = false;
+      linhas.forEach(function (linha) {
+        var pts = linha.pts, n = pts.length, i, pt;
+        var ox = linha.ox, oy = linha.oy;
+        for (i = 0; i < n; i++) { ox[i] = pts[i].dx; oy[i] = pts[i].dy; }
+        for (i = 0; i < n; i++) {
+          pt = pts[i];
+          var e = i > 0 ? i - 1 : 0, d2 = i < n - 1 ? i + 1 : n - 1;
+          pt.vx += ((ox[e] + ox[d2]) / 2 - ox[i]) * TENSAO;
+          pt.vy += ((oy[e] + oy[d2]) / 2 - oy[i]) * TENSAO;
+          pt.vx -= pt.dx * MOLA; pt.vy -= pt.dy * MOLA;
+          pt.vx *= ATRITO; pt.vy *= ATRITO;
+          pt.dx += pt.vx; pt.dy += pt.vy;
+          if (pt.dx >  TETO) { pt.dx =  TETO; pt.vx *= -0.3; }
+          else if (pt.dx < -TETO) { pt.dx = -TETO; pt.vx *= -0.3; }
+          if (pt.dy >  TETO) { pt.dy =  TETO; pt.vy *= -0.3; }
+          else if (pt.dy < -TETO) { pt.dy = -TETO; pt.vy *= -0.3; }
+        }
+        pts[0].dx = pts[0].dy = pts[n - 1].dx = pts[n - 1].dy = 0;
+        for (var k = 0; k < n; k += 12) {
+          if (Math.abs(pts[k].dx) + Math.abs(pts[k].dy) + Math.abs(pts[k].vx) + Math.abs(pts[k].vy) > 0.02) { vivo = true; break; }
+        }
+        linha.el.setAttribute('d', tracado(pts));
+      });
+      if (vivo || dentro) liga();
+    }
+    function liga() { if (!raf) raf = requestAnimationFrame(passo); }
+  }
+})();
+</script>
+</body>
+</html>
