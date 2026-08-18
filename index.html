@@ -1638,19 +1638,26 @@ import { criaDecolagem } from './js/voo-decolagem.js';
     var rumo = fila.classList.contains('galeria--dia') ? -1 : 1;
     var parado = false, arrastando = false, x0 = 0, s0 = 0, ultimo = 0;
 
+    /* A conta do passo mora aqui, em ponto flutuante, e só o total vai para o
+       scrollLeft. O navegador guarda scrollLeft arredondado ao pixel da tela, e
+       a 22 px/s cada quadro anda 0,37 px: somando direto no scrollLeft o resto
+       se perde no arredondamento a cada quadro e a fila nunca sai do lugar. */
+    var pos = fila.scrollLeft;
+
     function laco(t) {
       if (!ultimo) ultimo = t;
       var dt = Math.min(64, t - ultimo); ultimo = t;
       if (!parado && !arrastando && fila.offsetParent) {
-        fila.scrollLeft += rumo * dt * 0.022;   /* ~22 px/s */
+        pos += rumo * dt * 0.022;   /* ~22 px/s */
+        fila.scrollLeft = pos;
       }
       normaliza();
       requestAnimationFrame(laco);
     }
     function normaliza() {
       var m = metade();
-      if (fila.scrollLeft <= 1) fila.scrollLeft += m;
-      else if (fila.scrollLeft >= m * 2 - 1) fila.scrollLeft -= m;
+      if (fila.scrollLeft <= 1) { fila.scrollLeft += m; pos = fila.scrollLeft; }
+      else if (fila.scrollLeft >= m * 2 - 1) { fila.scrollLeft -= m; pos = fila.scrollLeft; }
     }
 
     fila.addEventListener('pointerenter', function () { parado = true; });
@@ -1665,6 +1672,7 @@ import { criaDecolagem } from './js/voo-decolagem.js';
     fila.addEventListener('pointermove', function (e) {
       if (!arrastando) return;
       fila.scrollLeft = s0 - (e.clientX - x0);
+      pos = fila.scrollLeft;          /* o arrasto manda: o acumulador o segue */
       normaliza();
     });
     ['pointerup', 'pointercancel'].forEach(function (ev) {
