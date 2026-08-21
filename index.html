@@ -999,7 +999,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   <section class="secao" id="horta">
     <div class="cabeca rev">
       <p class="rotulo">02</p>
-      <h2>Da Terra para a Mesa</h2>
+      <h2 data-ed="horta.titulo">Da Terra para a Mesa</h2>
     </div>
 
     <div class="horta__abre rev">
@@ -1085,7 +1085,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     </div>
     <div class="cabeca rev">
       <p class="rotulo">03</p>
-      <h2>Cardápio sazonal</h2>
+      <h2 data-ed="cardapio.titulo">Cardápio sazonal</h2>
     </div>
 
     <div class="card__vao">
@@ -1127,13 +1127,13 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   <section class="secao arte" id="arte">
     <div class="cabeca rev">
       <p class="rotulo">04</p>
-      <h2>A arte da casa</h2>
+      <h2 data-ed="arte.titulo">A arte da casa</h2>
       <button class="cabeca__hora" type="button" id="luz-arte" aria-pressed="false">Ver a versão escura</button>
     </div>
 
     <div class="arte__abertura">
       <div class="arte__dizer rev">
-        <p class="arte__voz">Arte é a voz da alma.</p>
+        <p class="arte__voz" data-ed="arte.voz">Arte é a voz da alma.</p>
         <span class="arte__fio" aria-hidden="true"></span>
         <div class="prosa">
           <p>É enxergar beleza e sensibilidade onde os olhos comuns apenas passam; é permitir
@@ -1161,7 +1161,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
       </figure>
       <div class="arte__legenda rev">
         <p class="rotulo">Da mão da artista</p>
-        <p class="arte__assina">Maria Clara Porto</p>
+        <p class="arte__assina" data-ed="arte.artista">Maria Clara Porto</p>
         <p class="arte__mudo">Obras autorais, pintadas para esta casa.</p>
       </div>
     </div>
@@ -1214,7 +1214,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     <div class="agenda">
       <article class="evento rev">
         <div>
-          <h3>Eventos da casa</h3>
+          <h3 data-ed="eventos.titulo">Eventos da casa</h3>
           <p class="mudo" style="font-size:16px">Noite de cinema, jantares harmonizados e datas
             especiais são anunciados no
             <a class="elo" href="https://www.instagram.com/casadolagobistro/" target="_blank" rel="noopener">instagram</a>.</p>
@@ -1223,7 +1223,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
       </article>
       <article class="evento rev">
         <div>
-          <h3>Casamentos</h3>
+          <h3 data-ed="casamentos.titulo">Casamentos</h3>
           <p class="mudo" style="font-size:16px">Cerimônias na Casa do Lago ou Vila Botané. Nosso
             cerimonial conduz o grande dia do primeiro contato ao último brinde.</p>
         </div>
@@ -1234,7 +1234,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
       </article>
       <article class="evento rev">
         <div>
-          <h3>Visitações e degustações</h3>
+          <h3 data-ed="visitacoes.titulo">Visitações e degustações</h3>
           <p class="mudo" style="font-size:16px">Na <a class="elo" href="https://gabriellroque9017-lab.github.io/vilabotane-site/">Vila Botané</a>,
             em datas abertas ao longo do ano e divulgadas no
             <a class="elo" href="https://www.instagram.com/vilabotane/" target="_blank" rel="noopener">Instagram</a>
@@ -2463,5 +2463,6 @@ import { criaDecolagem } from './js/voo-decolagem.js';
   }
 })();
 </script>
+<script src="./js/conteudo.js" defer></script>
 </body>
 </html>
