@@ -1675,6 +1675,9 @@ import { criaDecolagem } from './js/voo-decolagem.js';
   var vid = document.getElementById('popup-video');
   var x = document.getElementById('popup-x');
   if (!pop || !vid) return;
+  /* o convite só se abre no celular. No computador a capa já entrega a casa em
+     tela cheia, e o vídeo por cima atrapalharia mais do que convida. */
+  if (!window.matchMedia('(max-width: 760px)').matches) { pop.hidden = true; return; }
 
   function fecha() {
     pop.classList.remove('is-aberto');
