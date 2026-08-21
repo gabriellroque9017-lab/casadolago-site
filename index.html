@@ -421,7 +421,15 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 .assinatura__nome{ font-size:clamp(28px,3.6vw,46px); font-weight:300; line-height:1.05; margin-bottom:4px; }
 .assinatura__linha{ color:var(--marfim-mudo); max-width:62ch; line-height:1.72; text-wrap:pretty; }
 .assinatura__linha:first-of-type{ color:var(--marfim); }
-@media (max-width:760px){ .assinatura__vao{ grid-template-columns:1fr; } }
+@media (max-width:760px){
+  .assinatura__vao{ grid-template-columns:1fr; }
+  /* no celular a virada é só a troca da foto e da luz. Trocar os lados aqui
+     empurraria o retrato para baixo do texto e faria perder o lugar da leitura;
+     e a grade da virada ainda pedia duas colunas, que não cabem no telefone. */
+  .assinatura.is-virada .assinatura__vao{ grid-template-columns:1fr; }
+  .assinatura.is-virada .assinatura__retrato,
+  .assinatura.is-virada .assinatura__texto{ order:0; }
+}
 
 /* a horta: a caminhada passa na borda de cima das fotos */
 .horta__cena{
