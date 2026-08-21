@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buffet · Casa do Lago</title>
+<meta name="description" content="A apresentação do buffet de casamentos da Casa do Lago: finger foods, mini degustações, pratos, sobremesas e a degustação na casa.">
+
+<!-- ==========================================================================
+     Obra da Casa do Lago, Vassouras (RJ). Todos os direitos reservados.
+     Uso, cópia ou adaptação deste material dependem de autorização escrita.
+     Direção artística: Ana Luiza Val. Desenvolvimento: Gabriel Hossana.
+     ========================================================================== -->
+<meta name="robots" content="noai, noimageai">
+<meta name="author" content="Gabriel Hossana">
+<meta name="copyright" content="© 2026 Casa do Lago · Todos os direitos reservados">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
+<link rel="preload" as="image" href="./img/buffet/b01.webp" fetchpriority="high">
+
+<style>
+:root{
+  --tinta:#F2EDE0; --tinta-alta:#E9E2D0;
+  --marfim:#636B2F; --marfim-mudo:#79815A;
+  --claro:#EDE7DA;
+  --agua:#5C7E7D;
+  --casca:#CFC8B2;
+  --serifa:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --grot:"Jost","Helvetica Neue",Arial,sans-serif;
+  --margem:8vw; --secao:150px;
+  --ease:cubic-bezier(.65,0,.35,1);
+}
+@media (max-width:760px){ :root{ --margem:24px; --secao:84px; } }
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0; background:var(--tinta); color:var(--marfim);
+  font-family:var(--serifa); font-size:18px; line-height:1.8; font-weight:300;
+  -webkit-font-smoothing:antialiased;
+}
+a{ color:inherit; }
+.rotulo{
+  font-family:var(--grot); font-weight:400; font-size:11px;
+  letter-spacing:.35em; text-indent:.35em; text-transform:uppercase; color:var(--marfim-mudo);
+  margin:0;
+}
+.pill{
+  display:inline-block; padding:14px 28px;
+  border:1px solid var(--casca); border-radius:2px;
+  font-family:var(--grot); font-size:11px; letter-spacing:.35em; text-indent:.35em;
+  text-transform:uppercase; text-decoration:none; color:var(--marfim);
+  transition:background .6s var(--ease), border-color .6s var(--ease), color .6s var(--ease);
+}
+.pill:hover, .pill:focus-visible{ background:var(--marfim); border-color:var(--marfim); color:var(--tinta); }
+:focus-visible{ outline:2px solid var(--agua); outline-offset:3px; }
+
+/* o alto da página: só a volta, como na página de casamentos */
+.chrome{
+  position:fixed; inset:0 0 auto 0; z-index:40; display:flex; justify-content:space-between;
+  padding:22px var(--margem); pointer-events:none;
+  background:linear-gradient(to bottom, var(--tinta) 40%, transparent);
+}
+.chrome > *{ pointer-events:auto; }
+.chrome__volta{
+  font-family:var(--grot); font-size:11px; letter-spacing:.35em; text-indent:.35em;
+  text-transform:uppercase; color:var(--marfim); text-decoration:none;
+}
+.chrome__volta:hover{ color:var(--agua); }
+
+.cabeca{
+  padding:calc(var(--secao) * .8) var(--margem) clamp(30px,5vw,56px);
+  max-width:1180px; margin:0 auto;
+}
+.cabeca h1{
+  font-weight:300; font-size:clamp(34px,5.4vw,64px); line-height:1.04;
+  letter-spacing:-.008em; margin:16px 0 0; text-wrap:balance;
+}
+.cabeca .linha{ margin:18px 0 0; max-width:52ch; color:var(--marfim-mudo); }
+
+/* os slides, um embaixo do outro */
+.folhas{
+  display:grid; gap:clamp(16px,2.4vw,34px);
+  max-width:1180px; margin:0 auto; padding:0 var(--margem) clamp(40px,6vw,80px);
+}
+.folha{
+  display:block; width:100%; height:auto; border:1px solid var(--casca);
+  background:#FFF;
+}
+
+.fecho{
+  max-width:1180px; margin:0 auto;
+  padding:0 var(--margem) var(--secao); text-align:center;
+}
+.fecho p{ margin:0 0 26px; }
+.fecho__acoes{ display:flex; flex-wrap:wrap; gap:18px 22px; justify-content:center; }
+
+.rodape{
+  border-top:1px solid var(--casca);
+  padding:clamp(30px,4vw,44px) var(--margem);
+  font-family:var(--grot); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--marfim-mudo); text-align:center; line-height:2.2;
+}
+.rodape a{ color:var(--marfim); text-decoration:none; border-bottom:1px solid transparent; }
+.rodape a:hover{ border-bottom-color:currentColor; }
+.rodape__direitos{ text-transform:none; letter-spacing:.04em; font-size:12px; margin-top:14px; line-height:1.7; }
+</style>
+</head>
+<body>
+
+<div class="chrome">
+  <a class="chrome__volta" href="./casamentos_casa_lago.html">← Casamentos</a>
+  <a class="chrome__volta" href="./index.html">Casa do Lago</a>
+</div>
+
+<header class="cabeca">
+  <p class="rotulo">Buffet</p>
+  <h1>Gastronomia afetiva<br>e autoral</h1>
+  <p class="linha">A apresentação que entregamos aos casais, folha a folha: o que servimos, como
+    servimos e como funciona a degustação aqui na casa.</p>
+</header>
+
+<main class="folhas" id="folhas">
+  <img class="folha" src="./img/buffet/b01.webp" width="1500" height="844" fetchpriority="high" decoding="async" alt="Capa: Casa do Lago Buffet, gastronomia afetiva e autoral para casamentos">
+  <img class="folha" src="./img/buffet/b02.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Quem somos: a Casa do Lago nasceu do desejo de transformar a gastronomia em afeto">
+  <img class="folha" src="./img/buffet/b03.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Os quatro pilares da cozinha: afetivo, brasileiro, autoral e estético">
+  <img class="folha" src="./img/buffet/b04.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Texturas: mosaico de mesas postas, flores e detalhes do serviço">
+  <img class="folha" src="./img/buffet/b05.webp" width="1500" height="844" loading="lazy" decoding="async" alt="O buffet: formato gastronômico flexível, montado por etapas">
+  <img class="folha" src="./img/buffet/b06.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Finger foods frios: carnes, especiais e frutos do mar, quatro opções a escolher">
+  <img class="folha" src="./img/buffet/b07.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Finger foods quentes: fritos, formes e assados, vegetarianos e veganos, doze opções">
+  <img class="folha" src="./img/buffet/b08.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Mini degustações e volantes: saladas e composições, três opções a escolher">
+  <img class="folha" src="./img/buffet/b09.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Diversos: cuscuz marroquino, costelinha, escondidinhos e arrozes">
+  <img class="folha" src="./img/buffet/b10.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Risotos: caprese, bacalhau, camarão, grana padano, funghi e outros">
+  <img class="folha" src="./img/buffet/b11.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Caldos: abóbora com brie, aspargos, brócolis, feijão com alho e mariscos">
+  <img class="folha" src="./img/buffet/b12.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Massas e molhos: farfalle, penne, ravióli, gnocchi e os molhos da casa">
+  <img class="folha" src="./img/buffet/b13.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Carnes e frutos do mar: escalope, medalhão, filé mignon, salmão e camarões">
+  <img class="folha" src="./img/buffet/b14.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Acompanhamentos e pratos veganos, opcionais para estacionados">
+  <img class="folha" src="./img/buffet/b15.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Mini doces volantes, mesa de café de cortesia e bebidas">
+  <img class="folha" src="./img/buffet/b16.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Degustação: realizada na Casa do Lago Bistrô, com taxa por pessoa abatida no contrato">
+  <img class="folha" src="./img/buffet/b17.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Do simples ao memorável: a casa iluminada e o salão montado para a festa">
+</main>
+
+<section class="fecho">
+  <p class="rotulo">O próximo passo</p>
+  <p style="margin-top:14px">Cada casamento é montado com o casal, à mesa. Conte o que vocês têm em
+    mente e o cerimonial conduz o resto.</p>
+  <div class="fecho__acoes">
+    <a class="pill" href="https://wa.me/5522981595317?text=Ol%C3%A1!%20Vi%20a%20apresenta%C3%A7%C3%A3o%20do%20buffet%20e%20gostaria%20de%20falar%20sobre%20um%20casamento%20na%20Casa%20do%20Lago." target="_blank" rel="noopener">Falar com o cerimonial</a>
+    <a class="pill" href="./casamentos_casa_lago.html">Ver as fotos</a>
+  </div>
+</section>
+
+<footer class="rodape">
+  <p>Casa do Lago · Vassouras, Rio de Janeiro</p>
+  <p class="rodape__direitos">
+    © 2026 Casa do Lago. Todos os direitos reservados. Textos, fotografias, receitas e a
+    identidade desta apresentação são obra protegida: nenhuma parte pode ser copiada, reproduzida
+    ou adaptada sem autorização escrita.<br>
+    Direção artística por <a href="https://www.analuizaval.com.br/" target="_blank" rel="noopener">Ana Luiza Val</a>
+    · Website desenvolvido por <a href="https://www.linkedin.com/in/gabriel-hossana-lopes-roque-18111b246/" target="_blank" rel="noopener">Gabriel Hossana</a>
+  </p>
+</footer>
+
+</body>
+</html>
