@@ -51,10 +51,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
 <link rel="preload" as="image" href="./img/lago.jpeg" fetchpriority="high">
-<link rel="preload" as="image" href="./img/casa-cor-topo-recorte.png">
-<link rel="preload" as="image" href="./img/casa-cor-agua-recorte.png">
-<link rel="preload" as="image" href="./img/casa-marca-topo.png">
-<link rel="preload" as="image" href="./img/casa-marca-agua.png">
+<link rel="preload" as="image" href="./img/casa-cor-topo-recorte.webp">
+<link rel="preload" as="image" href="./img/casa-cor-agua-recorte.webp">
+<link rel="preload" as="image" href="./img/casa-marca-topo.webp">
+<link rel="preload" as="image" href="./img/casa-marca-agua.webp">
 
 <style>
 /* ==========================================================
@@ -826,10 +826,10 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     <div class="capa__veu" aria-hidden="true"></div>
 
     <span class="capa__marca" aria-label="Casa do Lago" role="img">
-      <img class="base cor" src="./img/casa-cor-topo-recorte.png" alt="" width="1706" height="1139" decoding="async">
-      <img class="cor" src="./img/casa-cor-agua-recorte.png" alt="" width="1706" height="1139" decoding="async">
-      <img class="traco" src="./img/casa-marca-topo.png" alt="" width="1706" height="1139" decoding="async">
-      <img class="traco" src="./img/casa-marca-agua.png" alt="" width="1706" height="1139" decoding="async">
+      <img class="base cor" src="./img/casa-cor-topo-recorte.webp" alt="" width="1706" height="1139" decoding="async">
+      <img class="cor" src="./img/casa-cor-agua-recorte.webp" alt="" width="1706" height="1139" decoding="async">
+      <img class="traco" src="./img/casa-marca-topo.webp" alt="" width="1706" height="1139" decoding="async">
+      <img class="traco" src="./img/casa-marca-agua.webp" alt="" width="1706" height="1139" decoding="async">
     </span>
 
     <div class="capa__base">
@@ -1057,7 +1057,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
           <img src="./img/horta/horta-nervuras.webp" alt="Folha aberta em close, nervuras claras contra o verde" width="760" height="1013" loading="lazy" decoding="async">
         </figure>
       </div>
-      <video class="horta__fonte" id="horta-filme" src="./img/caminhada-video.mp4"
+      <video class="horta__fonte" id="horta-filme" data-src="./img/caminhada-video.mp4" preload="none"
              muted loop playsinline preload="auto" aria-hidden="true"></video>
     </div>
   </section>
@@ -1105,7 +1105,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
         </div>
       </div>
       <figure class="card__filme grao rev">
-        <video src="./img/cardapio-cozinha.mp4" muted loop playsinline autoplay preload="auto"
+        <video data-src="./img/cardapio-cozinha.mp4" muted loop playsinline autoplay preload="none"
                aria-label="A cozinha da casa em movimento"></video>
       </figure>
     </div>
@@ -1361,10 +1361,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     <span aria-hidden="true">·</span>
     Website desenvolvido por <a class="rodape__autor" href="https://www.linkedin.com/in/gabriel-hossana-lopes-roque-18111b246/" target="_blank" rel="noopener noreferrer">Gabriel Hossana</a></p>
   <p class="rodape__direitos">© 2026 Casa do Lago. Todos os direitos reservados. Textos, fotografias,
-    ilustrações, identidade visual e código são obra protegida: a cópia, a adaptação e o uso para
-    treinar sistemas de inteligência artificial dependem de autorização escrita. Qualquer
-    reutilização, inclusive automatizada, deve manter visível o crédito a Gabriel Hossana e
-    Ana Luiza Val.</p>
+    ilustrações, identidade visual e código são obra protegida.</p>
 </footer>
 
 <script>
@@ -1920,6 +1917,30 @@ import { criaDecolagem } from './js/voo-decolagem.js';
     } else entra();
     setTimeout(entra, 6000);   /* rede de segurança */
   });
+})();
+
+/* os vídeos do meio da página só buscam o arquivo quando a seção deles chega
+   perto. Antes disso eles disputavam a rede com a capa, e no celular a capa
+   é a única coisa que a pessoa está esperando. */
+(function () {
+  var tarde = [].slice.call(document.querySelectorAll('video[data-src]'));
+  if (!tarde.length) return;
+  function acende(v) {
+    if (v.src) return;
+    v.src = v.dataset.src;
+    v.load();
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
+  }
+  if (!('IntersectionObserver' in window)) { tarde.forEach(acende); return; }
+  var olho = new IntersectionObserver(function (itens) {
+    itens.forEach(function (i) {
+      if (!i.isIntersecting) return;
+      acende(i.target);
+      olho.unobserve(i.target);
+    });
+  }, { rootMargin: '300px 0px' });
+  tarde.forEach(function (v) { olho.observe(v); });
 })();
 
 /* 04 · A arte: a parede acende ou apaga, a pedido de quem olha */
