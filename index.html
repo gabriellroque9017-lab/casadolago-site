@@ -271,6 +271,10 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   55%  { opacity:.35 }
   100% { opacity:.9 }
 }
+/* o convite em vídeo espera um toque, e só existe no celular */
+.capa__convite{ display:none; }
+.capa__convite button{ font-family:var(--grot); font-size:12px; }   /* o .elo cuida do resto */
+@media (max-width:760px){ .capa__convite{ display:block; } }
 .capa__base{
   position:absolute; left:var(--margem); right:var(--margem); bottom:clamp(96px,15vh,150px); z-index:4;
   display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center;
@@ -833,6 +837,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     </span>
 
     <div class="capa__base">
+      <p class="capa__convite"><button class="elo rotulo--agua" type="button" id="abre-convite">Ver o convite</button></p>
     </div>
     <span class="capa__fio" aria-hidden="true"></span>
   </section>
@@ -1709,8 +1714,8 @@ import { criaDecolagem } from './js/voo-decolagem.js';
 <div class="popup" id="popup" role="dialog" aria-modal="true" aria-label="Convite em vídeo" hidden>
   <div class="popup__caixa">
     <button class="popup__x" type="button" id="popup-x" aria-label="Fechar">✕</button>
-    <video class="popup__video" id="popup-video" muted loop playsinline preload="auto" tabindex="-1">
-      <source src="./img/popup-casadolago.mp4" type="video/mp4">
+    <video class="popup__video" id="popup-video" muted loop playsinline preload="none" data-src="./img/popup-casadolago.mp4" tabindex="-1">
+      <!-- o arquivo só vem quando alguém toca em "Ver o convite" -->
     </video>
   </div>
 </div>
@@ -1752,14 +1757,16 @@ import { criaDecolagem } from './js/voo-decolagem.js';
   /* enquanto o arquivo do vídeo não existir, o convite não aparece */
   vid.addEventListener('error', function () { pop.hidden = true; }, true);
 
-  var pronto = { video: false, pouso: false };
-  function talvezAbre() {
-    if (pronto.video && pronto.pouso) setTimeout(abre, 500);
+  /* o convite espera o toque em "Ver o convite": abrir sozinho custava três
+     megabytes de vídeo antes de a pessoa ver a capa. O arquivo só é buscado
+     no primeiro toque. */
+  var gatilho = document.getElementById('abre-convite');
+  if (gatilho) {
+    gatilho.addEventListener('click', function () {
+      if (!vid.src && vid.dataset.src) { vid.src = vid.dataset.src; vid.load(); }
+      abre();
+    });
   }
-  vid.addEventListener('loadeddata', function () { pronto.video = true; talvezAbre(); }, { once: true });
-  document.addEventListener('capa:pousou', function () { pronto.pouso = true; talvezAbre(); }, { once: true });
-  /* se a marca já tinha pousado antes deste script correr */
-  if (document.querySelector('.capa__marca.is-pronta')) { pronto.pouso = true; }
 })();
 </script>
 <script>
