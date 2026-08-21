@@ -1,14 +1,26 @@
 {
   "site": "casadolago",
   "campos": {
-    "horta.titulo": "Da Terra para a Mesa",
-    "cardapio.titulo": "Cardápio sazonal",
-    "arte.titulo": "A arte da casa",
-    "arte.voz": "Arte é a voz da alma.",
-    "arte.artista": "Maria Clara Porto",
-    "eventos.titulo": "Eventos da casa",
-    "casamentos.titulo": "Casamentos",
-    "visitacoes.titulo": "Visitações e degustações"
+    "horta": {
+      "titulo": "Da Terra para a Mesa"
+    },
+    "cardapio": {
+      "titulo": "Cardápio sazonal"
+    },
+    "arte": {
+      "titulo": "A arte da casa",
+      "voz": "Arte é a voz da alma.",
+      "artista": "Maria Clara Porto"
+    },
+    "eventos": {
+      "titulo": "Eventos da casa"
+    },
+    "casamentos": {
+      "titulo": "Casamentos"
+    },
+    "visitacoes": {
+      "titulo": "Visitações e degustações"
+    }
   },
   "pratos": [
     {
@@ -19,7 +31,8 @@
       "notas": "Massa crocante da casa|Queijo cremoso e camarão|Molho de pimenta da casa",
       "preco": "",
       "quantidade": "",
-      "subtitulo": "2 unidades"
+      "subtitulo": "2 unidades",
+      "foto": "./img/prato-pastel-camarao.webp"
     },
     {
       "id": "prato-brie-mel",
@@ -29,7 +42,8 @@
       "notas": "Brie brasileiro de terroir|Mel de abelhas selvagens trufado|Torradas de ervas finas",
       "preco": "",
       "quantidade": "",
-      "subtitulo": "com torradas"
+      "subtitulo": "com torradas",
+      "foto": "./img/prato-brie-mel.webp"
     },
     {
       "id": "prato-tartar-mignon",
@@ -39,7 +53,8 @@
       "notas": "Filé mignon cortado à faca|Gema caipira e flor de sal|Chips crocantes de batata",
       "preco": "",
       "quantidade": "",
-      "subtitulo": "na ponta da faca"
+      "subtitulo": "na ponta da faca",
+      "foto": "./img/prato-tartar-mignon.webp"
     },
     {
       "id": "prato-burrata",
@@ -49,7 +64,8 @@
       "notas": "Burrata artesanal|Tomate assado e rúcula selvagem|Pesto de manjericão",
       "preco": "",
       "quantidade": "",
-      "subtitulo": "com pães da casa"
+      "subtitulo": "com pães da casa",
+      "foto": "./img/prato-burrata.webp"
     },
     {
       "id": "prato-croquetas-costela",
@@ -59,7 +75,8 @@
       "notas": "Costela desfiada|Molho agridoce de goiaba|Cebola caramelizada e pimenta",
       "preco": "",
       "quantidade": "",
-      "subtitulo": "4 unidades"
+      "subtitulo": "4 unidades",
+      "foto": "./img/prato-croquetas-costela.webp"
     },
     {
       "id": "prato-couvert",
@@ -69,7 +86,8 @@
       "notas": "Pães de fermentação natural|Manteiga de ervas e queijo de terroir|Cream cheese com cebola caramelizada|Paté de alho-poró da casa",
       "preco": "",
       "quantidade": "",
-      "subtitulo": "para a mesa"
+      "subtitulo": "para a mesa",
+      "foto": "./img/prato-couvert.webp"
     },
     {
       "id": "prato-arroz-bacalhau",
@@ -79,7 +97,8 @@
       "notas": "Lascas de bacalhau Gadus Morhua|Arroz jasmim e ovos caipiras|Tapenade de olivas pretas",
       "preco": "",
       "quantidade": "",
-      "subtitulo": ""
+      "subtitulo": "",
+      "foto": "./img/prato-arroz-bacalhau.webp"
     },
     {
       "id": "prato-file-pasta",
@@ -89,7 +108,8 @@
       "notas": "Filé mignon alto na manteiga de ervas|Massa fresca em fonduta de queijo curado da Serra|Crocante de charcutaria artesanal",
       "preco": "",
       "quantidade": "",
-      "subtitulo": "clássico Casa do Lago"
+      "subtitulo": "clássico Casa do Lago",
+      "foto": "./img/prato-file-pasta.webp"
     },
     {
       "id": "prato-camarao-arroz",
@@ -99,7 +119,8 @@
       "notas": "Camarões VM da Costa Verde|Azeite de ervas brasileiras|Arroz cremoso de brie da Mantiqueira|Crocante de alho-poró",
       "preco": "",
       "quantidade": "",
-      "subtitulo": ""
+      "subtitulo": "",
+      "foto": "./img/prato-camarao-arroz.webp"
     },
     {
       "id": "prato-escalopes",
@@ -109,7 +130,8 @@
       "notas": "Escalopes de filé mignon|Molho de vinho tinto|Risoto cremoso de cogumelos",
       "preco": "",
       "quantidade": "",
-      "subtitulo": ""
+      "subtitulo": "",
+      "foto": "./img/prato-escalopes.webp"
     },
     {
       "id": "prato-pappardelle",
@@ -119,7 +141,8 @@
       "notas": "Massa fresca da casa|Molho de gorgonzola|Pêras glaciadas e nozes",
       "preco": "",
       "quantidade": "",
-      "subtitulo": ""
+      "subtitulo": "",
+      "foto": "./img/prato-pappardelle.webp"
     },
     {
       "id": "prato-peixe",
@@ -129,7 +152,8 @@
       "notas": "Tilápia na manteiga de ervas|Musseline de batata-baroa|Farofa de castanha com limão-cravo",
       "preco": "",
       "quantidade": "",
-      "subtitulo": "pesca artesanal"
+      "subtitulo": "pesca artesanal",
+      "foto": "./img/prato-peixe.webp"
     },
     {
       "id": "prato-risoto-gorgonzola",
@@ -139,7 +163,8 @@
       "notas": "Arroz cremoso de queijo azul|Emincé de filé mignon|Cebola crispy",
       "preco": "",
       "quantidade": "",
-      "subtitulo": ""
+      "subtitulo": "",
+      "foto": "./img/prato-risoto-gorgonzola.webp"
     },
     {
       "id": "prato-risoto-caprese",
@@ -149,7 +174,8 @@
       "notas": "Queijo branco fresco|Tomates confitados|Pesto de manjericão",
       "preco": "",
       "quantidade": "",
-      "subtitulo": ""
+      "subtitulo": "",
+      "foto": "./img/prato-risoto-caprese.webp"
     },
     {
       "id": "prato-romeu-julieta",
@@ -159,7 +185,8 @@
       "notas": "Sorvetinho caseiro de queijo|Calda quente de goiabada cascão|Farofa de castanha",
       "preco": "",
       "quantidade": "",
-      "subtitulo": "quente e gelado"
+      "subtitulo": "quente e gelado",
+      "foto": "./img/prato-romeu-julieta.webp"
     },
     {
       "id": "prato-coco-milho",
@@ -169,7 +196,8 @@
       "notas": "Cocada cremosa brûlée|Sorvete de milho verde|Paçoca",
       "preco": "",
       "quantidade": "",
-      "subtitulo": "Festival Delícias do Vale"
+      "subtitulo": "Festival Delícias do Vale",
+      "foto": "./img/prato-coco-milho.webp"
     },
     {
       "id": "prato-rabanada",
@@ -179,7 +207,8 @@
       "notas": "Rabanada de pão Petrópolis|Bananas carameladas|Doce de leite regional|Gelato de banoffee",
       "preco": "",
       "quantidade": "",
-      "subtitulo": "receita de família"
+      "subtitulo": "receita de família",
+      "foto": "./img/prato-rabanada.webp"
     }
   ]
 }

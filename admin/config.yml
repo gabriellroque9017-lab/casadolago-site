@@ -1,0 +1,84 @@
+# Modo Edição · Casa do Lago
+# Gerado por ferramentas/monta-painel.mjs a partir de conteudo/esquema.json.
+# Não edite à mão: acrescente o campo no extrator e rode o gerador de novo.
+
+backend:
+  name: github
+  repo: gabriellroque9017-lab/casadolago-site
+  branch: main
+
+# onde as fotos enviadas ficam guardadas. O painel exige caminho absoluto aqui;
+# o site normaliza para relativo ao aplicar, porque vive numa subpasta.
+media_folder: img/enviadas
+public_folder: /img/enviadas
+
+locale: pt
+
+collections:
+  - name: conteudo
+    label: "Conteúdo do site"
+    files:
+      - name: textos
+        label: "Textos, preços e fotos"
+        file: conteudo.json
+        description: "O que você mudar aqui aparece no site em cerca de um minuto."
+        fields:
+          - { label: Site, name: site, widget: hidden }
+          - label: "Textos e preços"
+            name: campos
+            widget: object
+            collapsed: false
+            fields:
+              - label: "Da terra para a mesa"
+                name: horta
+                widget: object
+                collapsed: false
+                fields:
+                  - { label: "Título da seção", name: titulo, widget: string, required: false }
+              - label: "Cardápio"
+                name: cardapio
+                widget: object
+                collapsed: false
+                fields:
+                  - { label: "Título da seção", name: titulo, widget: string, required: false }
+              - label: "A arte da casa"
+                name: arte
+                widget: object
+                collapsed: false
+                fields:
+                  - { label: "Título da seção", name: titulo, widget: string, required: false }
+                  - { label: "Frase de abertura", name: voz, widget: string, required: false }
+                  - { label: "Nome da artista", name: artista, widget: string, required: false }
+              - label: "Eventos da casa"
+                name: eventos
+                widget: object
+                collapsed: false
+                fields:
+                  - { label: "Título", name: titulo, widget: string, required: false }
+              - label: "Casamentos"
+                name: casamentos
+                widget: object
+                collapsed: false
+                fields:
+                  - { label: "Título", name: titulo, widget: string, required: false }
+              - label: "Visitações"
+                name: visitacoes
+                widget: object
+                collapsed: false
+                fields:
+                  - { label: "Título", name: titulo, widget: string, required: false }
+          - label: "Pratos da carta"
+            name: pratos
+            widget: list
+            label_singular: "Prato"
+            summary: "{{fields.nome}}"
+            fields:
+              - { label: "Identificador", name: id, widget: hidden }
+              - { label: "Nome", name: nome, widget: string }
+              - { label: "Categoria", name: categoria, widget: string, required: false }
+              - { label: "Descrição", name: descricao, widget: text, required: false }
+              - { label: "Notas (separadas por |)", name: notas, widget: string, required: false }
+              - { label: "Preço", name: preco, widget: string, required: false }
+              - { label: "Quantidade", name: quantidade, widget: string, required: false }
+              - { label: "Subtítulo", name: subtitulo, widget: string, required: false }
+              - { label: "Foto do prato", name: foto, widget: image, required: false }
