@@ -325,6 +325,62 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   --agua:#7A9A99; --casca:#3A322A;
   background:#12100E; color:var(--marfim);
 }
+/* ---------- 04 · a arte da casa ----------
+   A seção vira noite, como a parede de uma galeria: as telas são quentes e
+   só ganham luz sobre o escuro. Mesma troca de tokens da seção da Rachel. */
+.arte{
+  --tinta:#12100E; --tinta-alta:#1B1815;
+  --marfim:#EDE7DA; --marfim-mudo:#8F887C;
+  --agua:#7A9A99; --casca:#3A322A;
+  background:#12100E; color:var(--marfim);
+}
+.arte .cabeca h2, .arte .prosa{ color:var(--marfim); }
+.arte .rotulo{ color:var(--marfim-mudo); }
+
+.arte__abertura{
+  display:grid; grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);
+  gap:clamp(28px,5vw,84px); align-items:center;
+}
+.arte__voz{
+  font-family:var(--serifa); font-style:italic; font-weight:300;
+  font-size:clamp(28px,3.4vw,44px); line-height:1.18; color:var(--marfim);
+  margin:0; text-wrap:balance;
+}
+.arte__fio{ display:block; width:64px; height:1px; background:var(--casca); margin:clamp(20px,2.4vw,30px) 0; }
+.arte__nome{ color:var(--areia,#F6E4B8); font-style:italic; }
+.arte .prosa p{ color:rgba(237,231,218,.78); }
+
+/* a moldura: um fio claro em volta e um respiro escuro, como tela na parede */
+.arte__obra{ aspect-ratio:3/2; border:1px solid rgba(237,231,218,.16); box-shadow:0 24px 60px rgba(0,0,0,.45); }
+.arte__quadro{ cursor:pointer; }
+.arte__quadro > img{ transition:transform 1.4s var(--ease); }
+.arte__quadro:hover > img, .arte__quadro:focus-visible > img{ transform:scale(1.03); }
+.arte__quadro:focus-visible{ outline:2px solid var(--agua); outline-offset:4px; }
+
+.arte__parede{
+  display:grid; grid-template-columns:minmax(0,1.14fr) minmax(0,.86fr);
+  gap:clamp(28px,5vw,84px); align-items:center; margin-top:clamp(48px,8vw,120px);
+}
+.arte__legenda{ display:grid; gap:10px; }
+.arte__assina{ font-family:var(--serifa); font-size:clamp(24px,2.6vw,34px); font-weight:300; margin:0; color:var(--marfim); }
+.arte__mudo{ color:var(--marfim-mudo); margin:0; max-width:34ch; }
+
+.arte__rotulo{ margin:clamp(56px,9vw,130px) 0 clamp(18px,2.4vw,28px); }
+.arte__vitrine{
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(12px,1.8vw,26px);
+}
+.arte__vitrine .arte__quadro{ aspect-ratio:2/3; }
+
+@media (max-width:860px){
+  .arte__abertura, .arte__parede{ grid-template-columns:1fr; }
+  .arte__parede .arte__legenda{ order:2; }
+  .arte__vitrine{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:520px){
+  .arte__vitrine{ grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion:reduce){ .arte__quadro > img{ transition:none; } }
+
 .assinatura.is-virada .assinatura__vao{ grid-template-columns:minmax(0,1fr) minmax(0,.52fr); }
 .assinatura.is-virada .assinatura__retrato{ order:2; }
 .assinatura.is-virada .assinatura__texto{ order:1; }
@@ -696,6 +752,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     <a href="#casa">A Casa</a>
     <a href="#horta">Nossa Horta</a>
     <a href="./cardapio_casalago.html">Cardápio</a>
+    <a href="#arte">A Arte</a>
     <a href="#experiencias">Experiências</a>
     <a href="#reservas">Reservas</a>
   </div>
@@ -1013,11 +1070,95 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 
 
   <!-- ==========================================================
-       04 · EXPERIÊNCIAS — calendário + compra
+       04 · A ARTE DA CASA — os quadros de Maria Clara Porto
+       A seção escurece, como a parede de uma galeria: as telas são
+       quentes e ganham luz sobre o escuro. As duas primeiras são as
+       obras; as outras mostram a arte já morando na casa. Todas
+       abrem inteiras na lupa, pelo mesmo mecanismo da horta.
+       ========================================================== -->
+  <section class="secao arte" id="arte">
+    <div class="cabeca rev">
+      <p class="rotulo">04</p>
+      <h2>A arte da casa</h2>
+    </div>
+
+    <div class="arte__abertura">
+      <div class="arte__dizer rev">
+        <p class="arte__voz">Arte é a voz da alma.</p>
+        <span class="arte__fio" aria-hidden="true"></span>
+        <div class="prosa">
+          <p>É enxergar beleza e sensibilidade onde os olhos comuns apenas passam; é permitir
+            que as cores dialoguem e que as emoções se entrelacem.</p>
+          <p>Os quadros que dão vida à Casa do Lago nascem das mãos de
+            <span class="arte__nome">Maria Clara Porto</span>, artista e mãe da proprietária,
+            em obras autorais que carregam sua sensibilidade e seu olhar sobre o mundo.</p>
+          <p>Uma arte que não se limita às paredes, mas flui pelos nossos espaços, envolve
+            quem nos visita e se torna parte da essência e da identidade da Casa do Lago.</p>
+        </div>
+      </div>
+
+      <figure class="arte__obra arte__quadro horta__quadro grao rev" role="button" tabindex="0"
+              aria-label="Ver a obra inteira" data-cheia="./img/arte/obra-mesa-posta.webp">
+        <img src="./img/arte/obra-mesa-posta.webp" width="1800" height="1200" loading="lazy" decoding="async"
+             alt="Obra de Maria Clara Porto: a mesa posta, com cadeiras de palha, taças e um vaso de flores vermelhas">
+      </figure>
+    </div>
+
+    <div class="arte__parede">
+      <figure class="arte__obra arte__quadro horta__quadro grao rev" role="button" tabindex="0"
+              aria-label="Ver a obra inteira" data-cheia="./img/arte/obra-cozinha.webp">
+        <img src="./img/arte/obra-cozinha.webp" width="1800" height="1200" loading="lazy" decoding="async"
+             alt="Obra de Maria Clara Porto: a cozinha antiga, com fogão a lenha, garrafa de vinho e uvas sobre a mesa">
+      </figure>
+      <div class="arte__legenda rev">
+        <p class="rotulo">Da mão da artista</p>
+        <p class="arte__assina">Maria Clara Porto</p>
+        <p class="arte__mudo">Obras autorais, pintadas para esta casa.</p>
+      </div>
+    </div>
+
+    <p class="rotulo arte__rotulo rev">A arte fora da moldura</p>
+    <div class="arte__vitrine">
+      <figure class="arte__quadro horta__quadro grao rev" role="button" tabindex="0"
+              aria-label="Ver a foto inteira" data-cheia="./img/arte/parede-flores-lampiao.webp">
+        <img src="./img/arte/parede-flores-lampiao.webp" width="1200" height="1800" loading="lazy" decoding="async"
+             alt="Natureza-morta de flores emoldurada na parede, ao lado do lampião aceso">
+      </figure>
+      <figure class="arte__quadro horta__quadro grao rev" role="button" tabindex="0"
+              aria-label="Ver a foto inteira" data-cheia="./img/arte/porta-paisagem.webp">
+        <img src="./img/arte/porta-paisagem.webp" width="1200" height="1800" loading="lazy" decoding="async"
+             alt="Paisagem em moldura dourada junto à porta de madeira, com flores do campo embaixo">
+      </figure>
+      <figure class="arte__quadro horta__quadro grao rev" role="button" tabindex="0"
+              aria-label="Ver a foto inteira" data-cheia="./img/arte/parede-vinho.webp">
+        <img src="./img/arte/parede-vinho.webp" width="1200" height="1800" loading="lazy" decoding="async"
+             alt="Tela do vinho e das taças sobre a parede de pedra, sob a luz do nicho">
+      </figure>
+      <figure class="arte__quadro horta__quadro grao rev" role="button" tabindex="0"
+              aria-label="Ver a foto inteira" data-cheia="./img/arte/parede-flores-luz.webp">
+        <img src="./img/arte/parede-flores-luz.webp" width="1265" height="1800" loading="lazy" decoding="async"
+             alt="O quadro de flores acima do arranjo de flores de verdade, na mesma luz quente">
+      </figure>
+      <figure class="arte__quadro horta__quadro grao rev" role="button" tabindex="0"
+              aria-label="Ver a foto inteira" data-cheia="./img/arte/sala-quadros.webp">
+        <img src="./img/arte/sala-quadros.webp" width="1200" height="1800" loading="lazy" decoding="async"
+             alt="A sala de jantar com três telas na parede, mesa de madeira posta ao lado">
+      </figure>
+      <figure class="arte__quadro horta__quadro grao rev" role="button" tabindex="0"
+              aria-label="Ver a foto inteira" data-cheia="./img/arte/mesa-casal.webp">
+        <img src="./img/arte/mesa-casal.webp" width="1203" height="1800" loading="lazy" decoding="async"
+             alt="Casal jantando à luz de velas, as telas da casa ao fundo">
+      </figure>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================
+       05 · EXPERIÊNCIAS — calendário + compra
        ========================================================== -->
   <section class="secao" id="experiencias">
     <div class="cabeca rev">
-      <p class="rotulo">04</p>
+      <p class="rotulo">05</p>
       <h2>Experiências</h2>
     </div>
 
@@ -1057,11 +1198,11 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 
 
   <!-- ==========================================================
-       05 · RESERVAS
+       06 · RESERVAS
        ========================================================== -->
   <section class="reservas" id="reservas">
     <div class="cabeca rev">
-      <p class="rotulo">05</p>
+      <p class="rotulo">06</p>
       <h2>Reservas</h2>
     </div>
 
