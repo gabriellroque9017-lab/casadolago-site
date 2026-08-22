@@ -6,6 +6,11 @@
 export function criaDecolagem(o) {
   var marca = o.marca, marcaLinha = o.linha, marcaCor = o.cor, sprite = o.sprite;
   var paradaLinha = o.paradaLinha != null ? o.paradaLinha : 1;
+  /* A cada batida de asa o bicho podia soltar tinta — recortes de verdade de
+     uma folha pintada, em img/tinta/. Essa folha nunca chegou, e sem ela o
+     que cai na tela são dezenas de imagens quebradas. Quem chama decide se
+     quer tinta; sem pedir, o voo é limpo. */
+  var comTinta = o.tinta === true;
   if (!marca || !sprite) return null;
   var cenaTinta = null;
 
@@ -170,8 +175,8 @@ export function criaDecolagem(o) {
       }
       var camadas = [marcaCor, marcaLinha].filter(Boolean);
       if (camadas.length) gsap.set(camadas, { opacity: 0 });
-      if (!respingos) respingos = criaRespingos(69);   /* logo abaixo do sprite (z 70) */
-      respingos.limpa();
+      if (comTinta && !respingos) respingos = criaRespingos(69);   /* logo abaixo do sprite (z 70) */
+      if (respingos) respingos.limpa();
       /* o laço começa AQUI, no mesmo callback que mediu o caminho: em dois
          callbacks separados o GSAP não garante a ordem, e o primeiro quadro
          podia rodar com o caminho ainda nulo — e aí o rAF morria. */
