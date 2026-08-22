@@ -1009,7 +1009,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
         <h3>Rabanada, doce de leite e banana caramelada</h3>
         <span class="cartao__ver">Ver informações</span>
       </article>
-      <article class="cartao cartao--chef rev" data-cat="chef" role="button" tabindex="0"
+      <article class="cartao cartao--chef rev" data-chef-id="chef-fogo-lento" data-cat="chef" role="button" tabindex="0"
                data-titulo="Fogo lento" data-ordem="Menu do chef I" data-etapas-num="quatro etapas"
                data-fotos="./img/prato-couvert.webp|./img/prato-tartar-mignon.webp|./img/prato-escalopes.webp|./img/prato-rabanada.webp"
                data-linha="Uma sequência de inverno, construída em graus: começa fria e crua, passa pelo vinho reduzido e termina em caramelo quente. Tudo o que vem antes prepara o paladar para o que vem depois."
@@ -1022,7 +1022,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
         </div>
         <span class="cartao--chef__ver">Ver a sequência</span>
       </article>
-      <article class="cartao cartao--chef rev" data-cat="chef" role="button" tabindex="0"
+      <article class="cartao cartao--chef rev" data-chef-id="chef-a-beira-do-lago" data-cat="chef" role="button" tabindex="0"
                data-titulo="À beira do lago" data-ordem="Menu do chef II" data-etapas-num="quatro etapas"
                data-fotos="./img/prato-burrata.webp|./img/prato-pastel-camarao.webp|./img/prato-camarao-arroz.webp|./img/prato-coco-milho.webp"
                data-linha="A sequência do lago: leite, mar e horta, em pratos claros e de acidez viva. Nada pesa, tudo se emenda. Pensada para as mesas de fora, quando ainda há luz na água."
@@ -1504,12 +1504,20 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
       document.body.style.overflow = '';
       if (ultimo) ultimo.focus();
     }
-    document.querySelectorAll('.cartao--chef').forEach(function (c) {
-      c.addEventListener('click', function () { abre(c); });
-      c.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abre(c); }
+    /* o cardápio é sazonal: um menu do chef pode chegar depois que a página
+       carregou. Quem chega tem de abrir a sequência como os outros. */
+    function ligaChefs() {
+      document.querySelectorAll('.cartao--chef').forEach(function (c) {
+        if (c.getAttribute('data-ligado-chef')) return;
+        c.setAttribute('data-ligado-chef', '1');
+        c.addEventListener('click', function () { abre(c); });
+        c.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abre(c); }
+        });
       });
-    });
+    }
+    ligaChefs();
+    document.addEventListener('carta:mudou', ligaChefs);
     pontos.addEventListener('click', function (e) {
       var i = bolas.indexOf(e.target); if (i >= 0) { mostraFoto(i); gira(); }
     });
