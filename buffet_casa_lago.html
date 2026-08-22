@@ -4,12 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Buffet · Casa do Lago</title>
-<meta name="description" content="A apresentação do buffet de casamentos da Casa do Lago: finger foods, mini degustações, pratos, sobremesas e a degustação na casa.">
+<meta name="description" content="O buffet de casamentos da Casa do Lago: quem somos, o coquetel padrão, os finger foods, as mini degustações, os doces, as bebidas e a degustação na casa.">
 
 <!-- ==========================================================================
      Obra da Casa do Lago, Vassouras (RJ). Todos os direitos reservados.
      Uso, cópia ou adaptação deste material dependem de autorização escrita.
      Direção artística: Ana Luiza Val. Desenvolvimento: Gabriel Hossana.
+
+     Esta página é escrita: os textos e o cardápio vivem no HTML, e as
+     fotografias foram recortadas de dentro da apresentação. Não há imagem
+     de slide aqui — o que se lê é texto, e o que se vê é fotografia.
      ========================================================================== -->
 <meta name="robots" content="noai, noimageai">
 <meta name="author" content="Gabriel Hossana">
@@ -18,7 +22,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
-<link rel="preload" as="image" href="./img/buffet/b01.webp" fetchpriority="high">
+<link rel="preload" as="image" href="./img/buffet/capa.webp" fetchpriority="high">
+
+<script>document.documentElement.className += ' js';</script>
 
 <style>
 :root{
@@ -29,73 +35,235 @@
   --casca:#CFC8B2;
   --serifa:"Cormorant Garamond",Georgia,"Times New Roman",serif;
   --grot:"Jost","Helvetica Neue",Arial,sans-serif;
-  --margem:8vw; --secao:150px;
+  --margem:8vw; --secao:clamp(84px,11vw,150px);
   --ease:cubic-bezier(.65,0,.35,1);
+  --grao:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-@media (max-width:760px){ :root{ --margem:24px; --secao:84px; } }
+@media (max-width:760px){ :root{ --margem:24px; } }
 
 *{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
+html{ scroll-behavior:smooth; background:var(--tinta); -webkit-text-size-adjust:100%; }
 body{
   margin:0; background:var(--tinta); color:var(--marfim);
   font-family:var(--serifa); font-size:18px; line-height:1.8; font-weight:300;
   -webkit-font-smoothing:antialiased;
 }
-a{ color:inherit; }
+h1,h2,h3{ font-weight:300; margin:0; letter-spacing:-.008em; }
+p{ margin:0; }
+ul{ margin:0; padding:0; list-style:none; }
+img{ display:block; max-width:100%; }
+a{ color:var(--marfim); text-decoration:none; }
+a:hover{ color:var(--agua); }
+:focus-visible{ outline:1px solid var(--agua); outline-offset:4px; }
+
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
 .rotulo{
   font-family:var(--grot); font-weight:400; font-size:11px;
   letter-spacing:.35em; text-indent:.35em; text-transform:uppercase; color:var(--marfim-mudo);
-  margin:0;
 }
+.num{ font-variant-numeric:tabular-nums; }
+.prosa{ max-width:60ch; }
+.prosa p + p{ margin-top:1.3em; }
+.miolo{ max-width:1180px; margin-inline:auto; }
+
 .pill{
   display:inline-block; padding:14px 28px;
   border:1px solid var(--casca); border-radius:2px;
   font-family:var(--grot); font-size:11px; letter-spacing:.35em; text-indent:.35em;
-  text-transform:uppercase; text-decoration:none; color:var(--marfim);
+  text-transform:uppercase;
   transition:background .6s var(--ease), border-color .6s var(--ease), color .6s var(--ease);
 }
 .pill:hover, .pill:focus-visible{ background:var(--marfim); border-color:var(--marfim); color:var(--tinta); }
-:focus-visible{ outline:2px solid var(--agua); outline-offset:3px; }
 
-/* o alto da página: só a volta, como na página de casamentos */
+/* foto com o grão da casa */
+.grao{ position:relative; overflow:hidden; background:var(--tinta-alta); }
+.grao > img{ width:100%; height:100%; object-fit:cover; }
+.grao::after{
+  content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background-image:var(--grao); background-size:220px 220px; opacity:.08; mix-blend-mode:overlay;
+}
+
+/* ---------- o alto da página ---------- */
 .chrome{
-  position:fixed; inset:0 0 auto 0; z-index:40; display:flex; justify-content:space-between;
+  position:fixed; top:0; left:0; right:0; z-index:70;
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
   padding:22px var(--margem); pointer-events:none;
-  background:linear-gradient(to bottom, var(--tinta) 40%, transparent);
 }
 .chrome > *{ pointer-events:auto; }
 .chrome__volta{
   font-family:var(--grot); font-size:11px; letter-spacing:.35em; text-indent:.35em;
-  text-transform:uppercase; color:var(--marfim); text-decoration:none;
+  text-transform:uppercase; color:#2A2620; transition:color .45s var(--ease);
 }
+.chrome.is-sobre-escuro .chrome__volta{ color:rgba(237,231,218,.92); }
 .chrome__volta:hover{ color:var(--agua); }
 
-.cabeca{
-  padding:calc(var(--secao) * .8) var(--margem) clamp(30px,5vw,56px);
-  max-width:1180px; margin:0 auto;
+/* ---------- capa ---------- */
+.capa{
+  position:relative; min-height:min(86svh,780px);
+  display:grid; align-items:end; overflow:hidden; background:#2A2620;
 }
-.cabeca h1{
-  font-weight:300; font-size:clamp(34px,5.4vw,64px); line-height:1.04;
-  letter-spacing:-.008em; margin:16px 0 0; text-wrap:balance;
+.capa__foto{ position:absolute; inset:0; z-index:0; }
+.capa__foto img{ width:100%; height:100%; object-fit:cover; object-position:50% 46%; }
+.capa__veu{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(180deg, rgba(26,22,17,.62) 0%, rgba(26,22,17,.14) 30%,
+    rgba(26,22,17,.4) 66%, rgba(26,22,17,.86) 100%);
 }
-.cabeca .linha{ margin:18px 0 0; max-width:52ch; color:var(--marfim-mudo); }
+.capa__grao{
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  background-image:var(--grao); background-size:220px 220px; opacity:.09; mix-blend-mode:overlay;
+}
+.capa__texto{
+  position:relative; z-index:3; width:100%;
+  padding:0 var(--margem) clamp(46px,8vh,96px); color:var(--claro);
+}
+.capa .rotulo{ color:rgba(237,231,218,.72); }
+.capa h1{ font-size:clamp(38px,6.6vw,86px); line-height:1.02; margin-top:18px; text-wrap:balance; }
+.capa__linha{ margin-top:20px; max-width:40ch; color:rgba(237,231,218,.82); font-size:clamp(17px,1.5vw,20px); }
 
-/* os slides, um embaixo do outro */
-.folhas{
-  display:grid; gap:clamp(16px,2.4vw,34px);
-  max-width:1180px; margin:0 auto; padding:0 var(--margem) clamp(40px,6vw,80px);
+/* ---------- seções ---------- */
+.secao{ padding:var(--secao) var(--margem); }
+.secao--creme{ background:var(--tinta-alta); }
+.secao__topo{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.55fr); gap:clamp(28px,5vw,84px); align-items:start; }
+@media (max-width:900px){ .secao__topo{ grid-template-columns:1fr; gap:22px; } }
+.secao__topo h2{ font-size:clamp(30px,4.2vw,56px); line-height:1.06; text-wrap:balance; }
+.secao__topo .prosa{ font-size:clamp(17px,1.55vw,20px); }
+
+/* ---------- quem somos: fotografia e prosa ---------- */
+.dupla{
+  display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+  gap:clamp(30px,5vw,90px); align-items:center;
 }
-.folha{
-  display:block; width:100%; height:auto; border:1px solid var(--casca);
-  background:#FFF;
+@media (max-width:900px){ .dupla{ grid-template-columns:1fr; gap:34px; } }
+.dupla__foto{ aspect-ratio:4/5; margin:0; }
+.dupla h2{ font-size:clamp(30px,4.2vw,54px); line-height:1.06; margin:16px 0 26px; }
+
+/* ---------- os quatro pilares ---------- */
+.pilares{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(14px,2vw,30px); margin-top:clamp(44px,6vw,80px); }
+@media (max-width:900px){ .pilares{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 16px; } }
+.pilar{ margin:0; }
+.pilar__foto{ aspect-ratio:3/4; }
+.pilar h3{ font-size:clamp(19px,1.9vw,26px); margin-top:16px; }
+
+/* ---------- texturas ---------- */
+.texturas{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(12px,1.6vw,24px); margin-top:clamp(40px,5.5vw,72px); }
+@media (max-width:760px){ .texturas{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } }
+.texturas .grao{ aspect-ratio:3/4; }
+
+/* ---------- o buffet: prosa e a pilha de fotos ---------- */
+.buffet{ display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:clamp(30px,5vw,84px); align-items:start; }
+@media (max-width:900px){ .buffet{ grid-template-columns:1fr; gap:34px; } }
+.buffet h2{ font-size:clamp(30px,4.2vw,54px); line-height:1.06; margin:16px 0 26px; }
+.buffet__pilha{ display:grid; gap:clamp(12px,1.6vw,22px); }
+.buffet__pilha .grao:nth-child(1){ aspect-ratio:16/7; }
+.buffet__pilha .grao:nth-child(2){ aspect-ratio:16/5; }
+.buffet__pilha .grao:nth-child(3){ aspect-ratio:16/9; }
+.receita{
+  margin-top:clamp(28px,3.6vw,44px); padding:clamp(24px,3vw,36px);
+  border:1px solid var(--casca); border-radius:2px; background:rgba(242,237,224,.55);
+}
+.receita__formula{ font-size:clamp(19px,2.1vw,27px); line-height:1.5; margin-top:14px; }
+.receita__formula em{ font-style:normal; color:var(--agua); }
+.receita__ou{
+  font-family:var(--grot); font-size:11px; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--marfim-mudo);
+}
+.receita__nota{ margin-top:16px; font-size:16px; color:var(--marfim-mudo); }
+
+/* ---------- o cardápio ---------- */
+.carta{ padding:var(--secao) var(--margem) 0; }
+.capitulo{ margin-top:clamp(72px,9vw,132px); }
+.capitulo:first-of-type{ margin-top:clamp(46px,6vw,84px); }
+.capitulo__cabeca{ position:relative; }
+.capitulo__cabeca h2{ font-size:clamp(28px,3.8vw,50px); line-height:1.08; margin-top:14px; }
+.capitulo__cabeca .prosa{ margin-top:22px; font-size:clamp(16px,1.4vw,19px); color:var(--marfim-mudo); }
+/* o desenho a traço da folha dos finger foods, pousado no canto.
+   A altura vem escrita: sem ela o navegador estica a figura enquanto a
+   imagem preguiçosa não chega. */
+.capitulo__traco{
+  position:absolute; right:0; top:-26px;
+  width:clamp(118px,13vw,182px); height:auto; aspect-ratio:640/618;
+  opacity:.34; pointer-events:none; mix-blend-mode:multiply;
+}
+@media (max-width:900px){ .capitulo__traco{ position:static; margin:0 0 10px auto; width:112px; } }
+
+.escolha{
+  display:inline-block; margin-top:22px; padding:9px 20px;
+  border:1px solid var(--casca); border-radius:2px;
+  font-family:var(--grot); font-size:10px; letter-spacing:.3em; text-indent:.3em;
+  text-transform:uppercase; color:var(--marfim-mudo);
 }
 
-.fecho{
-  max-width:1180px; margin:0 auto;
-  padding:0 var(--margem) var(--secao); text-align:center;
+/* um grupo: fotografia de um lado, a lista do outro */
+.grupo{
+  display:grid; grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
+  gap:clamp(26px,4.4vw,76px); align-items:start;
+  margin-top:clamp(46px,6vw,86px);
 }
-.fecho p{ margin:0 0 26px; }
-.fecho__acoes{ display:flex; flex-wrap:wrap; gap:18px 22px; justify-content:center; }
+.grupo--espelho{ grid-template-columns:minmax(0,1.22fr) minmax(0,.78fr); }
+.grupo--espelho .grupo__foto{ order:2; }
+@media (max-width:900px){
+  .grupo, .grupo--espelho{ grid-template-columns:1fr; gap:26px; }
+  .grupo--espelho .grupo__foto{ order:0; }
+}
+.grupo__foto{ position:sticky; top:clamp(84px,12vh,124px); aspect-ratio:3/4; margin:0; }
+@media (max-width:900px){ .grupo__foto{ position:static; aspect-ratio:4/3; } }
+.grupo__corpo > * + *{ margin-top:clamp(34px,4vw,56px); }
+
+/* as listas do cardápio */
+.bloco h3{
+  font-family:var(--grot); font-weight:400; font-size:11px;
+  letter-spacing:.32em; text-indent:.32em; text-transform:uppercase; color:var(--marfim);
+  padding-bottom:14px; border-bottom:1px solid var(--casca);
+}
+.bloco h3 small{
+  display:block; margin-top:8px; letter-spacing:.2em; text-indent:.2em;
+  font-size:10px; color:var(--marfim-mudo);
+}
+.lista{ font-size:clamp(16px,1.35vw,18.5px); line-height:1.55; }
+.lista li{ padding:13px 0 12px; border-bottom:1px solid rgba(207,200,178,.5); text-wrap:pretty; }
+.lista li:last-child{ border-bottom:0; }
+.lista--curta li{ padding:10px 0 9px; }
+
+/* blocos lado a lado, quando não há fotografia para dividir a página */
+.par{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(26px,3.6vw,64px); margin-top:clamp(34px,4.4vw,60px); align-items:start; }
+.trio{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(24px,3.2vw,56px); margin-top:clamp(34px,4.4vw,60px); align-items:start; }
+@media (max-width:900px){ .par, .trio{ grid-template-columns:1fr; gap:34px; } }
+
+/* ---------- degustação ---------- */
+.deg__tira{ display:grid; grid-template-columns:1fr 1fr 2.2fr 1fr; gap:clamp(10px,1.4vw,20px); margin-top:clamp(40px,5.5vw,74px); }
+@media (max-width:760px){ .deg__tira{ grid-template-columns:1fr 1fr; } .deg__tira .grao:nth-child(3){ grid-column:span 2; } }
+.deg__tira .grao{ aspect-ratio:3/4; }
+.deg__tira .grao:nth-child(3){ aspect-ratio:16/9; }
+.deg__valor{
+  display:grid; gap:8px; margin-top:clamp(26px,3.4vw,44px);
+  padding-top:clamp(24px,3vw,34px); border-top:1px solid var(--casca);
+}
+.deg__valor strong{ font-weight:400; font-size:clamp(21px,2.3vw,30px); color:var(--marfim); }
+.deg__valor span{ font-size:16px; color:var(--marfim-mudo); }
+
+/* ---------- o fecho: a casa e a mesa montada ---------- */
+.memoravel{ padding:0 0 var(--secao); }
+.memoravel__panorama{ width:100%; aspect-ratio:2400/438; }
+@media (max-width:760px){ .memoravel__panorama{ aspect-ratio:16/9; } }
+.memoravel__frase{
+  padding:clamp(52px,7vw,96px) var(--margem);
+  text-align:center; font-style:italic;
+  font-size:clamp(26px,4vw,52px); line-height:1.18; color:var(--marfim);
+}
+.memoravel__tira{ display:grid; grid-template-columns:1fr 1fr 2.5fr 1fr 1fr; gap:clamp(8px,1.1vw,16px); padding:0 var(--margem); }
+@media (max-width:760px){
+  .memoravel__tira{ grid-template-columns:1fr 1fr; }
+  .memoravel__tira .grao:nth-child(3){ grid-column:span 2; }
+}
+.memoravel__tira .grao{ aspect-ratio:3/4; }
+.memoravel__tira .grao:nth-child(3){ aspect-ratio:16/9; }
+
+/* ---------- fecho e rodapé ---------- */
+.fecho{ padding:var(--secao) var(--margem); text-align:center; }
+.fecho h2{ font-size:clamp(28px,4vw,52px); line-height:1.08; margin-top:16px; }
+.fecho .prosa{ margin:22px auto 0; }
+.fecho__acoes{ display:flex; flex-wrap:wrap; gap:18px 22px; justify-content:center; margin-top:36px; }
 
 .rodape{
   border-top:1px solid var(--casca);
@@ -103,57 +271,601 @@ a{ color:inherit; }
   font-family:var(--grot); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
   color:var(--marfim-mudo); text-align:center; line-height:2.2;
 }
-.rodape a{ color:var(--marfim); text-decoration:none; border-bottom:1px solid transparent; }
+.rodape a{ border-bottom:1px solid transparent; }
 .rodape a:hover{ border-bottom-color:currentColor; }
 .rodape__direitos{ text-transform:none; letter-spacing:.04em; font-size:12px; margin-top:14px; line-height:1.7; }
 .rodape__entrar{ margin-top:18px; font-size:10px; letter-spacing:.24em; opacity:.34; }
-.rodape__entrar a{ color:inherit; border-bottom:1px solid transparent; }
+.rodape__entrar a{ color:inherit; }
 .rodape__entrar:hover{ opacity:.85; }
+
+/* ==========================================================================
+   as entradas · no computador a fotografia entra pelo lado em que ela vive,
+   ou por baixo quando está numa fileira. No celular ela já está lá: sem
+   transição, sem espera, sem gasto.
+   ========================================================================== */
+.js .rev{
+  opacity:0; transform:translateY(46px);
+  transition:opacity .95s var(--ease), transform .95s var(--ease);
+  will-change:opacity, transform;
+}
+.js .rev--esq{ transform:translateX(-64px); }
+.js .rev--dir{ transform:translateX(64px); }
+.js .rev--perto{ transform:translateY(26px); }
+.js .rev.is-dentro{ opacity:1; transform:none; will-change:auto; }
+.js .rev--d1{ transition-delay:.09s; }
+.js .rev--d2{ transition-delay:.18s; }
+.js .rev--d3{ transition-delay:.27s; }
+.js .rev--d4{ transition-delay:.36s; }
+@media (max-width:900px){
+  .js .rev--esq, .js .rev--dir{ transform:translateY(34px); }
+}
+@media (max-width:760px){
+  .js .rev{ opacity:1; transform:none; transition:none; }
+}
+@media (prefers-reduced-motion:reduce){
+  .js .rev{ opacity:1 !important; transform:none !important; transition:none; }
+}
 </style>
 </head>
 <body>
 
-<div class="chrome">
+<div class="chrome" id="chrome">
   <a class="chrome__volta" href="./casamentos_casa_lago.html">← Casamentos</a>
   <a class="chrome__volta" href="./index.html">Casa do Lago</a>
 </div>
 
-<header class="cabeca">
-  <p class="rotulo">Buffet</p>
-  <h1>Gastronomia afetiva<br>e autoral</h1>
-  <p class="linha">A apresentação que entregamos aos casais, folha a folha: o que servimos, como
-    servimos e como funciona a degustação aqui na casa.</p>
+<!-- ==========================================================
+     CAPA
+     ========================================================== -->
+<header class="capa" id="capa">
+  <div class="capa__foto">
+    <img src="./img/buffet/capa.webp" width="2400" height="832" fetchpriority="high" decoding="async"
+         alt="Mesa do buffet montada: margaridas, pães, caprese sobre livros antigos e velas acesas">
+  </div>
+  <div class="capa__veu" aria-hidden="true"></div>
+  <div class="capa__grao" aria-hidden="true"></div>
+  <div class="capa__texto">
+    <div class="miolo">
+      <p class="rotulo">Casa do Lago <span aria-hidden="true">·</span> Buffet</p>
+      <h1>Gastronomia afetiva<br>e autoral</h1>
+      <p class="capa__linha">O que servimos num casamento, como servimos, e como funciona a
+        degustação aqui na casa.</p>
+    </div>
+  </div>
 </header>
 
-<main class="folhas" id="folhas">
-  <img class="folha" src="./img/buffet/b01.webp" width="1500" height="844" fetchpriority="high" decoding="async" alt="Capa: Casa do Lago Buffet, gastronomia afetiva e autoral para casamentos">
-  <img class="folha" src="./img/buffet/b02.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Quem somos: a Casa do Lago nasceu do desejo de transformar a gastronomia em afeto">
-  <img class="folha" src="./img/buffet/b03.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Os quatro pilares da cozinha: afetivo, brasileiro, autoral e estético">
-  <img class="folha" src="./img/buffet/b04.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Texturas: mosaico de mesas postas, flores e detalhes do serviço">
-  <img class="folha" src="./img/buffet/b05.webp" width="1500" height="844" loading="lazy" decoding="async" alt="O buffet: formato gastronômico flexível, montado por etapas">
-  <img class="folha" src="./img/buffet/b06.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Finger foods frios: carnes, especiais e frutos do mar, quatro opções a escolher">
-  <img class="folha" src="./img/buffet/b07.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Finger foods quentes: fritos, formes e assados, vegetarianos e veganos, doze opções">
-  <img class="folha" src="./img/buffet/b08.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Mini degustações e volantes: saladas e composições, três opções a escolher">
-  <img class="folha" src="./img/buffet/b09.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Diversos: cuscuz marroquino, costelinha, escondidinhos e arrozes">
-  <img class="folha" src="./img/buffet/b10.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Risotos: caprese, bacalhau, camarão, grana padano, funghi e outros">
-  <img class="folha" src="./img/buffet/b11.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Caldos: abóbora com brie, aspargos, brócolis, feijão com alho e mariscos">
-  <img class="folha" src="./img/buffet/b12.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Massas e molhos: farfalle, penne, ravióli, gnocchi e os molhos da casa">
-  <img class="folha" src="./img/buffet/b13.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Carnes e frutos do mar: escalope, medalhão, filé mignon, salmão e camarões">
-  <img class="folha" src="./img/buffet/b14.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Acompanhamentos e pratos veganos, opcionais para estacionados">
-  <img class="folha" src="./img/buffet/b15.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Mini doces volantes, mesa de café de cortesia e bebidas">
-  <img class="folha" src="./img/buffet/b16.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Degustação: realizada na Casa do Lago Bistrô, com taxa por pessoa abatida no contrato">
-  <img class="folha" src="./img/buffet/b17.webp" width="1500" height="844" loading="lazy" decoding="async" alt="Do simples ao memorável: a casa iluminada e o salão montado para a festa">
-</main>
+<main>
 
+<!-- ==========================================================
+     01 · QUEM SOMOS
+     ========================================================== -->
+<section class="secao" id="quem-somos" aria-labelledby="t-quem">
+  <div class="miolo dupla">
+    <figure class="dupla__foto grao rev rev--esq">
+      <img src="./img/buffet/mesa-posta.webp" width="900" height="1122" loading="lazy" decoding="async"
+           alt="Mesa posta à beira do lago: prato de borda turquesa sobre sousplat de palha, faca e colher de prata">
+    </figure>
+    <div class="rev rev--dir">
+      <p class="rotulo">01 <span aria-hidden="true">—</span> Quem somos</p>
+      <h2 id="t-quem">Gastronomia<br>em afeto</h2>
+      <div class="prosa">
+        <p>A Casa do Lago nasceu do desejo de transformar a gastronomia em afeto. Há oito anos
+          fazemos isso com verdade, cuidado e profundidade, unindo ingredientes brasileiros,
+          técnicas contemporâneas e a memória afetiva das cozinhas que moldaram nossa história.
+          Nossa cozinha tem alma, tem propósito e tem raiz.</p>
+        <p>Acreditamos na beleza das coisas simples, feitas devagar, com significado. Por isso
+          cada prato que servimos carrega a nossa essência: alimentar com emoção, estética e
+          autenticidade.</p>
+        <p>Quando assinamos um casamento, transportamos todo esse propósito e essência para a
+          celebração. Nosso buffet não é apenas serviço. É presença. É sensorialidade. É poesia
+          à mesa do seu Grande Dia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     OS QUATRO PILARES
+     ========================================================== -->
+<section class="secao secao--creme" id="pilares" aria-labelledby="t-pilares">
+  <div class="miolo">
+    <div class="secao__topo">
+      <p class="rotulo rev rev--perto">A cozinha</p>
+      <h2 class="rev rev--perto rev--d1" id="t-pilares">Quatro palavras<br>sustentam a casa</h2>
+    </div>
+    <div class="pilares">
+      <figure class="pilar rev rev--d1">
+        <div class="pilar__foto grao">
+          <img src="./img/buffet/pilar-afetivo.webp" width="900" height="812" loading="lazy" decoding="async"
+               alt="Cozinheira termina com sal um prato de cenouras coloridas e folhas">
+        </div>
+        <h3>Afetivo</h3>
+      </figure>
+      <figure class="pilar rev rev--d2">
+        <div class="pilar__foto grao">
+          <img src="./img/buffet/pilar-brasileiro.webp" width="800" height="1018" loading="lazy" decoding="async"
+               alt="Limões verdes recém-colhidos, num cesto de palha">
+        </div>
+        <h3>Brasileiro</h3>
+      </figure>
+      <figure class="pilar rev rev--d3">
+        <div class="pilar__foto grao">
+          <img src="./img/buffet/pilar-autoral.webp" width="800" height="1076" loading="lazy" decoding="async"
+               alt="Risoto cremoso com camarões grelhados e crocante de alho-poró">
+        </div>
+        <h3>Autoral</h3>
+      </figure>
+      <figure class="pilar rev rev--d4">
+        <div class="pilar__foto grao">
+          <img src="./img/buffet/pilar-estetico.webp" width="900" height="878" loading="lazy" decoding="async"
+               alt="Colheres de madeira e guardanapo de linho sobre pedra, ao lado de uma folha verde">
+        </div>
+        <h3>Estético</h3>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     TEXTURAS
+     ========================================================== -->
+<section class="secao" id="texturas" aria-labelledby="t-texturas">
+  <div class="miolo">
+    <div class="secao__topo">
+      <p class="rotulo rev rev--perto">O que se vê antes de provar</p>
+      <h2 class="rev rev--perto rev--d1" id="t-texturas">Texturas</h2>
+    </div>
+    <div class="texturas">
+      <div class="grao rev rev--esq"><img src="./img/buffet/textura-1.webp" width="800" height="1114" loading="lazy" decoding="async" alt="Sousplat de palha trançada e capim-dos-pampas sobre linho branco"></div>
+      <div class="grao rev rev--perto rev--d1"><img src="./img/buffet/textura-2.webp" width="800" height="1044" loading="lazy" decoding="async" alt="Mesa comprida posta junto à janela, com orquídeas e flores do campo"></div>
+      <div class="grao rev rev--dir rev--d2"><img src="./img/buffet/textura-3.webp" width="800" height="1050" loading="lazy" decoding="async" alt="Manta de algodão cru, com franjas"></div>
+      <div class="grao rev rev--esq rev--d1"><img src="./img/buffet/textura-4.webp" width="800" height="812" loading="lazy" decoding="async" alt="Guardanapo bordado sobre sousplat de fibra e renda antiga"></div>
+      <div class="grao rev rev--perto rev--d2"><img src="./img/buffet/textura-5.webp" width="800" height="762" loading="lazy" decoding="async" alt="Pratos de porcelana de barrado florido, em vermelho, verde e azul, empilhados de lado"></div>
+      <div class="grao rev rev--dir rev--d3"><img src="./img/buffet/textura-6.webp" width="800" height="1058" loading="lazy" decoding="async" alt="Mesa longa montada no salão de madeira, com arranjos baixos e velas"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     02 · O BUFFET
+     ========================================================== -->
+<section class="secao secao--creme" id="o-buffet" aria-labelledby="t-buffet">
+  <div class="miolo buffet">
+    <div class="rev rev--esq">
+      <p class="rotulo">02 <span aria-hidden="true">—</span> O buffet</p>
+      <h2 id="t-buffet">Um formato flexível<br>e experiencial</h2>
+      <div class="prosa">
+        <p>Trabalhamos com um formato gastronômico flexível e experiencial, ideal para casamentos
+          na Vila Botané. Nossos quatro orçamentos incluem o Coquetel Padrão.</p>
+        <p>Além disso, disponibilizamos estações gastronômicas opcionais, para personalizar o seu
+          evento e torná-lo ainda mais único e inesquecível.</p>
+      </div>
+      <div class="receita">
+        <p class="rotulo">O coquetel padrão</p>
+        <p class="receita__formula"><em>Bebidas</em> + <em>Finger foods</em> +
+          <em>Mini degustações</em> <span class="receita__ou">e/ou</span> <em>Mesa de antepastos</em></p>
+        <p class="receita__nota">As estações gastronômicas entram por fora, à escolha do casal.</p>
+      </div>
+    </div>
+    <div class="buffet__pilha">
+      <div class="grao rev rev--dir"><img src="./img/buffet/buffet-1.webp" width="1200" height="498" loading="lazy" decoding="async" alt="Canapés de carpaccio e legumes servidos em taças de vidro"></div>
+      <div class="grao rev rev--dir rev--d1"><img src="./img/buffet/buffet-2.webp" width="1200" height="302" loading="lazy" decoding="async" alt="Mesa de antepastos com queijos, favo de mel, frutas vermelhas e pães"></div>
+      <div class="grao rev rev--dir rev--d2"><img src="./img/buffet/buffet-3.webp" width="1200" height="624" loading="lazy" decoding="async" alt="Tábua de queijos azuis com physalis e ervas, sobre madeira"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     03 · O CARDÁPIO
+     ========================================================== -->
+<div class="carta" id="cardapio">
+  <div class="miolo">
+
+    <div class="secao__topo">
+      <p class="rotulo rev rev--perto">03 <span aria-hidden="true">—</span> O cardápio</p>
+      <h2 class="rev rev--perto rev--d1">Tudo o que pode<br>ir para a mesa</h2>
+    </div>
+
+    <!-- ---------- FINGER FOODS ---------- -->
+    <section class="capitulo" aria-labelledby="t-finger">
+      <div class="capitulo__cabeca">
+        <img class="capitulo__traco rev rev--dir" src="./img/buffet/traco-tomate.webp" width="640" height="618" loading="lazy" decoding="async" alt="" aria-hidden="true">
+        <p class="rotulo rev rev--perto">Para circular</p>
+        <h2 class="rev rev--perto rev--d1" id="t-finger">Finger foods</h2>
+        <div class="prosa rev rev--perto rev--d2">
+          <p>Pequenas criações servidas em uma ou duas mordidas, pensadas para circular com leveza
+            e dar ritmo ao evento. São combinações estéticas e saborosas, que unem técnica,
+            criatividade e ingredientes selecionados.</p>
+        </div>
+      </div>
+
+      <div class="par">
+        <div class="bloco rev rev--esq">
+          <h3>Frios <small>Carnes &amp; especiais · escolher 4 opções no total</small></h3>
+          <ul class="lista">
+            <li>Tartar de truta de cachoeira com capim-limão e pólen de flor de laranjeira</li>
+            <li>Figo fresco maçaricado com creme de burrata, azeite de manjericão e flor de sal</li>
+            <li>Carpaccio de banana-da-terra com castanha-do-brasil e redução de balsâmico de café</li>
+            <li>Roast beef com queijo ementhal na torrada italiana com dijon e alcaparras</li>
+            <li>Terrine de Parma com palmito, ricota e geleia de cabernet sauvignon</li>
+          </ul>
+        </div>
+        <div class="bloco rev rev--dir rev--d1">
+          <h3>Frios <small>Frutos do mar</small></h3>
+          <ul class="lista">
+            <li>Crudo de peixe branco com manga e sour cream</li>
+            <li>Atum marinado com crosta de gergelim ao molho torange</li>
+            <li>Mix de salmão defumado com morango, ovas e vinagrete de framboesa</li>
+            <li>Tartar de salmão com cream cheese, raspas de limão siciliano e molho teriaky</li>
+            <li>Vinagrete de polvo com torradinhas artesanais</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="escolha rev rev--perto">Quentes <span aria-hidden="true">·</span> escolher 12 opções</p>
+      <div class="trio">
+        <div class="bloco rev rev--esq">
+          <h3>Fritos</h3>
+          <ul class="lista">
+            <li>Bolinho de canjiquinha com queijo canastra e melado</li>
+            <li>Dadinho de tapioca com queijo coalho e melado</li>
+            <li>Bolinho de bacalhau com azeite</li>
+            <li>Bolinho de feijoada ao molho de pimenta</li>
+            <li>Camarão empanado com coco ao molho de maracujá</li>
+            <li>Croquete de pato com molho de laranja</li>
+            <li>Queijo coalho grelhado com melado</li>
+            <li>Kafta de cordeiro com molho de hortelã</li>
+          </ul>
+        </div>
+        <div class="bloco rev rev--perto rev--d1">
+          <h3>Fornos e assados</h3>
+          <ul class="lista">
+            <li>Trouxinha de costela caipira com purê de mandioca defumada e redução de vinho tinto</li>
+            <li>Mini empadinha de frango caipira com geleia de jabuticaba</li>
+            <li>Mini filé Wellington ao molho de mostarda e mel</li>
+            <li>Mil folhas de truta defumada ao molho de amêndoas</li>
+            <li>Mil folhas de camarão com chutney de manga</li>
+            <li>Mil folhas de damasco ao molho de gorgonzola</li>
+            <li>Mini quiche de alho-poró</li>
+            <li>Mini quiche de brie com geleia de damasco</li>
+            <li>Pastel de forno de palmito pupunha e queijo ementhal</li>
+            <li>Pastel de forno de gorgonzola com nozes</li>
+            <li>Vol-au-vent com creme de haddock</li>
+            <li>Casquinha de siri com raspas de limão siciliano</li>
+          </ul>
+        </div>
+        <div class="bloco rev rev--dir rev--d2">
+          <h3>Vegetarianos e veganos</h3>
+          <ul class="lista">
+            <li>Polentinha cremosa com ragu de cogumelos da Mata Atlântica</li>
+            <li>Batatinha recheada com mix de cogumelos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- MINI DEGUSTAÇÕES ---------- -->
+    <section class="capitulo" aria-labelledby="t-mini">
+      <div class="capitulo__cabeca">
+        <p class="rotulo rev rev--perto">Volantes e/ou estacionadas</p>
+        <h2 class="rev rev--perto rev--d1" id="t-mini">Mini degustações</h2>
+        <div class="prosa rev rev--perto rev--d2">
+          <p>Mini refeições servidas em louças de curadoria, de acordo com a sua necessidade, que
+            trazem aconchego e profundidade ao coquetel. As mini refeições permitem ao convidado
+            vivenciar sabores mais ricos — risottos, massas, carnes, cremes e combinações quentes —
+            sem perder a fluidez do serviço. São momentos de conforto e intensidade gastronômica,
+            que elevam o ritmo e a sofisticação da celebração.</p>
+        </div>
+        <p class="escolha rev rev--perto rev--d2">Escolher 3 opções</p>
+      </div>
+
+      <div class="par">
+        <div class="bloco rev rev--esq">
+          <h3>Saladas</h3>
+          <ul class="lista">
+            <li>Coquile de salpicão de frango defumado</li>
+            <li>Salada caprese</li>
+            <li>Salada chèvre com mix de folhas e amêndoas laminadas</li>
+            <li>Salada Caesar</li>
+          </ul>
+        </div>
+        <div class="bloco rev rev--dir rev--d1">
+          <h3><span class="sr-only">Saladas, continuação</span><span aria-hidden="true" style="visibility:hidden">Saladas</span></h3>
+          <ul class="lista">
+            <li>Folhas verdes com brotos, queijo frescal, lâminas de pêra e nozes com vinagrete de framboesa</li>
+            <li>Mix de folhas com lascas de parma, parmesão, figo fresco e aspargos</li>
+            <li>Mix de folhas com muçarela de búfala, tomate seco e croutons</li>
+          </ul>
+        </div>
+      </div>
+
+      <article class="grupo">
+        <figure class="grupo__foto grao rev rev--esq">
+          <img src="./img/buffet/diversos.webp" width="1000" height="1376" loading="lazy" decoding="async"
+               alt="Costelinha glaceada sobre creme de aipim, com purê amarelo e brotos">
+        </figure>
+        <div class="grupo__corpo">
+          <div class="bloco rev rev--dir">
+            <h3>Diversos</h3>
+            <ul class="lista">
+              <li>Couscous marroquino de carne seca com ratatouille de legumes</li>
+              <li>Couscous marroquino de pato</li>
+              <li>Costelinha ao molho ferrugem com polentinha</li>
+              <li>Creme de aipim com costelinha ao molho ferrugem</li>
+              <li>Creme de aipim com ragu de carne seca e crisp de queijo</li>
+              <li>Escondidinho de aipim com carne seca e catupiry</li>
+              <li>Escondidinho de aipim com haddock</li>
+              <li>Escondidinho de aipim com frango defumado e catupiry</li>
+              <li>Musseline de baroa com ragu de cordeiro</li>
+              <li>Arroz de frutos do mar</li>
+              <li>Arroz de pato</li>
+              <li>Arroz de lula</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="grupo grupo--espelho">
+        <figure class="grupo__foto grao rev rev--dir">
+          <img src="./img/buffet/risotos.webp" width="1000" height="1368" loading="lazy" decoding="async"
+               alt="Risoto amarelo com medalhão de carne, gorgonzola e alecrim">
+        </figure>
+        <div class="grupo__corpo">
+          <div class="bloco rev rev--esq">
+            <h3>Risotos</h3>
+            <ul class="lista">
+              <li>Risoto caprese</li>
+              <li>Risoto de bacalhau</li>
+              <li>Risoto de camarão</li>
+              <li>Risoto de grana padano com cordeiro e crocante de parma</li>
+              <li>Risoto de costelinha com crisp de cebola</li>
+              <li>Risoto de frango defumado com alho-poró</li>
+              <li>Risoto de frutos do mar</li>
+              <li>Risoto de funghi</li>
+              <li>Risoto de gorgonzola com pêra</li>
+              <li>Risoto de limão siciliano com lascas de salmão</li>
+              <li>Risoto de pato</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="grupo">
+        <figure class="grupo__foto grao rev rev--esq">
+          <img src="./img/buffet/caldos.webp" width="1000" height="1384" loading="lazy" decoding="async"
+               alt="Caldeirões de cobre sobre rechauds, com pães e palitos ao lado">
+        </figure>
+        <div class="grupo__corpo">
+          <div class="bloco rev rev--dir">
+            <h3>Caldos</h3>
+            <ul class="lista">
+              <li>Caldinho de abóbora com brie e hortelã</li>
+              <li>Caldinho de abóbora com gorgonzola</li>
+              <li>Caldinho de aspargos</li>
+              <li>Caldinho de baroa com brie</li>
+              <li>Caldinho de brócolis com creme de leite fresco</li>
+              <li>Caldinho de cebola</li>
+              <li>Caldinho de ervilha</li>
+              <li>Caldinho de feijão com alho, salsinha e croutons</li>
+              <li>Caldo de mariscos</li>
+              <li>Caldinho de palmito</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="grupo grupo--espelho">
+        <figure class="grupo__foto grao rev rev--dir">
+          <img src="./img/buffet/massas.webp" width="1000" height="1376" loading="lazy" decoding="async"
+               alt="Estação de massas: penne, queijo ralado e manjericão em travessas de prata">
+        </figure>
+        <div class="grupo__corpo">
+          <div class="bloco rev rev--esq">
+            <h3>Massas</h3>
+            <ul class="lista lista--curta">
+              <li>Farfalle</li>
+              <li>Penne</li>
+              <li>Ravióli de queijo curado</li>
+              <li>Ravioli de pêra</li>
+              <li>Ravióli de queijo curado e Parma</li>
+              <li>Gnocchi recheado de provolone</li>
+            </ul>
+          </div>
+          <div class="bloco rev rev--esq rev--d1">
+            <h3>Molhos para massas</h3>
+            <ul class="lista lista--curta">
+              <li>Ao funghi</li>
+              <li>Ao sugo com manjericão</li>
+              <li>Bolonhesa</li>
+              <li>Gorgonzola com creme de leite fresco</li>
+              <li>Manteiga clarificada e sálvia</li>
+              <li>Pesto</li>
+              <li>Quatro queijos</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="grupo">
+        <figure class="grupo__foto grao rev rev--esq">
+          <img src="./img/buffet/carnes.webp" width="1000" height="1398" loading="lazy" decoding="async"
+               alt="Mini filé com manteiga de ervas, fettuccine ao creme e crocante de bacon">
+        </figure>
+        <div class="grupo__corpo">
+          <div class="bloco rev rev--dir">
+            <h3>Carnes</h3>
+            <ul class="lista">
+              <li>Mini escalope ao molho de vinho tinto</li>
+              <li>Mini medalhão com bacon ao molho madeira</li>
+              <li>Mini filé na manteiga de ervas</li>
+              <li>Mini roast beef em seu jus</li>
+              <li>Picadinho carioca</li>
+              <li>Pernil suíno Duroc com barbecue</li>
+            </ul>
+          </div>
+          <div class="bloco rev rev--dir rev--d1">
+            <h3>Frutos do mar</h3>
+            <ul class="lista">
+              <li>Filezinho de salmão ao molho de champagne</li>
+              <li>Flor de linguado ao molho de moqueca</li>
+              <li>Mini filé de tilápia com crosta de ervas na manteiga clarificada com amêndoas</li>
+              <li>Bacalhau gratinado com alho-poró</li>
+              <li>Bobó de camarão com arroz de coco</li>
+              <li>Bobó de camarão com farofinha de dendê</li>
+              <li>Haddock gratinado com alho-poró</li>
+              <li>Camarão Thai com arroz cremoso de queijo brie e crisp de alho-poró</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="grupo grupo--espelho">
+        <figure class="grupo__foto grao rev rev--dir">
+          <img src="./img/buffet/guarnicoes.webp" width="1000" height="1384" loading="lazy" decoding="async"
+               alt="Mini caçarolas vermelhas com purê e ragu de cogumelos, alinhadas numa bandeja">
+        </figure>
+        <div class="grupo__corpo">
+          <div class="bloco rev rev--esq">
+            <h3>Acompanhamentos <small>Opcionais para estacionados</small></h3>
+            <ul class="lista lista--curta">
+              <li>Arroz com alho-poró e crisp de alho-poró</li>
+              <li>Arroz negro com alho-poró e crisp de alho-poró</li>
+              <li>Arroz com amêndoas</li>
+              <li>Batata gratin</li>
+              <li>Flan de queijo parmesão</li>
+              <li>Flan de chèvre com crocante de castanha de caju</li>
+              <li>Panaché de legumes</li>
+              <li>Pérolas de batatinha com perfume de alecrim</li>
+              <li>Cebolinhas caramelizadas</li>
+              <li>Chips de aipim</li>
+              <li>Farofinha crocante</li>
+            </ul>
+          </div>
+          <div class="bloco rev rev--esq rev--d1">
+            <h3>Pratos veganos <small>Volantes ou estacionados</small></h3>
+            <ul class="lista lista--curta">
+              <li>Salada crocante de grãos e romã</li>
+              <li>Saladinha de grão-de-bico</li>
+              <li>Saladinha de lentilha com cebola crocante</li>
+              <li>Bobó de palmito com arroz branco e crisp de alho-poró</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ---------- DOCES, CAFÉ E BEBIDAS ---------- -->
+    <section class="capitulo" aria-labelledby="t-doces">
+      <div class="capitulo__cabeca">
+        <p class="rotulo rev rev--perto">O fim da noite</p>
+        <h2 class="rev rev--perto rev--d1" id="t-doces">Doces, café<br>e bebidas</h2>
+      </div>
+
+      <article class="grupo">
+        <figure class="grupo__foto grao rev rev--esq">
+          <img src="./img/buffet/doces.webp" width="1000" height="1266" loading="lazy" decoding="async"
+               alt="Xícara de café com bolinho, bule e leiteira de porcelana florida sobre madeira">
+        </figure>
+        <div class="grupo__corpo">
+          <div class="bloco rev rev--dir">
+            <h3>Mini doces volantes</h3>
+            <ul class="lista">
+              <li>Mini churros com doce de leite e Nutella</li>
+              <li>Marquise de chocolate com praliné de amêndoas</li>
+              <li>Tortinha de amora</li>
+              <li>Mini pudim</li>
+              <li>Mini brownie com ganache de chocolate</li>
+            </ul>
+          </div>
+          <div class="bloco rev rev--dir rev--d1">
+            <h3>Mesa de café <small>Cortesia da casa</small></h3>
+            <ul class="lista lista--curta">
+              <li>Café e chá</li>
+              <li>Petit fours</li>
+              <li>Chocolates e suspiros</li>
+            </ul>
+          </div>
+          <div class="bloco rev rev--dir rev--d2">
+            <h3>Bebidas</h3>
+            <ul class="lista lista--curta">
+              <li>Cerveja (Original, Brahma, Skol ou Bohemia)</li>
+              <li>Coca-Cola comum e zero</li>
+              <li>Guaraná Antártica comum e zero</li>
+              <li>Água mineral com e sem gás</li>
+              <li>Suco de abacaxi com hortelã</li>
+              <li>Suco de manga com gengibre</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+  </div>
+</div>
+
+<!-- ==========================================================
+     04 · DEGUSTAÇÃO
+     ========================================================== -->
+<section class="secao secao--creme" id="degustacao" aria-labelledby="t-deg" style="margin-top:var(--secao)">
+  <div class="miolo">
+    <div class="secao__topo">
+      <p class="rotulo rev rev--perto">04 <span aria-hidden="true">—</span> Degustação</p>
+      <div>
+        <h2 class="rev rev--perto rev--d1" id="t-deg">Provar antes<br>de decidir</h2>
+        <div class="prosa rev rev--perto rev--d2" style="margin-top:24px">
+          <p>Nossas degustações são realizadas na Casa do Lago Bistrô, na Rua Luiz Francisco de
+            Souza, 555 — Ponte Funda, Vassouras/RJ.</p>
+        </div>
+        <div class="deg__valor rev rev--perto rev--d2">
+          <strong>R$ <span class="num">100,00</span> por pessoa, para até <span class="num">4</span> pessoas</strong>
+          <span>Fechado o contrato, o valor é abatido do total.</span>
+        </div>
+      </div>
+    </div>
+    <div class="deg__tira">
+      <div class="grao rev rev--esq"><img src="./img/buffet/deg-1.webp" width="700" height="1048" loading="lazy" decoding="async" alt="Vinho sendo servido à mesa, entre queijos e flores, à luz de velas"></div>
+      <div class="grao rev rev--perto rev--d1"><img src="./img/buffet/deg-2.webp" width="700" height="1052" loading="lazy" decoding="async" alt="Mini filé com fettuccine ao creme, servido em prato de porcelana antiga"></div>
+      <div class="grao rev rev--perto rev--d2"><img src="./img/buffet/deg-3.webp" width="1400" height="844" loading="lazy" decoding="async" alt="A Casa do Lago Bistrô iluminada à noite, refletida no lago"></div>
+      <div class="grao rev rev--dir rev--d3"><img src="./img/buffet/deg-4.webp" width="700" height="924" loading="lazy" decoding="async" alt="Prato de porcelana com flores pintadas, garfo e sousplat de fibra"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     DO SIMPLES AO MEMORÁVEL
+     ========================================================== -->
+<section class="memoravel" aria-labelledby="t-mem">
+  <div class="memoravel__panorama grao rev rev--perto">
+    <img src="./img/buffet/estrutura.webp" width="2400" height="438" loading="lazy" decoding="async"
+         alt="A estrutura iluminada ao fim da tarde, vista do meio do vinhedo">
+  </div>
+  <p class="memoravel__frase rev rev--perto" id="t-mem">Do simples ao memorável.</p>
+  <div class="memoravel__tira">
+    <div class="grao rev rev--esq"><img src="./img/buffet/fecho-1.webp" width="560" height="794" loading="lazy" decoding="async" alt="Mesa ao ar livre com velas altas e flores do campo"></div>
+    <div class="grao rev rev--perto rev--d1"><img src="./img/buffet/fecho-2.webp" width="560" height="802" loading="lazy" decoding="async" alt="Massa ao sugo servida em prato de porcelana florida"></div>
+    <div class="grao rev rev--perto rev--d2"><img src="./img/buffet/fecho-3.webp" width="1400" height="528" loading="lazy" decoding="async" alt="O salão de madeira montado para a festa, com luzes suspensas e mesas compridas"></div>
+    <div class="grao rev rev--perto rev--d3"><img src="./img/buffet/fecho-4.webp" width="560" height="802" loading="lazy" decoding="async" alt="Tábua de queijos azuis com physalis e ervas"></div>
+    <div class="grao rev rev--dir rev--d4"><img src="./img/buffet/fecho-5.webp" width="560" height="786" loading="lazy" decoding="async" alt="Mesa de antepastos com orquídeas, cumbucas de barro e pães"></div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     O PRÓXIMO PASSO
+     ========================================================== -->
 <section class="fecho">
-  <p class="rotulo">O próximo passo</p>
-  <p style="margin-top:14px">Cada casamento é montado com o casal, à mesa. Conte o que vocês têm em
-    mente e o cerimonial conduz o resto.</p>
-  <div class="fecho__acoes">
+  <p class="rotulo rev rev--perto">O próximo passo</p>
+  <h2 class="rev rev--perto rev--d1">Cada casamento<br>é montado à mesa</h2>
+  <div class="prosa rev rev--perto rev--d2">
+    <p>Conte o que vocês têm em mente — o número de convidados, o horário, o que não pode faltar —
+      e o cerimonial conduz o resto.</p>
+  </div>
+  <div class="fecho__acoes rev rev--perto rev--d2">
     <a class="pill" href="https://wa.me/5522981595317?text=Ol%C3%A1!%20Vi%20a%20apresenta%C3%A7%C3%A3o%20do%20buffet%20e%20gostaria%20de%20falar%20sobre%20um%20casamento%20na%20Casa%20do%20Lago." target="_blank" rel="noopener">Falar com o cerimonial</a>
     <a class="pill" href="./casamentos_casa_lago.html">Ver as fotos</a>
   </div>
 </section>
+
+</main>
 
 <footer class="rodape">
   <p>Casa do Lago · Vassouras, Rio de Janeiro</p>
@@ -165,6 +877,64 @@ a{ color:inherit; }
   </p>
   <p class="rodape__entrar"><a href="./admin/" rel="nofollow" title="Modo Edição, para a equipe da casa">Entrar</a></p>
 </footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- o alto da página muda de cor sobre a capa ---------- */
+  (function () {
+    var chrome = document.getElementById('chrome');
+    var capa = document.getElementById('capa');
+    if (!chrome || !capa) return;
+    function checa() {
+      chrome.classList.toggle('is-sobre-escuro', capa.getBoundingClientRect().bottom > 64);
+    }
+    checa();
+    addEventListener('scroll', checa, { passive: true });
+    addEventListener('resize', checa);
+  })();
+
+  /* ---------- as entradas ----------
+     Cada elemento marcado entra quando encosta na dobra. Quem manda no
+     movimento é o CSS: aqui só se diz que chegou a hora. No celular a regra
+     de estilo já deixa tudo visível, e este laço não tem o que fazer. */
+  (function () {
+    var alvos = [].slice.call(document.querySelectorAll('.rev'));
+    if (!alvos.length) return;
+    var parado = matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if (parado) {
+      alvos.forEach(function (el) { el.classList.add('is-dentro'); });
+      return;
+    }
+    var pendentes = alvos.slice(), pedido = 0;
+    function passa() {
+      pedido = 0;
+      var alto = window.innerHeight || 800;
+      pendentes = pendentes.filter(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.top < alto * 0.88 && r.bottom > 0) { el.classList.add('is-dentro'); return false; }
+        return true;
+      });
+      if (!pendentes.length) {
+        removeEventListener('scroll', agenda);
+        removeEventListener('resize', agenda);
+        clearInterval(relogio);
+      }
+    }
+    function agenda() { if (!pedido) pedido = requestAnimationFrame(passa); }
+    addEventListener('scroll', agenda, { passive: true });
+    addEventListener('resize', agenda);
+    passa();
+    /* fotografias e fontes chegam depois e mexem na altura da página */
+    var voltas = 0;
+    var relogio = setInterval(function () {
+      passa();
+      if (++voltas > 16 || !pendentes.length) clearInterval(relogio);
+    }, 250);
+  })();
+})();
+</script>
 
 </body>
 </html>
