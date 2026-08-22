@@ -860,7 +860,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     <div class="cabeca rev">
       <p class="rotulo">01</p>
       <h2>A casa</h2>
-      <button class="cabeca__hora" id="hora-casa" type="button" aria-pressed="false">Conheça a casa à noite</button>
+      <button class="cabeca__hora" id="hora-casa" data-nao-editar type="button" aria-pressed="false">Conheça a casa à noite</button>
     </div>
 
     <div class="duas">
@@ -1138,7 +1138,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     <div class="cabeca rev">
       <p class="rotulo">04</p>
       <h2 data-ed="arte.titulo">A arte da casa</h2>
-      <button class="cabeca__hora" type="button" id="luz-arte" aria-pressed="false">Ver a versão escura</button>
+      <button class="cabeca__hora" type="button" id="luz-arte" data-nao-editar aria-pressed="false">Ver a versão escura</button>
     </div>
 
     <div class="arte__abertura">
@@ -1274,10 +1274,10 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
           <select id="pessoas" name="pessoas"><option>2</option><option>3</option><option>4</option><option>5</option><option>6 ou mais</option></select>
         </div>
         <div class="campo"><label for="horario">Horário</label>
-          <select id="horario" name="horario" disabled><option value="">Escolha a data</option></select>
+          <select id="horario" data-nao-editar name="horario" disabled><option value="">Escolha a data</option></select>
         </div>
         <p class="largo"><button class="pill" type="submit">Reservar</button></p>
-        <p class="rotulo largo" id="recado" role="status"></p>
+        <p class="rotulo largo" id="recado" data-nao-editar role="status"></p>
       </form>
 
       <div class="fio-balanca" aria-hidden="true"></div>
@@ -2475,5 +2475,6 @@ import { criaDecolagem } from './js/voo-decolagem.js';
 })();
 </script>
 <script src="./js/conteudo.js" defer></script>
+<script src="./js/modo-edicao.js" defer></script>
 </body>
 </html>
