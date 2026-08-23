@@ -1,0 +1,214 @@
+{
+  "site": "casadolago",
+  "campos": {
+    "horta": {
+      "titulo": "Da Terra para a Mesa"
+    },
+    "cardapio": {
+      "titulo": "Cardápio sazonal"
+    },
+    "arte": {
+      "titulo": "A arte da casa",
+      "voz": "Arte é a voz da alma.",
+      "artista": "Maria Clara Porto"
+    },
+    "eventos": {
+      "titulo": "Eventos da casa"
+    },
+    "casamentos": {
+      "titulo": "Casamentos"
+    },
+    "visitacoes": {
+      "titulo": "Visitações e degustações"
+    }
+  },
+  "pratos": [
+    {
+      "id": "prato-pastel-camarao",
+      "nome": "Pastel de camarão",
+      "categoria": "Entrada",
+      "descricao": "Massa crocante feita na casa, recheada com queijo cremoso e camarões refogados no azeite com alho-poró. Servido com molho de pimenta da casa (2 unidades).",
+      "notas": "Massa crocante da casa|Queijo cremoso e camarão|Molho de pimenta da casa",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "2 unidades",
+      "foto": "./img/prato-pastel-camarao.webp"
+    },
+    {
+      "id": "prato-brie-mel",
+      "nome": "Brie brasileiro ao mel",
+      "categoria": "Entrada",
+      "descricao": "Queijo brie brasileiro de terroir empanado e regado com mel de abelhas selvagens trufado. Acompanha torradas de ervas finas.",
+      "notas": "Brie brasileiro de terroir|Mel de abelhas selvagens trufado|Torradas de ervas finas",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "com torradas",
+      "foto": "./img/prato-brie-mel.webp"
+    },
+    {
+      "id": "prato-tartar-mignon",
+      "nome": "Tartar de mignon",
+      "categoria": "Entrada",
+      "descricao": "Filé mignon cortado na ponta da faca, temperado com alcaparras, ervas frescas do nosso quintal, molho de mostarda Dijon e flor de sal. Finalizado com gema caipira e servido com chips crocantes de batata inglesa.",
+      "notas": "Filé mignon cortado à faca|Gema caipira e flor de sal|Chips crocantes de batata",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "na ponta da faca",
+      "foto": "./img/prato-tartar-mignon.webp"
+    },
+    {
+      "id": "prato-burrata",
+      "nome": "Burrata",
+      "categoria": "Entrada",
+      "descricao": "Burrata artesanal, tomate assado, rúcula selvagem e pesto de manjericão. Acompanha pães da casa.",
+      "notas": "Burrata artesanal|Tomate assado e rúcula selvagem|Pesto de manjericão",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "com pães da casa",
+      "foto": "./img/prato-burrata.webp"
+    },
+    {
+      "id": "prato-croquetas-costela",
+      "nome": "Croquetas de costela",
+      "categoria": "Entrada",
+      "descricao": "Croquete de costela desfiada, crocante por fora e macio por dentro, servido com molho agridoce de goiaba, cebola caramelizada e pimenta (4 unidades).",
+      "notas": "Costela desfiada|Molho agridoce de goiaba|Cebola caramelizada e pimenta",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "4 unidades",
+      "foto": "./img/prato-croquetas-costela.webp"
+    },
+    {
+      "id": "prato-couvert",
+      "nome": "Couvert da estação",
+      "categoria": "Entrada",
+      "descricao": "Seleção de pães de fermentação natural acompanhados de manteiga de ervas, queijo de terroir, cream cheese com cebola caramelizada e paté de alho-poró da casa.",
+      "notas": "Pães de fermentação natural|Manteiga de ervas e queijo de terroir|Cream cheese com cebola caramelizada|Paté de alho-poró da casa",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "para a mesa",
+      "foto": "./img/prato-couvert.webp"
+    },
+    {
+      "id": "prato-arroz-bacalhau",
+      "nome": "Arroz de bacalhau",
+      "categoria": "Principal",
+      "descricao": "Lascas de bacalhau Gadus Morhua, arroz jasmim, confit de pimentão, tomate, alho frito, tapenade de olivas pretas, ovos caipiras mexidos, azeite siciliano e crispies de cebola.",
+      "notas": "Lascas de bacalhau Gadus Morhua|Arroz jasmim e ovos caipiras|Tapenade de olivas pretas",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "",
+      "foto": "./img/prato-arroz-bacalhau.webp"
+    },
+    {
+      "id": "prato-file-pasta",
+      "nome": "Filé com pasta",
+      "categoria": "Principal",
+      "descricao": "Filé mignon alto, grelhado na manteiga de ervas frescas da horta, servido com massa fresca envolta em fonduta cremosa de queijo curado da Serra e finalizado com crocante de charcutaria artesanal.",
+      "notas": "Filé mignon alto na manteiga de ervas|Massa fresca em fonduta de queijo curado da Serra|Crocante de charcutaria artesanal",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "clássico Casa do Lago",
+      "foto": "./img/prato-file-pasta.webp"
+    },
+    {
+      "id": "prato-camarao-arroz",
+      "nome": "Camarões, ervas brasileiras, arroz cremoso, alho-poró",
+      "categoria": "Principal",
+      "descricao": "Camarões VM da Costa Verde salteados no azeite de ervas brasileiras, servidos sobre arroz cremoso de queijo brie da Mantiqueira com crocante de alho-poró.",
+      "notas": "Camarões VM da Costa Verde|Azeite de ervas brasileiras|Arroz cremoso de brie da Mantiqueira|Crocante de alho-poró",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "",
+      "foto": "./img/prato-camarao-arroz.webp"
+    },
+    {
+      "id": "prato-escalopes",
+      "nome": "Escalopes ao molho de vinho tinto",
+      "categoria": "Principal",
+      "descricao": "Escalopes de filé mignon ao molho de vinho tinto com risoto cremoso de cogumelos.",
+      "notas": "Escalopes de filé mignon|Molho de vinho tinto|Risoto cremoso de cogumelos",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "",
+      "foto": "./img/prato-escalopes.webp"
+    },
+    {
+      "id": "prato-pappardelle",
+      "nome": "Pappardelle de pêra ao gorgonzola",
+      "categoria": "Principal",
+      "descricao": "Massa fresca ao molho de queijo gorgonzola com pêras glaciadas e nozes.",
+      "notas": "Massa fresca da casa|Molho de gorgonzola|Pêras glaciadas e nozes",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "",
+      "foto": "./img/prato-pappardelle.webp"
+    },
+    {
+      "id": "prato-peixe",
+      "nome": "Peixe da casa",
+      "categoria": "Principal",
+      "descricao": "Filé de tilápia de pesca artesanal na manteiga de ervas, musseline de batata-baroa, banana de jardim grelhada, vagem sauté e farofa crocante de castanha com toque de limão-cravo.",
+      "notas": "Tilápia na manteiga de ervas|Musseline de batata-baroa|Farofa de castanha com limão-cravo",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "pesca artesanal",
+      "foto": "./img/prato-peixe.webp"
+    },
+    {
+      "id": "prato-risoto-gorgonzola",
+      "nome": "Risoto de gorgonzola com mignon",
+      "categoria": "Principal",
+      "descricao": "Arroz cremoso de queijo azul com emincé de filé mignon e cebola crispy.",
+      "notas": "Arroz cremoso de queijo azul|Emincé de filé mignon|Cebola crispy",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "",
+      "foto": "./img/prato-risoto-gorgonzola.webp"
+    },
+    {
+      "id": "prato-risoto-caprese",
+      "nome": "Risotto caprese",
+      "categoria": "Principal",
+      "descricao": "Arroz cremoso de queijo branco fresco, tomates confitados e pesto de manjericão.",
+      "notas": "Queijo branco fresco|Tomates confitados|Pesto de manjericão",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "",
+      "foto": "./img/prato-risoto-caprese.webp"
+    },
+    {
+      "id": "prato-romeu-julieta",
+      "nome": "Romeu e Julieta",
+      "categoria": "Sobremesa",
+      "descricao": "Sorvetinho caseiro de queijo com calda quente de goiabada cascão e farofa de castanha.",
+      "notas": "Sorvetinho caseiro de queijo|Calda quente de goiabada cascão|Farofa de castanha",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "quente e gelado",
+      "foto": "./img/prato-romeu-julieta.webp"
+    },
+    {
+      "id": "prato-coco-milho",
+      "nome": "Coco e milho verde",
+      "categoria": "Sobremesa",
+      "descricao": "Cocada cremosa brûlée com sorvete de milho verde e paçoca.",
+      "notas": "Cocada cremosa brûlée|Sorvete de milho verde|Paçoca",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "Festival Delícias do Vale",
+      "foto": "./img/prato-coco-milho.webp"
+    },
+    {
+      "id": "prato-rabanada",
+      "nome": "Rabanada, doce de leite e banana caramelada",
+      "categoria": "Sobremesa",
+      "descricao": "Rabanada de pão Petrópolis, bananas carameladas, doce de leite regional e gelato sabor banoffee.",
+      "notas": "Rabanada de pão Petrópolis|Bananas carameladas|Doce de leite regional|Gelato de banoffee",
+      "preco": "",
+      "quantidade": "",
+      "subtitulo": "receita de família",
+      "foto": "./img/prato-rabanada.webp"
+    }
+  ]
+}
