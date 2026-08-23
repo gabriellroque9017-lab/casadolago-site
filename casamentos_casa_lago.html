@@ -277,9 +277,11 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 .rodape .elo{ color:var(--agua); }
 .rodape a:hover .elo::after,
 .rodape a:focus-visible .elo::after{ transform:scaleX(1); }
-.rodape__pe{ display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-top:clamp(40px,6vw,72px); padding-top:20px; border-top:1px solid var(--casca); }
+/* o filete que separava o pé agora abre o bloco de créditos, que passou a
+   ser o primeiro depois da grade */
 .rodape__credito{
-  margin-top:18px; text-align:center;
+  margin-top:clamp(40px,6vw,72px); padding-top:20px; border-top:1px solid var(--casca);
+  text-align:center;
   font-family:var(--grot); font-size:11px; letter-spacing:.16em; line-height:1.7;
   color:rgba(99,107,47,.62);
 }
@@ -530,16 +532,11 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     </div>
   </div>
 
-  <div class="rodape__pe">
-    <span class="rotulo"><span class="num">© 2026</span> Casa do Lago, Vassouras, Rio de Janeiro</span>
-  </div>
-
   <p class="rodape__credito" data-nao-editar>Casa do Lago <span aria-hidden="true">·</span>
     Direção artística por <a class="rodape__autor" href="https://www.analuizaval.com.br/" target="_blank" rel="noopener noreferrer">Ana Luiza Val</a>
     <span aria-hidden="true">·</span>
     Website desenvolvido por <a class="rodape__autor" href="https://www.linkedin.com/in/gabriel-hossana-lopes-roque-18111b246/" target="_blank" rel="noopener noreferrer">Gabriel Hossana</a></p>
-  <p class="rodape__direitos" data-nao-editar>© 2026 Casa do Lago. Todos os direitos reservados. Textos, fotografias,
-    ilustrações, identidade visual e código são obra protegida.</p>
+  <p class="rodape__direitos" data-nao-editar>© 2026 Casa do Lago, Vassouras, Rio de Janeiro. Todos os direitos reservados. Fotografias, ilustrações, identidade visual e código são obra protegida.</p>
   <p class="rodape__entrar"><a href="./admin/" rel="nofollow" title="Modo Edição, para a equipe da casa">Entrar</a></p>
 </footer>
 

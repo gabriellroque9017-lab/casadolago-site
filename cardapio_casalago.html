@@ -673,31 +673,28 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 .pratica__linha{ display:flex; justify-content:space-between; gap:20px; padding:15px 0; border-bottom:1px solid var(--casca); }
 
 /* ---------- rodapé: mesma arquitetura da Vila Botané, com os horários ---------- */
-.rodape{ padding:clamp(54px,7vw,92px) var(--margem) 56px; background:var(--tinta-alta); color:var(--marfim); }
+/* Esta página é escura, o rodapé não. A paleta clara da casa vale daqui para
+   dentro, e por token: as regras abaixo seguem falando em nome de cor. */
+.rodape{
+  --tinta-alta:#E9E2D0; --marfim:#636B2F; --marfim-mudo:#79815A;
+  --agua:#5C7E7D; --casca:#CFC8B2;
+  /* as regras globais desta página pedem cor por este nome: dentro do rodapé
+     ele vale o oliva claro da casa, como na capa */
+  --grafite-mudo:#79815A;
+  padding:clamp(54px,7vw,92px) var(--margem) 56px;
+  background:var(--tinta-alta); color:var(--marfim);
+}
 .rodape a{ color:var(--marfim); }
 .rodape a:hover{ color:var(--agua); }
-.rodape .rotulo{ color:rgba(237,231,218,.72); }
-.rodape .mudo{ color:rgba(237,231,218,.6); }
 .rodape__serra{
-  width:100%; height:clamp(44px,6.4vw,104px); color:rgba(237,231,218,.2);
+  width:100%; height:clamp(44px,6.4vw,104px); color:rgba(99,107,47,.34);
   margin-bottom:clamp(40px,6vw,72px);
 }
-/* as duas cristas balançam de leve quando o mouse passa */
-.rodape__serra path{
-  transform-box:fill-box; transform-origin:50% 50%;
-  transition:transform 1.1s var(--ease); will-change:transform;
-}
-.rodape__serra:hover path:nth-of-type(1){ animation:serraBalanco 4.8s ease-in-out infinite; }
-.rodape__serra:hover path:nth-of-type(2){ animation:serraBalanco 6.2s ease-in-out .4s infinite; }
-@keyframes serraBalanco{
-  0%,100%{ transform:translate3d(0,0,0) }
-  25%    { transform:translate3d(-7px,-3px,0) }
-  50%    { transform:translate3d(0,2.5px,0) }
-  75%    { transform:translate3d(7px,-2px,0) }
-}
-@media (prefers-reduced-motion:reduce){
-  .rodape__serra:hover path{ animation:none; }
-}
+/* a serra se desenha ao descer e, pronta, responde ao cursor como corda */
+.rodape__cena{ position:relative; touch-action:none; }
+.js .serra__traco{ stroke-dasharray:1; stroke-dashoffset:1; }
+.rodape__cena.is-viva{ cursor:crosshair; }
+.rodape__cena.is-viva .serra__traco{ stroke-dasharray:none; stroke-dashoffset:0; }
 .rodape__grade{
   display:grid; grid-template-columns:minmax(0,1fr) auto auto minmax(0,1fr);
   column-gap:clamp(28px,3.4vw,56px); row-gap:36px; align-items:start;
@@ -727,11 +724,13 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 .rodape .elo{ color:var(--agua); }
 .rodape a:hover .elo::after,
 .rodape a:focus-visible .elo::after{ transform:scaleX(1); }
-.rodape__pe{ display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-top:clamp(40px,6vw,72px); padding-top:20px; border-top:1px solid var(--casca); }
+/* o filete que separava o pé agora abre o bloco de créditos, que passou a
+   ser o primeiro depois da grade */
 .rodape__credito{
-  margin-top:18px; text-align:center;
+  margin-top:clamp(40px,6vw,72px); padding-top:20px; border-top:1px solid var(--casca);
+  text-align:center;
   font-family:var(--grot); font-size:11px; letter-spacing:.16em; line-height:1.7;
-  color:rgba(237,231,218,.5);
+  color:rgba(99,107,47,.62);
 }
 .rodape__direitos{
   margin:12px auto 0; text-align:center; max-width:76ch;
@@ -753,7 +752,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   transition:color .45s var(--ease), border-color .45s var(--ease);
 }
 .rodape__autor:hover,
-.rodape__autor:focus-visible{ color:rgba(237,231,218,.86); border-bottom-color:rgba(237,231,218,.42); }
+.rodape__autor:focus-visible{ color:rgba(99,107,47,.95); border-bottom-color:rgba(99,107,47,.45); }
 @media (max-width:1000px){
   .rodape__grade{ grid-template-columns:1fr 1fr; }
   .rodape__meio{ justify-self:start; }
@@ -1219,10 +1218,12 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 </main>
 
 <footer class="rodape">
-  <svg class="rodape__serra" viewBox="0 0 1200 90" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" preserveAspectRatio="none">
-    <path d="M0 82 C 84 78, 128 46, 196 40 C 258 34, 296 62, 356 58 C 420 54, 452 20, 528 22 C 598 24, 628 60, 700 56 C 768 52, 800 26, 872 30 C 942 34, 976 64, 1044 60 C 1108 56, 1146 36, 1200 40" vector-effect="non-scaling-stroke"/>
-    <path d="M0 88 C 96 86, 160 68, 244 66 C 330 64, 384 80, 470 76 C 560 72, 604 54, 700 58 C 790 62, 840 80, 930 76 C 1020 72, 1120 58, 1200 62" vector-effect="non-scaling-stroke"/>
+  <div class="rodape__cena" id="serra-cena">
+  <svg class="rodape__serra" id="serra-svg" viewBox="0 0 1200 90" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" preserveAspectRatio="none">
+    <path class="serra__traco" pathLength="1" d="M0 82 C 84 78, 128 46, 196 40 C 258 34, 296 62, 356 58 C 420 54, 452 20, 528 22 C 598 24, 628 60, 700 56 C 768 52, 800 26, 872 30 C 942 34, 976 64, 1044 60 C 1108 56, 1146 36, 1200 40" vector-effect="non-scaling-stroke"/>
+    <path class="serra__traco" pathLength="1" d="M0 88 C 96 86, 160 68, 244 66 C 330 64, 384 80, 470 76 C 560 72, 604 54, 700 58 C 790 62, 840 80, 930 76 C 1020 72, 1120 58, 1200 62" vector-effect="non-scaling-stroke"/>
   </svg>
+  </div>
 
   <div class="rodape__grade">
     <div>
@@ -1266,16 +1267,11 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     </div>
   </div>
 
-  <div class="rodape__pe">
-    <span class="rotulo"><span class="num">© 2026</span> Casa do Lago, Vassouras, Rio de Janeiro</span>
-  </div>
-
   <p class="rodape__credito" data-nao-editar>Casa do Lago <span aria-hidden="true">·</span>
     Direção artística por <a class="rodape__autor" href="https://www.analuizaval.com.br/" target="_blank" rel="noopener noreferrer">Ana Luiza Val</a>
     <span aria-hidden="true">·</span>
     Website desenvolvido por <a class="rodape__autor" href="https://www.linkedin.com/in/gabriel-hossana-lopes-roque-18111b246/" target="_blank" rel="noopener noreferrer">Gabriel Hossana</a></p>
-  <p class="rodape__direitos" data-nao-editar>© 2026 Casa do Lago. Todos os direitos reservados. Textos, fotografias,
-    ilustrações, identidade visual e código são obra protegida.</p>
+  <p class="rodape__direitos" data-nao-editar>© 2026 Casa do Lago, Vassouras, Rio de Janeiro. Todos os direitos reservados. Fotografias, ilustrações, identidade visual e código são obra protegida.</p>
   <p class="rodape__entrar"><a href="./admin/" rel="nofollow" title="Modo Edição, para a equipe da casa">Entrar</a></p>
 </footer>
 
@@ -1585,6 +1581,145 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
       gsap.to(cursor, { scale: 1, opacity: .55, duration: .5, ease: 'power3.out', overwrite: 'auto' });
     }
   });
+})();
+</script>
+<script>
+/* ---------- a serra do rodapé: desenha ao descer, depois vira corda ----------
+   Duas fases. Na primeira, a rolagem preenche o traço (stroke-dashoffset).
+   Ao completar, os pontos de cada linha ganham física de corda: o cursor bate,
+   a onda corre pela linha, reflete nas pontas presas e volta. */
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var cena = document.getElementById('serra-cena');
+  var svg  = document.getElementById('serra-svg');
+  if (!cena || !svg) return;
+
+  var tracos = [].slice.call(svg.querySelectorAll('.serra__traco'));
+  var VBH = (svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.height) || 96;
+  var reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- fase 1 · o desenho ---- */
+  var pronta = false;
+  function desenha() {
+    var r = cena.getBoundingClientRect();
+    /* de quando a serra assoma no rodapé até um terço acima do fim da tela */
+    var p = (innerHeight - r.top) / (innerHeight * 0.42);
+    p = p < 0 ? 0 : (p > 1 ? 1 : p);
+    tracos.forEach(function (t, i) {
+      var q = (p - i * 0.08) / (1 - i * 0.08);      /* cada linha vem um passo atrás */
+      q = q < 0 ? 0 : (q > 1 ? 1 : q);
+      t.style.strokeDashoffset = 1 - q;
+    });
+    if (p >= 1 && !pronta) { pronta = true; viva(); }
+  }
+
+  if (reduz) { tracos.forEach(function (t) { t.style.strokeDashoffset = 0; }); }
+  else {
+    var pedido = false;
+    addEventListener('scroll', function () {
+      if (pedido || pronta) return;
+      pedido = true;
+      requestAnimationFrame(function () { pedido = false; desenha(); });
+    }, { passive: true });
+    addEventListener('resize', function () { if (!pronta) desenha(); });
+    desenha();
+  }
+
+  /* ---- fase 2 · a corda ---- */
+  function viva() {
+    cena.classList.add('is-viva');
+    if (reduz) return;
+
+    var N = 170, RAIO = 130, TENSAO = 0.30, MOLA = 0.060,
+        ATRITO = 0.955, ARRASTO = 0.72, IMPULSO = 5, TETO = 18;
+
+    var linhas = tracos.map(function (el, i) {
+      var L = el.getTotalLength(), pts = [];
+      for (var k = 0; k <= N; k++) {
+        var p = el.getPointAtLength(L * k / N);
+        pts.push({ bx: p.x, by: p.y, dx: 0, dy: 0, vx: 0, vy: 0 });
+      }
+      el.removeAttribute('pathLength');
+      return { pts: pts, el: el, peso: 1 - i * 0.12,
+               ox: new Float32Array(N + 1), oy: new Float32Array(N + 1) };
+    });
+
+    function tracado(pts) {
+      var s = 'M' + (pts[0].bx + pts[0].dx).toFixed(2) + ' ' + (pts[0].by + pts[0].dy).toFixed(2);
+      for (var i = 1; i < pts.length - 1; i++) {
+        var a = pts[i], b = pts[i + 1];
+        var axx = a.bx + a.dx, ayy = a.by + a.dy;
+        var mx = (axx + b.bx + b.dx) / 2, my = (ayy + b.by + b.dy) / 2;
+        s += ' Q' + axx.toFixed(2) + ' ' + ayy.toFixed(2) + ' ' + mx.toFixed(2) + ' ' + my.toFixed(2);
+      }
+      var u = pts[pts.length - 1];
+      return s + ' L' + (u.bx + u.dx).toFixed(2) + ' ' + (u.by + u.dy).toFixed(2);
+    }
+
+    var px = -9999, py = -9999, ax = 0, ay = 0, dentro = false, raf = 0, vel = 0;
+
+    cena.addEventListener('pointermove', function (ev) {
+      var r = cena.getBoundingClientRect();
+      var x = (ev.clientX - r.left) / r.width * 1200;
+      var y = (ev.clientY - r.top) / r.height * VBH;
+      if (dentro) { ax = x - px; ay = y - py; } else { ax = 0; ay = 0; dentro = true; }
+      px = x; py = y;
+      vel = Math.hypot(ax, ay);
+      if (vel > IMPULSO) { ax *= IMPULSO / vel; ay *= IMPULSO / vel; }
+      toca();
+      liga();
+    });
+    cena.addEventListener('pointerleave', function () { dentro = false; ax = 0; ay = 0; });
+
+    function toca() {
+      linhas.forEach(function (linha) {
+        var pts = linha.pts;
+        for (var i = 0; i < pts.length; i++) {
+          var pt = pts[i];
+          var ex = pt.bx + pt.dx - px, ey = (pt.by + pt.dy - py) * 2.6;
+          var dist = Math.hypot(ex, ey);
+          if (dist > RAIO) continue;
+          var q = 1 - dist / RAIO;
+          var g = q * q * linha.peso * ARRASTO;
+          pt.vx += ax * g; pt.vy += ay * g;
+          if (dist > 0.001) {
+            var e = q * q * linha.peso * 0.10 * (1 + Math.min(vel, IMPULSO) * 0.05);
+            pt.vx += ex / dist * e; pt.vy += ey / dist * e;
+          }
+        }
+      });
+    }
+
+    function passo() {
+      raf = 0;
+      var vivo = false;
+      linhas.forEach(function (linha) {
+        var pts = linha.pts, n = pts.length, i, pt;
+        var ox = linha.ox, oy = linha.oy;
+        for (i = 0; i < n; i++) { ox[i] = pts[i].dx; oy[i] = pts[i].dy; }
+        for (i = 0; i < n; i++) {
+          pt = pts[i];
+          var e = i > 0 ? i - 1 : 0, d2 = i < n - 1 ? i + 1 : n - 1;
+          pt.vx += ((ox[e] + ox[d2]) / 2 - ox[i]) * TENSAO;
+          pt.vy += ((oy[e] + oy[d2]) / 2 - oy[i]) * TENSAO;
+          pt.vx -= pt.dx * MOLA; pt.vy -= pt.dy * MOLA;
+          pt.vx *= ATRITO; pt.vy *= ATRITO;
+          pt.dx += pt.vx; pt.dy += pt.vy;
+          if (pt.dx >  TETO) { pt.dx =  TETO; pt.vx *= -0.3; }
+          else if (pt.dx < -TETO) { pt.dx = -TETO; pt.vx *= -0.3; }
+          if (pt.dy >  TETO) { pt.dy =  TETO; pt.vy *= -0.3; }
+          else if (pt.dy < -TETO) { pt.dy = -TETO; pt.vy *= -0.3; }
+        }
+        pts[0].dx = pts[0].dy = pts[n - 1].dx = pts[n - 1].dy = 0;
+        for (var k = 0; k < n; k += 12) {
+          if (Math.abs(pts[k].dx) + Math.abs(pts[k].dy) + Math.abs(pts[k].vx) + Math.abs(pts[k].vy) > 0.02) { vivo = true; break; }
+        }
+        linha.el.setAttribute('d', tracado(pts));
+      });
+      if (vivo || dentro) liga();
+    }
+    function liga() { if (!raf) raf = requestAnimationFrame(passo); }
+  }
 })();
 </script>
 <script src="./js/conteudo.js" defer></script>
