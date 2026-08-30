@@ -210,5 +210,11 @@
       "subtitulo": "receita de família",
       "foto": "./img/prato-rabanada.webp"
     }
-  ]
+  ],
+  "pagina": {
+    "index.html": {
+      "#arte>div.arte__parede>div.arte__legenda>p.arte__mudo": "Obras autorais.",
+      "#arte>p.rotulo": "<br>"
+    }
+  }
 }
