@@ -565,24 +565,22 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   width:min(100%,88%); margin-inline:auto; align-items:stretch;
 }
 .horta__par figure{ margin:0; aspect-ratio:3/4; }
-/* a abertura: o texto à esquerda, a horta num quadro alto à direita, alternando duas fotos */
-.horta__abre{
-  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.78fr);
-  gap:clamp(24px,4.6vw,72px); align-items:start;
-}
+/* a abertura: só o texto, aberto em duas colunas.
+
+   Antes havia aqui uma foto alta de 3:4 à direita, alternando duas imagens.
+   Medida, ela tinha 659px de altura contra 194px do texto ao lado: sobravam
+   465px de vazio embaixo do parágrafo. Tirada a foto, uma coluna só de texto
+   deixava metade da largura vazia, e centrá-la afastava o parágrafo do título,
+   que fica na margem. Em duas colunas o texto começa rente ao título e vai até
+   a outra borda — sem buraco de um lado nem do outro. */
+.horta__abre{ display:block; }
 /* o pássaro se desenha da esquerda para a direita conforme a página desce;
    completo, um segundo desenho o cobre vindo da direita */
 .horta__lado{ display:grid; align-content:start; }
-.horta__abre .prosa{ max-width:52ch; }
-.horta__grande{ margin:0; aspect-ratio:3/4; position:relative; overflow:hidden; }
-.horta__troca{
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-  opacity:0; transition:opacity 1.4s var(--ease);
-}
-.horta__troca.is-vez{ opacity:1; }
+.horta__abre .prosa{ max-width:none; columns:2; column-gap:clamp(34px,5vw,72px); }
 @media (max-width:860px){
-  .horta__abre{ grid-template-columns:1fr; gap:clamp(20px,4vw,32px); }
-  .horta__grande{ aspect-ratio:4/3; }
+  /* estreito, duas colunas viram duas tiras ilegíveis */
+  .horta__abre .prosa{ columns:1; max-width:62ch; }
 }
 /* clicar numa foto da horta troca a imagem no lugar, como o retrato da Rachel */
 .horta__quadro{ cursor:pointer; }
@@ -699,15 +697,27 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 /* 03 · cardápio: o texto à esquerda, a cozinha em movimento à direita */
 .card__vao{
   display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
-  gap:clamp(34px,6.5vw,110px); align-items:stretch;
+  gap:clamp(34px,6.5vw,110px); align-items:start;
 }
 .card__vao > .prosa{ display:flex; flex-direction:column; }
-.card__filme{ margin:0; width:100%; aspect-ratio:4/5; overflow:hidden; }
+/* o botão fica no eixo da coluna de texto, não colado à margem esquerda */
+.card__botao{ text-align:center; }
+/* o vídeo sobe até a altura do título, para ocupar o vazio que havia à
+   direita de "Cardápio sazonal". A conta é exata: a margem sob o título
+   mais a altura da linha do próprio h2 — os dois valores vêm das regras
+   de .cabeca, então o vídeo acompanha se a tipografia mudar. */
+.card__filme{
+  margin:calc(-1 * (clamp(34px,5vw,68px) + clamp(30px,4.8vw,64px) * 1.04)) 0 0;
+  width:100%; aspect-ratio:4/5; overflow:hidden;
+}
 .card__filme video{ display:block; width:100%; height:100%; object-fit:cover; }
-/* duas fotos do cardápio, alternando no mesmo compasso da foto da horta */
+/* duas fotos do cardápio, alternando no mesmo compasso da foto da horta.
+   Antes havia aqui um margin-top:auto que as empurrava para o fundo da
+   coluna: sobravam 165px de vazio entre o botão e elas. Agora seguem o
+   texto de perto. */
 .card__provas{
   display:grid; grid-template-columns:1fr 1fr; gap:clamp(12px,1.6vw,20px);
-  margin-top:auto; padding-top:clamp(26px,4vw,48px);
+  padding-top:clamp(26px,4vw,48px);
 }
 .card__prova{ margin:0; position:relative; aspect-ratio:4/5; overflow:hidden; }
 .card__prova img{
@@ -717,7 +727,8 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 .card__prova img.is-vez{ opacity:1; }
 @media (max-width:860px){
   .card__vao{ grid-template-columns:1fr; }
-  .card__filme{ aspect-ratio:4/5; max-height:none; }
+  /* empilhado, o vídeo vem depois do texto: subir seria passar por cima dele */
+  .card__filme{ aspect-ratio:4/5; max-height:none; margin-top:0; }
 }
 .pratica__linha{ display:flex; justify-content:space-between; gap:20px; padding:15px 0; border-bottom:1px solid var(--casca); }
 /* reservas: um fio verde separa o formulário dos horários, e balança de leve */
@@ -1089,12 +1100,6 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
             verdadeira e bem feita.</p>
         </div>
       </div>
-      <figure class="horta__grande grao horta__quadro" role="button" tabindex="0" aria-label="Ver a foto inteira">
-        <img class="horta__troca is-vez" src="./img/horta/horta-vista.webp" alt="Os canteiros da horta em fileiras, do alho-poró às folhas novas" width="900" height="1350" loading="lazy" decoding="async"
-             data-cheia="./img/horta/cheia/horta-vista.webp">
-        <img class="horta__troca" src="./img/horta/horta-colheita.webp" alt="Mão colhendo uma fruta do pé, cesto de vime ao lado" width="760" height="1140" loading="lazy" decoding="async"
-             data-cheia="./img/horta/cheia/horta-colheita.webp">
-      </figure>
     </div>
 
     <div class="horta__cena rev">
@@ -1171,7 +1176,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
           das cozinhas que moldaram nossa história.</p>
         <p style="margin-top:1.4em">Acreditamos na beleza das coisas simples, feitas devagar
           e com significado.</p>
-        <p style="margin-top:1.4em"><a class="pill" href="./cardapio_casalago.html">Ver o cardápio</a></p>
+        <p class="card__botao" style="margin-top:1.4em"><a class="pill" href="./cardapio_casalago.html">Ver o cardápio</a></p>
 
         <div class="card__provas">
           <figure class="card__prova grao">
@@ -2288,8 +2293,10 @@ import { criaDecolagem } from './js/voo-decolagem.js';
   laco = requestAnimationFrame(passo);
 })();
 
-/* a foto grande alterna entre a horta e a colheita; o texto ao lado é medido
-   para começar e terminar rente às bordas dela */
+/* A abertura da horta já não tem a foto que alternava — ficou só o texto, em
+   duas colunas. O laço abaixo sobrevive porque a mesma mecânica serve às duas
+   fotos do cardápio, logo adiante; sem elementos `.horta__troca` na página,
+   a guarda de comprimento faz o primeiro trecho não fazer nada. */
 (function () {
   var fotos = document.querySelectorAll('.horta__troca');
   if (fotos.length > 1) {
