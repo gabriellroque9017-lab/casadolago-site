@@ -565,23 +565,21 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   width:min(100%,88%); margin-inline:auto; align-items:stretch;
 }
 .horta__par figure{ margin:0; aspect-ratio:3/4; }
-/* a abertura: só o texto, aberto em duas colunas.
+/* a abertura: só o texto, num bloco único que se lê de cima para baixo.
 
-   Antes havia aqui uma foto alta de 3:4 à direita, alternando duas imagens.
-   Medida, ela tinha 659px de altura contra 194px do texto ao lado: sobravam
-   465px de vazio embaixo do parágrafo. Tirada a foto, uma coluna só de texto
-   deixava metade da largura vazia, e centrá-la afastava o parágrafo do título,
-   que fica na margem. Em duas colunas o texto começa rente ao título e vai até
-   a outra borda — sem buraco de um lado nem do outro. */
+   Aqui havia uma foto alta de 3:4 à direita, alternando duas imagens. Medida,
+   ela tinha 659px de altura contra 194px do texto ao lado: sobravam 465px de
+   vazio embaixo do parágrafo, e era esse o buraco que incomodava.
+
+   Tentei depois abrir o texto em duas colunas para ocupar a largura toda, mas
+   partir o parágrafo ao meio manda a segunda metade para o lado do leitor em
+   vez de para baixo, e quebra a leitura. Uma coluna só, com medida larga o
+   bastante para não parecer uma tira, é o que fica. */
 .horta__abre{ display:block; }
 /* o pássaro se desenha da esquerda para a direita conforme a página desce;
    completo, um segundo desenho o cobre vindo da direita */
 .horta__lado{ display:grid; align-content:start; }
-.horta__abre .prosa{ max-width:none; columns:2; column-gap:clamp(34px,5vw,72px); }
-@media (max-width:860px){
-  /* estreito, duas colunas viram duas tiras ilegíveis */
-  .horta__abre .prosa{ columns:1; max-width:62ch; }
-}
+.horta__abre .prosa{ max-width:72ch; }
 /* clicar numa foto da horta troca a imagem no lugar, como o retrato da Rachel */
 .horta__quadro{ cursor:pointer; }
 .horta__quadro:focus-visible{ outline:2px solid var(--agua); outline-offset:4px; }
