@@ -485,6 +485,25 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 }
 .arte__vitrine .arte__quadro{ aspect-ratio:2/3; }
 
+/* a carta da Rachel sobre a mãe: em itálico, entre aspas e assinada, para
+   ficar claro que é a voz dela. Coluna estreita, como página de carta; usa os
+   tokens da seção, então acompanha a versão escura da parede. */
+.arte__carta{ max-width:34em; margin:clamp(64px,10vw,150px) auto 0; padding:0; }
+.arte__carta .arte__fio{ margin:0 auto clamp(30px,3.6vw,48px); }
+.arte__carta p{
+  font-family:var(--serifa); font-style:italic; font-weight:300;
+  font-size:clamp(19px,1.55vw,22px); line-height:1.72; color:var(--marfim);
+  margin:0 0 1.05em; text-wrap:pretty;
+}
+.arte__carta-assina{
+  display:grid; justify-items:end; gap:8px; text-align:right;
+  margin-top:clamp(26px,3vw,40px);
+}
+.arte__carta-nome{
+  font-family:var(--serifa); font-weight:300; font-style:normal;
+  font-size:clamp(26px,2.6vw,34px); line-height:1.1; color:var(--marfim);
+}
+
 @media (max-width:860px){
   .arte__abertura, .arte__parede{ grid-template-columns:1fr; }
   .arte__parede .arte__legenda{ order:2; }
@@ -1272,6 +1291,31 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
         <p class="arte__mudo">Obras autorais, pintadas para esta casa.</p>
       </div>
     </div>
+
+    <!-- A carta da Rachel sobre a mãe. O texto é dela, palavra por palavra,
+         como ela mandou. Em itálico, entre aspas e assinado embaixo, a pedido
+         dela: para quem lê saber que foi ela quem escreveu. -->
+    <blockquote class="arte__carta" id="carta-mae">
+      <span class="arte__fio" aria-hidden="true"></span>
+      <p class="rev">“Antes de existir a Casa do Lago, existia a casa da minha mãe e a fazenda do meu avô. Lugares que alimentaram em mim, desde pequena, o amor pela poesia da vida.</p>
+      <p class="rev">Onde aprendi que uma casa não precisa de uma ocasião especial para ser bonita. Que flores colhidas no jardim merecem um vaso sobre a mesa. Que a escolha de uma louça, o cuidado com uma toalha e a maneira de receber alguém dizem muito sobre o afeto de quem recebe.</p>
+      <p class="rev">Minha mãe sempre teve essa capacidade de transformar o cotidiano em alguma coisa extraordinária. Ela me ensinou, desde pequena, que pôr a mesa é muito mais do que organizar pratos e talheres. É uma maneira de dizer a alguém que sua presença importa.</p>
+      <p class="rev">Quando idealizei a Casa do Lago, percebi que boa parte das minhas referências não vinha dos restaurantes que conheci, dos livros que li ou dos lugares por onde passei. Vinha dela, da casa dela e da fazenda. Das mesas da nossa família. Da beleza despretensiosa de uma vida cercada de natureza e afeto.</p>
+      <p class="rev">É ela quem percorre o sítio colhendo flores e folhagens para criar os arranjos que recebem nossos clientes. Nenhum é exatamente igual ao outro. São composições que acompanham as estações, feitas com aquilo que a natureza oferece naquele dia.</p>
+      <p class="rev">Mas existe outra parte dessa história que é a minha favorita.</p>
+      <p class="rev">Minha mãe é portadora de Mal de Parkinson. E, entre tantas coisas que a doença transforma, estão os movimentos das mãos. Justamente as mãos com as quais ela sempre cuidou, criou, arrumou e fez tanta coisa bonita.</p>
+      <p class="rev">Ela sempre foi a minha artista favorita. Mas ultimamente, usar os pincéis ficou difícil… então ela pinta com os dedos.</p>
+      <p class="rev">Há algo de profundamente único nisso. Porque são mãos que enfrentam suas próprias limitações, mas que continuam encontrando maneiras de criar. Sem a distância de um pincel, ela toca a tinta, mistura as cores e constrói suas imagens diretamente sobre a tela.</p>
+      <p class="rev">Não gosto de pensar nas pinturas da minha mãe apenas como uma história de superação. Seria reduzir sua arte à doença. Seus quadros são, antes de qualquer coisa, uma expressão da mulher que ela sempre foi: sensível à beleza, à natureza e aos pequenos detalhes que tanta gente passa a vida inteira sem perceber.</p>
+      <p class="rev">Algumas dessas obras estão expostas aqui no bistrô e completam com protagonismo a história deste lugar.</p>
+      <p class="rev">Porque o bistrô nasceu do desejo de reproduzir um sentimento que conheci muito antes de entender qualquer coisa sobre gastronomia: o prazer de estar à mesa, cercada de beleza, de natureza e de pessoas queridas.</p>
+      <p class="rev">E foi minha mãe que me ensinou a enxergar tudo isso.</p>
+      <p class="rev">E hoje, quando vejo suas flores sobre as mesas e suas pinturas nas paredes, tenho a sensação de que consegui trazer um pedacinho da minha história para cá.”</p>
+      <footer class="arte__carta-assina rev">
+        <span class="arte__carta-nome"><span aria-hidden="true">— </span>Rachel Porto</span>
+        <span class="rotulo">Fundadora da Casa do Lago</span>
+      </footer>
+    </blockquote>
 
     <p class="rotulo arte__rotulo rev">A arte fora da moldura</p>
     <div class="arte__vitrine">
