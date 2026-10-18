@@ -488,7 +488,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 /* a carta da Rachel sobre a mãe: em itálico, entre aspas e assinada, para
    ficar claro que é a voz dela. Coluna estreita, como página de carta; usa os
    tokens da seção, então acompanha a versão escura da parede. */
-/* larga no computador, para a carta ocupar menos linhas (34em davam ~70) */
+/* larga no computador: com 880px a carta cai de ~47 para ~31 linhas */
 .arte__carta{ max-width:min(100%,880px); margin:clamp(64px,10vw,150px) auto 0; padding:0; }
 .arte__carta .arte__fio{ margin:0 auto clamp(30px,3.6vw,48px); }
 .arte__carta p{
@@ -504,6 +504,98 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   font-family:var(--serifa); font-weight:300; font-style:normal;
   font-size:clamp(26px,2.6vw,34px); line-height:1.1; color:var(--marfim);
 }
+
+/* ==== EFEITO OPCIONAL: a carta em aquarela ==================================
+   Tudo o que é efeito depende de .arte__carta--aquarela. Para tirar, basta
+   apagar essa classe do <blockquote id="carta-mae">: a carta continua larga,
+   sem efeito nenhum.
+
+   A ideia vem do próprio site, que fala em aquarela (o disco do pássaro, a
+   cor que sobe pelo lago da casa), e da mãe da Rachel, que pinta com os dedos.
+   Cada parágrafo entra como tinta molhada: uma pincelada passa da esquerda
+   para a direita, a letra chega borrada e no tom da água e assenta no oliva,
+   como pigmento secando no papel. Por trás, uma mancha de aquarela bem clara
+   se espalha; na versão escura da parede ela vira um brilho quente. Na
+   assinatura passa um brilho dourado, uma vez só. */
+@property --pincel{ syntax:'<percentage>'; inherits:false; initial-value:-30%; }
+.arte__carta--aquarela{ position:relative; isolation:isolate; --brilho:#C49A45; }
+.arte.is-escura .arte__carta--aquarela{ --brilho:#EBC982; }
+.arte__carta--aquarela::before{
+  content:""; position:absolute; z-index:-1; pointer-events:none;
+  inset:-7% -6vw;
+  /* sálvia, água do lago e um toque de ocre; onde duas se cruzam a cor
+     escurece, como camadas de aquarela */
+  background:
+    radial-gradient(34% 20% at 24% 13%, rgba(143,163,106,.10) 0 54%, rgba(143,163,106,.19) 64%, transparent 67%),
+    radial-gradient(30% 18% at 76% 29%, rgba(94,149,146,.09) 0 54%, rgba(94,149,146,.17) 64%, transparent 67%),
+    radial-gradient(38% 22% at 30% 55%, rgba(94,149,146,.07) 0 54%, rgba(94,149,146,.14) 64%, transparent 67%),
+    radial-gradient(32% 19% at 72% 74%, rgba(143,163,106,.09) 0 54%, rgba(143,163,106,.17) 64%, transparent 67%),
+    radial-gradient(22% 12% at 64% 93%, rgba(206,164,86,.10) 0 54%, rgba(206,164,86,.18) 64%, transparent 67%);
+  filter:url(#carta-aquarela);
+  opacity:0; transform:scale(.94);
+  transition:opacity 2.6s var(--ease), transform 3.4s var(--ease), background .9s var(--ease);
+  will-change:opacity,transform;
+}
+/* na parede escura a mancha vira luz: um brilho quente e macio, sem borda,
+   como vela acesa atrás do papel */
+.arte.is-escura .arte__carta--aquarela::before{
+  background:
+    radial-gradient(42% 26% at 26% 16%, rgba(246,228,184,.075), transparent 70%),
+    radial-gradient(36% 22% at 76% 36%, rgba(122,154,153,.07), transparent 72%),
+    radial-gradient(44% 26% at 34% 62%, rgba(246,228,184,.055), transparent 70%),
+    radial-gradient(34% 20% at 70% 80%, rgba(246,228,184,.07), transparent 70%);
+}
+.arte__carta--aquarela:has(.is-pintado)::before{ opacity:1; transform:none; }
+/* no celular a carta é alta e estreita: em porcentagem as manchas viravam
+   faixas compridas. Aqui elas têm tamanho próprio, em vw, e ficam redondas. */
+@media (max-width:760px){
+  .arte__carta--aquarela::before{
+    background:
+      radial-gradient(46vw 40vw at 22% 6%, rgba(143,163,106,.10) 0 54%, rgba(143,163,106,.19) 64%, transparent 67%),
+      radial-gradient(40vw 36vw at 82% 22%, rgba(94,149,146,.09) 0 54%, rgba(94,149,146,.17) 64%, transparent 67%),
+      radial-gradient(48vw 42vw at 18% 43%, rgba(94,149,146,.07) 0 54%, rgba(94,149,146,.14) 64%, transparent 67%),
+      radial-gradient(42vw 38vw at 80% 63%, rgba(143,163,106,.09) 0 54%, rgba(143,163,106,.17) 64%, transparent 67%),
+      radial-gradient(34vw 28vw at 30% 82%, rgba(206,164,86,.10) 0 54%, rgba(206,164,86,.18) 64%, transparent 67%),
+      radial-gradient(40vw 34vw at 74% 97%, rgba(94,149,146,.08) 0 54%, rgba(94,149,146,.15) 64%, transparent 67%);
+  }
+  .arte.is-escura .arte__carta--aquarela::before{
+    background:
+      radial-gradient(60vw 52vw at 24% 12%, rgba(246,228,184,.075), transparent 70%),
+      radial-gradient(56vw 48vw at 78% 40%, rgba(122,154,153,.07), transparent 72%),
+      radial-gradient(60vw 52vw at 26% 70%, rgba(246,228,184,.06), transparent 70%),
+      radial-gradient(56vw 48vw at 74% 94%, rgba(246,228,184,.07), transparent 70%);
+  }
+}
+
+/* a pincelada: máscara com borda macia que corre da esquerda para a direita */
+.js .arte__carta--aquarela p.rev,
+.js .arte__carta--aquarela .arte__carta-assina.rev{
+  clip-path:none; opacity:1;
+  -webkit-mask-image:linear-gradient(90deg,#000 var(--pincel),transparent calc(var(--pincel) + 24%));
+          mask-image:linear-gradient(90deg,#000 var(--pincel),transparent calc(var(--pincel) + 24%));
+  filter:blur(2.4px); color:var(--agua);
+  transition:--pincel 1.7s cubic-bezier(.33,.55,.25,1), filter 2s var(--ease), color 2.8s var(--ease);
+}
+.js .arte__carta--aquarela p.rev.is-pintado,
+.js .arte__carta--aquarela .arte__carta-assina.rev.is-pintado{
+  --pincel:100%; filter:none; color:var(--marfim);
+}
+/* o brilho na assinatura: um reflexo dourado que atravessa o nome uma vez */
+.arte__carta--aquarela .arte__carta-nome{
+  background:linear-gradient(100deg, var(--marfim) 0 42%, var(--brilho) 50%, var(--marfim) 58% 100%) 100% 0/260% 100% no-repeat;
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  transition:background-position 2.6s var(--ease) 1.1s;
+}
+.arte__carta--aquarela .arte__carta-assina.is-pintado .arte__carta-nome{ background-position:0% 0; }
+@media (prefers-reduced-motion:reduce){
+  .js .arte__carta--aquarela p.rev,
+  .js .arte__carta--aquarela .arte__carta-assina.rev{
+    -webkit-mask-image:none; mask-image:none; filter:none; color:var(--marfim); transition:none;
+  }
+  .arte__carta--aquarela::before{ opacity:1; transform:none; transition:none; }
+  .arte__carta--aquarela .arte__carta-nome{ transition:none; }
+}
+/* ==== fim do efeito opcional ============================================== */
 
 @media (max-width:860px){
   .arte__abertura, .arte__parede{ grid-template-columns:1fr; }
@@ -1296,7 +1388,16 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     <!-- A carta da Rachel sobre a mãe. O texto é dela, palavra por palavra,
          como ela mandou. Em itálico, entre aspas e assinado embaixo, a pedido
          dela: para quem lê saber que foi ela quem escreveu. -->
-    <blockquote class="arte__carta" id="carta-mae">
+    <blockquote class="arte__carta arte__carta--aquarela" id="carta-mae">
+      <!-- o EFEITO da carta é só a classe arte__carta--aquarela acima. Sem ela,
+           fica a carta larga e parada; este filtro passa a não ser usado. -->
+      <svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+        <filter id="carta-aquarela" x="-25%" y="-25%" width="150%" height="150%">
+          <feTurbulence type="fractalNoise" baseFrequency=".009 .014" numOctaves="3" seed="11" result="ruido"/>
+          <feDisplacementMap in="SourceGraphic" in2="ruido" scale="90" xChannelSelector="R" yChannelSelector="G" result="borda"/>
+          <feGaussianBlur in="borda" stdDeviation="3"/>
+        </filter>
+      </svg>
       <span class="arte__fio" aria-hidden="true"></span>
       <p class="rev">“Antes de existir a Casa do Lago, existia a casa da minha mãe e a fazenda do meu avô. Lugares que alimentaram em mim, desde pequena, o amor pela poesia da vida.</p>
       <p class="rev">Onde aprendi que uma casa não precisa de uma ocasião especial para ser bonita. Que flores colhidas no jardim merecem um vaso sobre a mesa. Que a escolha de uma louça, o cuidado com uma toalha e a maneira de receber alguém dizem muito sobre o afeto de quem recebe.</p>
@@ -2654,5 +2755,28 @@ import { criaDecolagem } from './js/voo-decolagem.js';
 </script>
 <script src="./js/conteudo.js" defer></script>
 <script src="./js/modo-edicao.js" defer></script>
+<script>
+/* EFEITO OPCIONAL da carta: cada parágrafo é pintado quando entra na tela.
+   Sem a classe arte__carta--aquarela no blockquote, este trecho não faz nada. */
+(function () {
+  var carta = document.querySelector('.arte__carta--aquarela');
+  if (!carta) return;
+  var partes = [].slice.call(carta.querySelectorAll('p, .arte__carta-assina'));
+  function pinta(el, atraso) { el.style.transitionDelay = (atraso || 0) + 's'; el.classList.add('is-pintado'); }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    partes.forEach(function (el) { pinta(el); });
+    return;
+  }
+  var io = new IntersectionObserver(function (es) {
+    var n = 0;
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      pinta(e.target, Math.min(n++, 4) * 0.22);
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.25 });
+  partes.forEach(function (el) { io.observe(el); });
+})();
+</script>
 </body>
 </html>
