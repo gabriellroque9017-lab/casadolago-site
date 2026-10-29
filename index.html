@@ -967,6 +967,9 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
    da linha do texto, e uma janela rente a cortava. */
 .js .rev.is-vis{ clip-path:inset(-.35em -.35em -.35em -.35em); opacity:1; }
 .js .rev.sem-transicao{ transition:none; }
+/* no modo de edição tudo fica à vista: edita-se o que se vê, sem esperar a
+   entrada de cada bloco */
+html.me-editando .rev{ clip-path:none !important; opacity:1 !important; }
 
 /* ---------- cursor customizado (desktop) — igual ao do portal ---------- */
 .cursor{
@@ -1692,22 +1695,52 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     });
   });
 
-  /* entradas */
+  /* entradas
+
+     Cada bloco abre quando o topo dele passa de 90% da altura da tela, e os
+     irmãos entram em leve cascata. A conta é feita pela caixa do próprio
+     bloco, a cada quadro de rolagem, e não pelo IntersectionObserver: o
+     navegador desconta o clip-path da área visível, e um bloco que nasce
+     recortado a zero nunca chegava a "aparecer" para o observador. A página
+     só se acendia inteira, de uma vez e sem animação, pela rede de
+     segurança dos 2,6 s. É a mesma conta do buffet e dos casamentos. */
   var blocos = [].slice.call(document.querySelectorAll('.rev'));
   function revelaTudo() { blocos.forEach(function (b) { b.classList.add('sem-transicao', 'is-vis'); }); }
-  if (reduzido || !('IntersectionObserver' in window)) { revelaTudo(); }
+  if (reduzido) { revelaTudo(); }
   else {
-    var obs = new IntersectionObserver(function (ent) {
-      ent.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var irmaos = [].slice.call(e.target.parentNode.querySelectorAll('.rev'));
-        e.target.style.transitionDelay = Math.min(irmaos.indexOf(e.target), 5) * 0.05 + 's';
-        e.target.classList.add('is-vis');
-        obs.unobserve(e.target);
+    var pendentes = blocos.slice(), agendado = false;
+    var confere = function () {
+      agendado = false;
+      var corte = window.innerHeight * 0.9;
+      pendentes = pendentes.filter(function (b) {
+        /* fechado (a carta de outra estação, por exemplo): espera abrir */
+        if (!b.getClientRects().length) return true;
+        var r = b.getBoundingClientRect();
+        if (r.top >= corte || r.bottom <= 0) return true;
+        var irmaos = [].slice.call(b.parentNode.querySelectorAll('.rev'));
+        b.style.transitionDelay = Math.min(irmaos.indexOf(b), 5) * 0.05 + 's';
+        b.classList.add('is-vis');
+        return false;
       });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.06 });
-    blocos.forEach(function (b) { obs.observe(b); });
-    setTimeout(revelaTudo, 2600);
+      if (!pendentes.length) {
+        window.removeEventListener('scroll', agenda);
+        window.removeEventListener('resize', agenda);
+        document.removeEventListener('click', aoClicar, true);
+      }
+    };
+    var agenda = function () {
+      if (agendado) return;
+      agendado = true;
+      requestAnimationFrame(confere);
+    };
+    window.addEventListener('scroll', agenda, { passive: true });
+    window.addEventListener('resize', agenda);
+    window.addEventListener('load', agenda);
+    /* um clique pode abrir o que estava fechado sem rolar nada (as abas
+       de estação do cardápio): confere de novo logo depois */
+    var aoClicar = function () { setTimeout(agenda, 30); };
+    document.addEventListener('click', aoClicar, true);
+    agenda();
   }
 
   /* formulário: monta o recado e abre o WhatsApp da casa */
