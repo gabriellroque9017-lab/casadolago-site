@@ -829,7 +829,10 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 /* ---------- entradas ---------- */
 .rev{ transition:clip-path .7s var(--ease), opacity .7s var(--ease); }
 .js .rev{ clip-path:inset(100% 0 0 0); opacity:.001; }
-.js .rev.is-vis{ clip-path:inset(0 0 0 0); opacity:1; }
+/* Aberta, a janela fica um pouco maior que a caixa: a perna do "g" de
+   "Lago", o itálico que se inclina e o contorno do modo de edição passam
+   da linha do texto, e uma janela rente a cortava. */
+.js .rev.is-vis{ clip-path:inset(-.35em -.35em -.35em -.35em); opacity:1; }
 .js .rev.sem-transicao{ transition:none; }
 
 @media (max-width:900px),(hover:none){ .cursor{ display:none; } }
@@ -927,7 +930,6 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
     <button data-cat="principais" aria-pressed="false">Principais</button>
     <button data-cat="doces" aria-pressed="false">Sobremesas</button>
     <button data-cat="bebidas" aria-pressed="false">Bebidas</button>
-    <button data-cat="chef" aria-pressed="false">Menu do chef</button>
   </div>
 
   <section class="pratos" aria-label="Pratos">
@@ -1133,33 +1135,6 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
         </div>
         <h3>Rabanada, doce de leite e banana caramelada</h3>
         <span class="cartao__ver">Ver informações</span>
-      </article>
-      <article class="cartao cartao--chef rev" data-chef-id="chef-fogo-lento" data-cat="chef" role="button" tabindex="0"
-               data-titulo="Fogo lento" data-ordem="Menu do chef I" data-etapas-num="quatro etapas"
-               data-fotos="./img/prato-couvert.webp|./img/prato-tartar-mignon.webp|./img/prato-escalopes.webp|./img/prato-rabanada.webp"
-               data-linha="Uma sequência de inverno, construída em graus: começa fria e crua, passa pelo vinho reduzido e termina em caramelo quente. Tudo o que vem antes prepara o paladar para o que vem depois."
-               data-etapas="Couvert da estação ~ Pães de fermentação natural, manteiga de ervas e paté de alho-poró: o primeiro sal da mesa.|Tartar de mignon ~ Carne crua na ponta da faca, alcaparras e gema caipira — acidez e frescor antes do fogo.|Escalopes ao molho de vinho tinto ~ Redução de tinto e risoto de cogumelos: a nota mais funda da sequência.|Rabanada, doce de leite e banana caramelada ~ Açúcar queimado e gelato de banoffee para fechar em calor."
-               data-harmonia="" data-pe="">
-        <div class="cartao--chef__vao">
-          <p class="rotulo">Menu do chef <span aria-hidden="true">·</span> I</p>
-          <h3>Fogo lento</h3>
-          <p>Couvert, tartar de mignon, escalopes ao vinho tinto e rabanada. Quatro etapas para uma noite fria.</p>
-        </div>
-        <span class="cartao--chef__ver">Ver a sequência</span>
-      </article>
-      <article class="cartao cartao--chef rev" data-chef-id="chef-a-beira-do-lago" data-cat="chef" role="button" tabindex="0"
-               data-titulo="À beira do lago" data-ordem="Menu do chef II" data-etapas-num="quatro etapas"
-               data-fotos="./img/prato-burrata.webp|./img/prato-pastel-camarao.webp|./img/prato-camarao-arroz.webp|./img/prato-coco-milho.webp"
-               data-linha="A sequência do lago: leite, mar e horta, em pratos claros e de acidez viva. Nada pesa, tudo se emenda. Pensada para as mesas de fora, quando ainda há luz na água."
-               data-etapas="Burrata ~ Tomate assado, rúcula selvagem e pesto de manjericão: leite fresco e verde de horta.|Pastel de camarão ~ Massa crocante da casa, queijo cremoso e camarão no alho-poró, com pimenta da casa.|Camarões, ervas brasileiras e arroz cremoso ~ Camarões da Costa Verde, azeite de ervas e brie da Mantiqueira com crocante de alho-poró.|Coco e milho verde ~ Cocada brûlée, sorvete de milho verde e paçoca: doce de festa, servido morno e gelado."
-               data-harmonia=""
-               data-pe="">
-        <div class="cartao--chef__vao">
-          <p class="rotulo">Menu do chef <span aria-hidden="true">·</span> II</p>
-          <h3>À beira do lago</h3>
-          <p>Burrata, pastel de camarão, camarões com arroz cremoso e coco com milho verde. Quatro etapas de frescor.</p>
-        </div>
-        <span class="cartao--chef__ver">Ver a sequência</span>
       </article>
   </section>
 

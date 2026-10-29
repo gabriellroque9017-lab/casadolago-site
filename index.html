@@ -962,7 +962,10 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 /* ---------- entradas ---------- */
 .rev{ transition:clip-path .7s var(--ease), opacity .7s var(--ease); }
 .js .rev{ clip-path:inset(100% 0 0 0); opacity:.001; }
-.js .rev.is-vis{ clip-path:inset(0 0 0 0); opacity:1; }
+/* Aberta, a janela fica um pouco maior que a caixa: a perna do "g" de
+   "Lago", o itálico que se inclina e o contorno do modo de edição passam
+   da linha do texto, e uma janela rente a cortava. */
+.js .rev.is-vis{ clip-path:inset(-.35em -.35em -.35em -.35em); opacity:1; }
 .js .rev.sem-transicao{ transition:none; }
 
 /* ---------- cursor customizado (desktop) — igual ao do portal ---------- */

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
 <title>Buffet · Casa do Lago</title>
-<meta name="description" content="O buffet de casamentos da Casa do Lago: quem somos, o coquetel padrão, os finger foods, as mini degustações, os doces, as bebidas e a degustação na casa.">
+<meta name="description" content="O buffet de casamentos da Casa do Lago: quem somos, o buffet, o cardápio em fotografias e a degustação na casa.">
 
 <!-- ==========================================================================
      Obra da Casa do Lago, Vassouras (RJ). Todos os direitos reservados.
@@ -223,89 +223,26 @@ a:hover{ color:var(--agua); }
 .buffet__pilha .grao:nth-child(1){ aspect-ratio:16/7; }
 .buffet__pilha .grao:nth-child(2){ aspect-ratio:16/5; }
 .buffet__pilha .grao:nth-child(3){ aspect-ratio:16/9; }
-.receita{
-  margin-top:clamp(28px,3.6vw,44px); padding:clamp(24px,3vw,36px);
-  border:1px solid var(--casca); border-radius:2px; background:rgba(242,237,224,.55);
-}
-.receita__formula{ font-size:clamp(19px,2.1vw,27px); line-height:1.5; margin-top:14px; }
-.receita__formula em{ font-style:normal; color:var(--agua); }
-.receita__ou{
-  font-family:var(--grot); font-size:11px; letter-spacing:.24em;
-  text-transform:uppercase; color:var(--marfim-mudo);
-}
-.receita__nota{ margin-top:16px; font-size:16px; color:var(--marfim-mudo); }
 
-/* ---------- o cardápio ---------- */
+/* ---------- o cardápio: só fotografia, e o desenho a traço entre elas ---------- */
 .carta{ padding:var(--secao) var(--margem) 0; }
-.capitulo{ margin-top:clamp(72px,9vw,132px); }
-.capitulo:first-of-type{ margin-top:clamp(46px,6vw,84px); }
-.capitulo__cabeca{ position:relative; }
-.capitulo__cabeca h2{ font-size:clamp(28px,3.8vw,50px); line-height:1.08; margin-top:14px; }
-.capitulo__cabeca .prosa{ margin-top:22px; font-size:clamp(16px,1.4vw,19px); color:var(--marfim-mudo); }
-/* o desenho a traço da folha dos finger foods, pousado no canto.
-   A altura vem escrita: sem ela o navegador estica a figura enquanto a
-   imagem preguiçosa não chega. */
-.capitulo__traco{
-  position:absolute; right:0; top:-26px;
-  width:clamp(118px,13vw,182px); height:auto; aspect-ratio:640/618;
-  opacity:.34; pointer-events:none; mix-blend-mode:multiply;
+.mesa{
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(12px,1.6vw,24px); margin-top:clamp(44px,6vw,84px);
 }
-@media (max-width:900px){ .capitulo__traco{ position:static; margin:0 0 10px auto; width:112px; } }
-
-.escolha{
-  display:inline-block; margin-top:22px; padding:9px 20px;
-  border:1px solid var(--casca); border-radius:2px;
-  font-family:var(--grot); font-size:10px; letter-spacing:.3em; text-indent:.3em;
-  text-transform:uppercase; color:var(--marfim-mudo);
-}
-
-/* um grupo: fotografia de um lado, a lista do outro */
-.grupo{
-  display:grid; grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
-  gap:clamp(26px,4.4vw,76px); align-items:start;
-  margin-top:clamp(46px,6vw,86px);
-}
-.grupo--espelho{ grid-template-columns:minmax(0,1.22fr) minmax(0,.78fr); }
-.grupo--espelho .grupo__foto{ order:2; }
-@media (max-width:900px){
-  .grupo, .grupo--espelho{ grid-template-columns:1fr; gap:26px; }
-  .grupo--espelho .grupo__foto{ order:0; }
-}
-.grupo__foto{ position:sticky; top:clamp(84px,12vh,124px); aspect-ratio:3/4; margin:0; }
-@media (max-width:900px){ .grupo__foto{ position:static; aspect-ratio:4/3; } }
-.grupo__corpo > * + *{ margin-top:clamp(34px,4vw,56px); }
-
-/* as listas do cardápio */
-.bloco h3{
-  font-family:var(--grot); font-weight:400; font-size:11px;
-  letter-spacing:.32em; text-indent:.32em; text-transform:uppercase; color:var(--marfim);
-  padding-bottom:14px; border-bottom:1px solid var(--casca);
-}
-.bloco h3 small{
-  display:block; margin-top:8px; letter-spacing:.2em; text-indent:.2em;
-  font-size:10px; color:var(--marfim-mudo);
-}
-.lista{ font-size:clamp(16px,1.35vw,18.5px); line-height:1.55; }
-.lista li{ padding:13px 0 12px; border-bottom:1px solid rgba(207,200,178,.5); text-wrap:pretty; }
-.lista li:last-child{ border-bottom:0; }
-.lista--curta li{ padding:10px 0 9px; }
-
-/* blocos lado a lado, quando não há fotografia para dividir a página */
-.par{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(26px,3.6vw,64px); margin-top:clamp(34px,4.4vw,60px); align-items:start; }
-.trio{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(24px,3.2vw,56px); margin-top:clamp(34px,4.4vw,60px); align-items:start; }
-@media (max-width:900px){ .par, .trio{ grid-template-columns:1fr; gap:34px; } }
+@media (max-width:760px){ .mesa{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } }
+.mesa__foto{ aspect-ratio:3/4; margin:0; }
+/* o tomate a traço ocupa uma casa da grade, como um prato desenhado no meio
+   das fotografias. A altura vem escrita: sem ela o navegador estica a figura
+   enquanto a imagem preguiçosa não chega. */
+.mesa__traco{ display:grid; place-items:center; aspect-ratio:3/4; }
+.mesa__traco img{ width:80%; height:auto; aspect-ratio:640/618; opacity:.62; mix-blend-mode:multiply; }
 
 /* ---------- degustação ---------- */
 .deg__tira{ display:grid; grid-template-columns:1fr 1fr 2.2fr 1fr; gap:clamp(10px,1.4vw,20px); margin-top:clamp(40px,5.5vw,74px); }
 @media (max-width:760px){ .deg__tira{ grid-template-columns:1fr 1fr; } .deg__tira .grao:nth-child(3){ grid-column:span 2; } }
 .deg__tira .grao{ aspect-ratio:3/4; }
 .deg__tira .grao:nth-child(3){ aspect-ratio:16/9; }
-.deg__valor{
-  display:grid; gap:8px; margin-top:clamp(26px,3.4vw,44px);
-  padding-top:clamp(24px,3vw,34px); border-top:1px solid var(--casca);
-}
-.deg__valor strong{ font-weight:400; font-size:clamp(21px,2.3vw,30px); color:var(--marfim); }
-.deg__valor span{ font-size:16px; color:var(--marfim-mudo); }
 
 /* ---------- o fecho: a casa e a mesa montada ---------- */
 .memoravel{ padding:0 0 var(--secao); }
@@ -369,6 +306,23 @@ a:hover{ color:var(--agua); }
 }
 @media (prefers-reduced-motion:reduce){
   .js .rev{ opacity:1 !important; transform:none !important; transition:none; }
+}
+
+/* As fotografias do fecho crescem sob o mouse: a moldura inteira, por cima
+   das vizinhas. `scale` corre em separado do `transform` da entrada, e o
+   atraso da entrada não vale para ele — a foto responde na hora. Só em tela
+   com mouse; no dedo não há "passar por cima". */
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .memoravel__tira .grao{
+    transition-property:opacity, transform, scale;
+    transition-duration:.95s, .95s, .55s;
+    transition-timing-function:var(--ease), var(--ease), cubic-bezier(.22,1,.36,1);
+  }
+  .memoravel__tira .grao:hover{ scale:1.1; z-index:2; }
+  .memoravel__tira .rev--d1{ transition-delay:.09s, .09s, 0s; }
+  .memoravel__tira .rev--d2{ transition-delay:.18s, .18s, 0s; }
+  .memoravel__tira .rev--d3{ transition-delay:.27s, .27s, 0s; }
+  .memoravel__tira .rev--d4{ transition-delay:.36s, .36s, 0s; }
 }
 
 /* ==========================================================================
@@ -567,12 +521,6 @@ a:hover{ color:var(--agua); }
         <p>Além disso, disponibilizamos estações gastronômicas opcionais, para personalizar o seu
           evento e torná-lo ainda mais único e inesquecível.</p>
       </div>
-      <div class="receita">
-        <p class="rotulo">O coquetel padrão</p>
-        <p class="receita__formula"><em>Bebidas</em> + <em>Finger foods</em> +
-          <em>Mini degustações</em> <span class="receita__ou">e/ou</span> <em>Mesa de antepastos</em></p>
-        <p class="receita__nota">As estações gastronômicas entram por fora, à escolha do casal.</p>
-      </div>
     </div>
     <div class="buffet__pilha">
       <div class="grao rev rev--dir"><img src="./img/buffet/buffet-1.webp" width="1200" height="498" loading="lazy" decoding="async" alt="Canapés de carpaccio e legumes servidos em taças de vidro"></div>
@@ -593,339 +541,17 @@ a:hover{ color:var(--agua); }
       <h2 class="rev rev--perto rev--d1">Tudo o que pode<br>ir para a mesa</h2>
     </div>
 
-    <!-- ---------- FINGER FOODS ---------- -->
-    <section class="capitulo" aria-labelledby="t-finger">
-      <div class="capitulo__cabeca">
-        <img class="capitulo__traco rev rev--dir" src="./img/buffet/traco-tomate.webp" width="640" height="618" loading="lazy" decoding="async" alt="" aria-hidden="true">
-        <p class="rotulo rev rev--perto">Para circular</p>
-        <h2 class="rev rev--perto rev--d1" id="t-finger">Finger foods</h2>
-        <div class="prosa rev rev--perto rev--d2">
-          <p>Pequenas criações servidas em uma ou duas mordidas, pensadas para circular com leveza
-            e dar ritmo ao evento. São combinações estéticas e saborosas, que unem técnica,
-            criatividade e ingredientes selecionados.</p>
-        </div>
-      </div>
-
-      <div class="par">
-        <div class="bloco rev rev--esq">
-          <h3>Frios <small>Carnes &amp; especiais · escolher 4 opções no total</small></h3>
-          <ul class="lista">
-            <li>Tartar de truta de cachoeira com capim-limão e pólen de flor de laranjeira</li>
-            <li>Figo fresco maçaricado com creme de burrata, azeite de manjericão e flor de sal</li>
-            <li>Carpaccio de banana-da-terra com castanha-do-brasil e redução de balsâmico de café</li>
-            <li>Roast beef com queijo ementhal na torrada italiana com dijon e alcaparras</li>
-            <li>Terrine de Parma com palmito, ricota e geleia de cabernet sauvignon</li>
-          </ul>
-        </div>
-        <div class="bloco rev rev--dir rev--d1">
-          <h3>Frios <small>Frutos do mar</small></h3>
-          <ul class="lista">
-            <li>Crudo de peixe branco com manga e sour cream</li>
-            <li>Atum marinado com crosta de gergelim ao molho torange</li>
-            <li>Mix de salmão defumado com morango, ovas e vinagrete de framboesa</li>
-            <li>Tartar de salmão com cream cheese, raspas de limão siciliano e molho teriaky</li>
-            <li>Vinagrete de polvo com torradinhas artesanais</li>
-          </ul>
-        </div>
-      </div>
-
-      <p class="escolha rev rev--perto">Quentes <span aria-hidden="true">·</span> escolher 12 opções</p>
-      <div class="trio">
-        <div class="bloco rev rev--esq">
-          <h3>Fritos</h3>
-          <ul class="lista">
-            <li>Bolinho de canjiquinha com queijo canastra e melado</li>
-            <li>Dadinho de tapioca com queijo coalho e melado</li>
-            <li>Bolinho de bacalhau com azeite</li>
-            <li>Bolinho de feijoada ao molho de pimenta</li>
-            <li>Camarão empanado com coco ao molho de maracujá</li>
-            <li>Croquete de pato com molho de laranja</li>
-            <li>Queijo coalho grelhado com melado</li>
-            <li>Kafta de cordeiro com molho de hortelã</li>
-          </ul>
-        </div>
-        <div class="bloco rev rev--perto rev--d1">
-          <h3>Fornos e assados</h3>
-          <ul class="lista">
-            <li>Trouxinha de costela caipira com purê de mandioca defumada e redução de vinho tinto</li>
-            <li>Mini empadinha de frango caipira com geleia de jabuticaba</li>
-            <li>Mini filé Wellington ao molho de mostarda e mel</li>
-            <li>Mil folhas de truta defumada ao molho de amêndoas</li>
-            <li>Mil folhas de camarão com chutney de manga</li>
-            <li>Mil folhas de damasco ao molho de gorgonzola</li>
-            <li>Mini quiche de alho-poró</li>
-            <li>Mini quiche de brie com geleia de damasco</li>
-            <li>Pastel de forno de palmito pupunha e queijo ementhal</li>
-            <li>Pastel de forno de gorgonzola com nozes</li>
-            <li>Vol-au-vent com creme de haddock</li>
-            <li>Casquinha de siri com raspas de limão siciliano</li>
-          </ul>
-        </div>
-        <div class="bloco rev rev--dir rev--d2">
-          <h3>Vegetarianos e veganos</h3>
-          <ul class="lista">
-            <li>Polentinha cremosa com ragu de cogumelos da Mata Atlântica</li>
-            <li>Batatinha recheada com mix de cogumelos</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ---------- MINI DEGUSTAÇÕES ---------- -->
-    <section class="capitulo" aria-labelledby="t-mini">
-      <div class="capitulo__cabeca">
-        <p class="rotulo rev rev--perto">Volantes e/ou estacionadas</p>
-        <h2 class="rev rev--perto rev--d1" id="t-mini">Mini degustações</h2>
-        <div class="prosa rev rev--perto rev--d2">
-          <p>Mini refeições servidas em louças de curadoria, de acordo com a sua necessidade, que
-            trazem aconchego e profundidade ao coquetel. As mini refeições permitem ao convidado
-            vivenciar sabores mais ricos — risottos, massas, carnes, cremes e combinações quentes —
-            sem perder a fluidez do serviço. São momentos de conforto e intensidade gastronômica,
-            que elevam o ritmo e a sofisticação da celebração.</p>
-        </div>
-        <p class="escolha rev rev--perto rev--d2">Escolher 3 opções</p>
-      </div>
-
-      <div class="par">
-        <div class="bloco rev rev--esq">
-          <h3>Saladas</h3>
-          <ul class="lista">
-            <li>Coquile de salpicão de frango defumado</li>
-            <li>Salada caprese</li>
-            <li>Salada chèvre com mix de folhas e amêndoas laminadas</li>
-            <li>Salada Caesar</li>
-          </ul>
-        </div>
-        <div class="bloco rev rev--dir rev--d1">
-          <h3><span class="sr-only">Saladas, continuação</span><span aria-hidden="true" style="visibility:hidden">Saladas</span></h3>
-          <ul class="lista">
-            <li>Folhas verdes com brotos, queijo frescal, lâminas de pêra e nozes com vinagrete de framboesa</li>
-            <li>Mix de folhas com lascas de parma, parmesão, figo fresco e aspargos</li>
-            <li>Mix de folhas com muçarela de búfala, tomate seco e croutons</li>
-          </ul>
-        </div>
-      </div>
-
-      <article class="grupo">
-        <figure class="grupo__foto grao rev rev--esq">
-          <img src="./img/buffet/diversos.webp" width="1000" height="1376" loading="lazy" decoding="async"
-               alt="Costelinha glaceada sobre creme de aipim, com purê amarelo e brotos">
-        </figure>
-        <div class="grupo__corpo">
-          <div class="bloco rev rev--dir">
-            <h3>Diversos</h3>
-            <ul class="lista">
-              <li>Couscous marroquino de carne seca com ratatouille de legumes</li>
-              <li>Couscous marroquino de pato</li>
-              <li>Costelinha ao molho ferrugem com polentinha</li>
-              <li>Creme de aipim com costelinha ao molho ferrugem</li>
-              <li>Creme de aipim com ragu de carne seca e crisp de queijo</li>
-              <li>Escondidinho de aipim com carne seca e catupiry</li>
-              <li>Escondidinho de aipim com haddock</li>
-              <li>Escondidinho de aipim com frango defumado e catupiry</li>
-              <li>Musseline de baroa com ragu de cordeiro</li>
-              <li>Arroz de frutos do mar</li>
-              <li>Arroz de pato</li>
-              <li>Arroz de lula</li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="grupo grupo--espelho">
-        <figure class="grupo__foto grao rev rev--dir">
-          <img src="./img/buffet/risotos.webp" width="1000" height="1368" loading="lazy" decoding="async"
-               alt="Risoto amarelo com medalhão de carne, gorgonzola e alecrim">
-        </figure>
-        <div class="grupo__corpo">
-          <div class="bloco rev rev--esq">
-            <h3>Risotos</h3>
-            <ul class="lista">
-              <li>Risoto caprese</li>
-              <li>Risoto de bacalhau</li>
-              <li>Risoto de camarão</li>
-              <li>Risoto de grana padano com cordeiro e crocante de parma</li>
-              <li>Risoto de costelinha com crisp de cebola</li>
-              <li>Risoto de frango defumado com alho-poró</li>
-              <li>Risoto de frutos do mar</li>
-              <li>Risoto de funghi</li>
-              <li>Risoto de gorgonzola com pêra</li>
-              <li>Risoto de limão siciliano com lascas de salmão</li>
-              <li>Risoto de pato</li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="grupo">
-        <figure class="grupo__foto grao rev rev--esq">
-          <img src="./img/buffet/caldos.webp" width="1000" height="1384" loading="lazy" decoding="async"
-               alt="Caldeirões de cobre sobre rechauds, com pães e palitos ao lado">
-        </figure>
-        <div class="grupo__corpo">
-          <div class="bloco rev rev--dir">
-            <h3>Caldos</h3>
-            <ul class="lista">
-              <li>Caldinho de abóbora com brie e hortelã</li>
-              <li>Caldinho de abóbora com gorgonzola</li>
-              <li>Caldinho de aspargos</li>
-              <li>Caldinho de baroa com brie</li>
-              <li>Caldinho de brócolis com creme de leite fresco</li>
-              <li>Caldinho de cebola</li>
-              <li>Caldinho de ervilha</li>
-              <li>Caldinho de feijão com alho, salsinha e croutons</li>
-              <li>Caldo de mariscos</li>
-              <li>Caldinho de palmito</li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="grupo grupo--espelho">
-        <figure class="grupo__foto grao rev rev--dir">
-          <img src="./img/buffet/massas.webp" width="1000" height="1376" loading="lazy" decoding="async"
-               alt="Estação de massas: penne, queijo ralado e manjericão em travessas de prata">
-        </figure>
-        <div class="grupo__corpo">
-          <div class="bloco rev rev--esq">
-            <h3>Massas</h3>
-            <ul class="lista lista--curta">
-              <li>Farfalle</li>
-              <li>Penne</li>
-              <li>Ravióli de queijo curado</li>
-              <li>Ravioli de pêra</li>
-              <li>Ravióli de queijo curado e Parma</li>
-              <li>Gnocchi recheado de provolone</li>
-            </ul>
-          </div>
-          <div class="bloco rev rev--esq rev--d1">
-            <h3>Molhos para massas</h3>
-            <ul class="lista lista--curta">
-              <li>Ao funghi</li>
-              <li>Ao sugo com manjericão</li>
-              <li>Bolonhesa</li>
-              <li>Gorgonzola com creme de leite fresco</li>
-              <li>Manteiga clarificada e sálvia</li>
-              <li>Pesto</li>
-              <li>Quatro queijos</li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="grupo">
-        <figure class="grupo__foto grao rev rev--esq">
-          <img src="./img/buffet/carnes.webp" width="1000" height="1398" loading="lazy" decoding="async"
-               alt="Mini filé com manteiga de ervas, fettuccine ao creme e crocante de bacon">
-        </figure>
-        <div class="grupo__corpo">
-          <div class="bloco rev rev--dir">
-            <h3>Carnes</h3>
-            <ul class="lista">
-              <li>Mini escalope ao molho de vinho tinto</li>
-              <li>Mini medalhão com bacon ao molho madeira</li>
-              <li>Mini filé na manteiga de ervas</li>
-              <li>Mini roast beef em seu jus</li>
-              <li>Picadinho carioca</li>
-              <li>Pernil suíno Duroc com barbecue</li>
-            </ul>
-          </div>
-          <div class="bloco rev rev--dir rev--d1">
-            <h3>Frutos do mar</h3>
-            <ul class="lista">
-              <li>Filezinho de salmão ao molho de champagne</li>
-              <li>Flor de linguado ao molho de moqueca</li>
-              <li>Mini filé de tilápia com crosta de ervas na manteiga clarificada com amêndoas</li>
-              <li>Bacalhau gratinado com alho-poró</li>
-              <li>Bobó de camarão com arroz de coco</li>
-              <li>Bobó de camarão com farofinha de dendê</li>
-              <li>Haddock gratinado com alho-poró</li>
-              <li>Camarão Thai com arroz cremoso de queijo brie e crisp de alho-poró</li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="grupo grupo--espelho">
-        <figure class="grupo__foto grao rev rev--dir">
-          <img src="./img/buffet/guarnicoes.webp" width="1000" height="1384" loading="lazy" decoding="async"
-               alt="Mini caçarolas vermelhas com purê e ragu de cogumelos, alinhadas numa bandeja">
-        </figure>
-        <div class="grupo__corpo">
-          <div class="bloco rev rev--esq">
-            <h3>Acompanhamentos <small>Opcionais para estacionados</small></h3>
-            <ul class="lista lista--curta">
-              <li>Arroz com alho-poró e crisp de alho-poró</li>
-              <li>Arroz negro com alho-poró e crisp de alho-poró</li>
-              <li>Arroz com amêndoas</li>
-              <li>Batata gratin</li>
-              <li>Flan de queijo parmesão</li>
-              <li>Flan de chèvre com crocante de castanha de caju</li>
-              <li>Panaché de legumes</li>
-              <li>Pérolas de batatinha com perfume de alecrim</li>
-              <li>Cebolinhas caramelizadas</li>
-              <li>Chips de aipim</li>
-              <li>Farofinha crocante</li>
-            </ul>
-          </div>
-          <div class="bloco rev rev--esq rev--d1">
-            <h3>Pratos veganos <small>Volantes ou estacionados</small></h3>
-            <ul class="lista lista--curta">
-              <li>Salada crocante de grãos e romã</li>
-              <li>Saladinha de grão-de-bico</li>
-              <li>Saladinha de lentilha com cebola crocante</li>
-              <li>Bobó de palmito com arroz branco e crisp de alho-poró</li>
-            </ul>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <!-- ---------- DOCES, CAFÉ E BEBIDAS ---------- -->
-    <section class="capitulo" aria-labelledby="t-doces">
-      <div class="capitulo__cabeca">
-        <p class="rotulo rev rev--perto">O fim da noite</p>
-        <h2 class="rev rev--perto rev--d1" id="t-doces">Doces, café<br>e bebidas</h2>
-      </div>
-
-      <article class="grupo">
-        <figure class="grupo__foto grao rev rev--esq">
-          <img src="./img/buffet/doces.webp" width="1000" height="1266" loading="lazy" decoding="async"
-               alt="Xícara de café com bolinho, bule e leiteira de porcelana florida sobre madeira">
-        </figure>
-        <div class="grupo__corpo">
-          <div class="bloco rev rev--dir">
-            <h3>Mini doces volantes</h3>
-            <ul class="lista">
-              <li>Mini churros com doce de leite e Nutella</li>
-              <li>Marquise de chocolate com praliné de amêndoas</li>
-              <li>Tortinha de amora</li>
-              <li>Mini pudim</li>
-              <li>Mini brownie com ganache de chocolate</li>
-            </ul>
-          </div>
-          <div class="bloco rev rev--dir rev--d1">
-            <h3>Mesa de café <small>Cortesia da casa</small></h3>
-            <ul class="lista lista--curta">
-              <li>Café e chá</li>
-              <li>Petit fours</li>
-              <li>Chocolates e suspiros</li>
-            </ul>
-          </div>
-          <div class="bloco rev rev--dir rev--d2">
-            <h3>Bebidas</h3>
-            <ul class="lista lista--curta">
-              <li>Cerveja (Original, Brahma, Skol ou Bohemia)</li>
-              <li>Coca-Cola comum e zero</li>
-              <li>Guaraná Antártica comum e zero</li>
-              <li>Água mineral com e sem gás</li>
-              <li>Suco de abacaxi com hortelã</li>
-              <li>Suco de manga com gengibre</li>
-            </ul>
-          </div>
-        </div>
-      </article>
-    </section>
+    <!-- só fotografia: sete mesas e o tomate a traço entre elas -->
+    <div class="mesa">
+      <figure class="mesa__foto grao rev rev--perto"><img src="./img/buffet/diversos.webp" width="1000" height="1376" loading="lazy" decoding="async" alt="Costelinha glaceada sobre creme de aipim, com purê amarelo e brotos"></figure>
+      <figure class="mesa__foto grao rev rev--perto rev--d1"><img src="./img/buffet/risotos.webp" width="1000" height="1368" loading="lazy" decoding="async" alt="Risoto amarelo com medalhão de carne, gorgonzola e alecrim"></figure>
+      <figure class="mesa__foto grao rev rev--perto rev--d2"><img src="./img/buffet/caldos.webp" width="1000" height="1384" loading="lazy" decoding="async" alt="Caldeirões de cobre sobre rechauds, com pães e palitos ao lado"></figure>
+      <figure class="mesa__foto grao rev rev--perto rev--d3"><img src="./img/buffet/massas.webp" width="1000" height="1376" loading="lazy" decoding="async" alt="Estação de massas: penne, queijo ralado e manjericão em travessas de prata"></figure>
+      <figure class="mesa__foto grao rev rev--perto"><img src="./img/buffet/carnes.webp" width="1000" height="1398" loading="lazy" decoding="async" alt="Mini filé com manteiga de ervas, fettuccine ao creme e crocante de bacon"></figure>
+      <div class="mesa__traco rev rev--perto rev--d1" aria-hidden="true"><img src="./img/buffet/traco-tomate.webp" width="640" height="618" loading="lazy" decoding="async" alt=""></div>
+      <figure class="mesa__foto grao rev rev--perto rev--d2"><img src="./img/buffet/guarnicoes.webp" width="1000" height="1384" loading="lazy" decoding="async" alt="Mini caçarolas vermelhas com purê e ragu de cogumelos, alinhadas numa bandeja"></figure>
+      <figure class="mesa__foto grao rev rev--perto rev--d3"><img src="./img/buffet/doces.webp" width="1000" height="1266" loading="lazy" decoding="async" alt="Xícara de café com bolinho, bule e leiteira de porcelana florida sobre madeira"></figure>
+    </div>
 
   </div>
 </div>
@@ -939,14 +565,6 @@ a:hover{ color:var(--agua); }
       <p class="rotulo rev rev--perto">04 <span aria-hidden="true">—</span> Degustação</p>
       <div>
         <h2 class="rev rev--perto rev--d1" id="t-deg">Provar antes<br>de decidir</h2>
-        <div class="prosa rev rev--perto rev--d2" style="margin-top:24px">
-          <p>Nossas degustações são realizadas na Casa do Lago Bistrô, na Rua Luiz Francisco de
-            Souza, 555 — Ponte Funda, Vassouras/RJ.</p>
-        </div>
-        <div class="deg__valor rev rev--perto rev--d2">
-          <strong>R$ <span class="num">100,00</span> por pessoa, para até <span class="num">4</span> pessoas</strong>
-          <span>Fechado o contrato, o valor é abatido do total.</span>
-        </div>
       </div>
     </div>
     <div class="deg__tira">
