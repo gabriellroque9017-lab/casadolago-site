@@ -242,13 +242,26 @@ a:hover{ color:var(--agua); }
    título, fora da grade das fotos. A altura vem escrita: sem ela o
    navegador estica a figura enquanto a imagem preguiçosa não chega. */
 .carta .secao__topo{ position:relative; }
+/* O título do cardápio fica no centro da página, com as duas linhas da
+   mesma largura: alinhadas à esquerda e à direita. A caixa tem a largura
+   da linha mais longa (fit-content) e as duas justificam, porque
+   text-align-last também vale para a linha que termina no <br>. O rótulo
+   fica no canto, na mesma altura, como nas outras seções. */
+.carta .secao__topo{ display:block; }
+.carta .secao__topo h2{
+  width:fit-content; margin-inline:auto;
+  text-align:justify; text-align-last:justify; text-wrap:nowrap;
+}
+@media (min-width:901px){ .carta .secao__topo .rotulo{ position:absolute; left:0; top:0; } }
+@media (max-width:900px){ .carta .secao__topo h2{ margin-top:22px; } }
 .mesa__enfeite{
   position:absolute; right:0; top:clamp(-34px,-2.4vw,-12px);
   width:clamp(118px,13vw,184px); height:auto; aspect-ratio:640/618;
   /* filter, e não opacity: a entrada (.rev) devolve opacity a 1 */
   filter:opacity(.5); mix-blend-mode:multiply; pointer-events:none;
 }
-@media (max-width:900px){ .mesa__enfeite{ top:-6px; width:clamp(84px,22vw,128px); } }
+@media (max-width:900px){ .mesa__enfeite{ top:-6px; width:clamp(56px,15vw,112px); } }
+@media (max-width:340px){ .mesa__enfeite{ width:38px; } }
 
 /* ---------- degustação ---------- */
 .deg__tira{ display:grid; grid-template-columns:1fr 1fr 2.2fr 1fr; gap:clamp(10px,1.4vw,20px); margin-top:clamp(40px,5.5vw,74px); }
