@@ -38,7 +38,7 @@ a Vila Botané (busque por `github.io` nas páginas).
 - Sem framework e sem build: GSAP entra por CDN, o resto é HTML puro.
 - Não use travessão (—) nos textos: decisão do cliente.
 - Os formulários não vão a servidor nenhum: montam a mensagem e abrem o
-  WhatsApp (reservas (24) 99930-9828, cerimonial +55 22 98159-5317).
+  WhatsApp (reservas (24) 99930-9828, cerimonial +55 24 99993-6927).
 - As bebidas do cardápio ainda não têm foto: a ficha abre no layout sem
   imagem. Para dar foto a uma delas, basta pôr um `src` no `<img>` que leva o
   id dela, dentro da gaveta no fim da página.
