@@ -317,9 +317,58 @@ a:hover{ color:var(--agua); }
 .js .fecho .fecho__passo.is-dentro{ opacity:1; letter-spacing:.42em; text-indent:.42em; filter:none; }
 .js .fecho .fecho__passo.is-dentro::before,
 .js .fecho .fecho__passo.is-dentro::after{ transform:scaleX(1); }
+
+/* E depois de chegar, o nome não para de acontecer: de tempos em tempos um
+   reflexo dourado atravessa as letras, da esquerda para a direita, com um
+   halo que acende e apaga junto (o mesmo dourado da assinatura da Rachel,
+   na casa); em volta, faíscas pequenas piscam cada uma no seu tempo. */
+.fecho__passo-vao{ position:relative; display:inline-block; }
+.fecho__passo{
+  --ouro:#B98B35; --luz:#E9C77C;
+  background:linear-gradient(100deg, var(--marfim-mudo) 0 38%, var(--ouro) 45%, var(--luz) 50%,
+             var(--ouro) 55%, var(--marfim-mudo) 62% 100%) 97% 0 / 250% 100% no-repeat;
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+/* O reflexo leva 2,6s para atravessar e volta a passar a cada 6,5s. O
+   halo é curto e só existe enquanto ele passa: aceso o tempo todo, virava
+   mancha. */
+.js .fecho .fecho__passo.is-dentro{ animation:passo-brilho 6.5s 1.8s infinite; }
+@keyframes passo-brilho{
+  0%   { background-position:97% 0; filter:drop-shadow(0 0 0 rgba(222,182,96,0));
+         animation-timing-function:cubic-bezier(.42,0,.58,1); }
+  20%  { filter:drop-shadow(0 0 2.5px rgba(222,182,96,.75)); }
+  40%  { background-position:3% 0; filter:drop-shadow(0 0 0 rgba(222,182,96,0)); }
+  100% { background-position:3% 0; filter:drop-shadow(0 0 0 rgba(222,182,96,0)); }
+}
+.fecho__faiscas{ position:absolute; inset:0; pointer-events:none; }
+.fecho__faiscas i{
+  position:absolute; width:16px; height:16px; margin:-8px 0 0 -8px;
+  background:radial-gradient(circle, rgba(233,199,124,.7) 0, rgba(233,199,124,0) 64%);
+  opacity:0; transform:scale(0);
+}
+.fecho__faiscas i::before{
+  content:""; position:absolute; inset:1px; background:linear-gradient(135deg, #E9C77C, #B98B35);
+  clip-path:polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+}
+.fecho__faiscas i:nth-child(1){ left:27%; top:-38%; --t:4.6s; --a:2.1s; }
+.fecho__faiscas i:nth-child(2){ left:41%; top:136%; --t:5.4s; --a:3.4s; width:12px; height:12px; margin:-6px 0 0 -6px; }
+.fecho__faiscas i:nth-child(3){ left:55%; top:-48%; --t:4.1s; --a:2.7s; width:14px; height:14px; margin:-7px 0 0 -7px; }
+.fecho__faiscas i:nth-child(4){ left:69%; top:130%; --t:6.1s; --a:4.2s; width:13px; height:13px; margin:-6.5px 0 0 -6.5px; }
+.fecho__faiscas i:nth-child(5){ left:77%; top:-26%; --t:5.0s; --a:5.1s; width:11px; height:11px; margin:-5.5px 0 0 -5.5px; }
+.fecho__faiscas i:nth-child(6){ left:22%; top:118%; --t:5.7s; --a:6.0s; width:11px; height:11px; margin:-5.5px 0 0 -5.5px; }
+.js .fecho .fecho__passo.is-dentro + .fecho__faiscas i{
+  animation:passo-faisca var(--t) ease-in-out var(--a) infinite;
+}
+@keyframes passo-faisca{
+  0%, 100% { opacity:0; transform:scale(0) rotate(0deg); }
+  9%       { opacity:1; transform:scale(1) rotate(45deg); }
+  20%      { opacity:0; transform:scale(.2) rotate(90deg); }
+}
+
 @media (prefers-reduced-motion:reduce){
   .js .fecho .fecho__passo{ letter-spacing:.42em; text-indent:.42em; filter:none; transition:none; }
   .js .fecho .fecho__passo::before, .js .fecho .fecho__passo::after{ transform:none; transition:none; }
+  .js .fecho .fecho__passo.is-dentro, .js .fecho .fecho__passo.is-dentro + .fecho__faiscas i{ animation:none; }
 }
 
 .rodape{
@@ -446,7 +495,7 @@ a:hover{ color:var(--agua); }
 <body>
 
 <div class="chrome" id="chrome">
-  <a class="chrome__volta" href="./casamentos_casa_lago.html">← Casamentos</a>
+  <a class="chrome__volta" href="./casamentos_casa_lago.html">Casamentos</a>
   <a class="chrome__volta" href="./index.html">Casa do Lago</a>
 </div>
 
@@ -653,7 +702,10 @@ a:hover{ color:var(--agua); }
      O PRÓXIMO PASSO
      ========================================================== -->
 <section class="fecho">
-  <p class="rotulo fecho__passo rev">O próximo passo</p>
+  <div class="fecho__passo-vao">
+    <p class="rotulo fecho__passo rev">O próximo passo</p>
+    <span class="fecho__faiscas" aria-hidden="true" data-nao-editar><i></i><i></i><i></i><i></i><i></i><i></i></span>
+  </div>
   <h2 class="rev rev--perto rev--d1">Cada casamento<br>é montado à mesa</h2>
   <div class="prosa rev rev--perto rev--d2">
     <p>Conte o que vocês têm em mente, o número de convidados, o horário e o que não pode faltar.
