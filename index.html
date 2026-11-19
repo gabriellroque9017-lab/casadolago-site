@@ -643,6 +643,9 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   opacity:0; transition:opacity .85s var(--ease);
 }
 .assinatura__retrato.is-verso .verso{ opacity:1; }
+/* a foto escondida não segura o ponteiro: no modo de edição, "Trocar foto"
+   troca a que está à vista — a do dia na frente, a da noite depois da virada */
+.assinatura__retrato:not(.is-verso) .verso{ pointer-events:none; }
 .assinatura__retrato img{ display:block; width:100%; height:100%; object-fit:cover; }
 .assinatura__nome{ font-size:clamp(28px,3.6vw,46px); font-weight:300; line-height:1.05; margin-bottom:4px; }
 .assinatura__linha{ color:var(--marfim-mudo); max-width:62ch; line-height:1.72; text-wrap:pretty; }
