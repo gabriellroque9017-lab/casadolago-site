@@ -43,6 +43,8 @@
   var mudancas = {};           /* caminho -> texto */
   var arquivos = [];           /* { caminho, nome, arquivo, url } */
   var apagados = [];           /* caminhos de vídeo que saem da página */
+  var lojaLista = null;        /* a vitrine da loja inteira, quando foi mexida */
+  var noticiasLista = null;    /* as matérias de Notícias & Histórias, quando foram mexidas */
   var conteudo = null;         /* o conteudo.json inteiro, como está no ar */
   var barra = null, aviso = null;
 
@@ -222,6 +224,8 @@
       abreMidia();
       abreCarta();
       abreSecoes();
+      abreLoja();
+      abreNoticias();
       montaBarra();
       /* o que chega depois — fichas que abrem, listas que o JS monta */
       var relogio = setInterval(function () { abreTextos(); abreMidia(); abreCarta(); abreSecoes(); }, 1200);
@@ -1424,7 +1428,8 @@
     return Object.keys(mudancas).length > 0 || arquivos.length > 0 ||
            novos.length > 0 || removidos.length > 0 || apagados.length > 0 ||
            chefNovos.length > 0 || chefFora.length > 0 ||
-           secoesNovas.length > 0 || secoesFora.length > 0;
+           secoesNovas.length > 0 || secoesFora.length > 0 ||
+           lojaLista !== null || noticiasLista !== null;
   }
 
   /* o que está por salvar, dito em português */
@@ -1434,7 +1439,8 @@
     /* a fotografia de um prato novo já é contada no prato */
     var m = arquivos.filter(function (a) {
       return a.caminho.indexOf('prato:') !== 0 && a.caminho.indexOf('chef:') !== 0 &&
-             a.caminho.indexOf('secao:') !== 0;
+             a.caminho.indexOf('secao:') !== 0 && a.caminho.indexOf('loja:') !== 0 &&
+             a.caminho.indexOf('noticia:') !== 0;
     }).length;
     if (t) partes.push(t + (t === 1 ? ' texto' : ' textos'));
     if (m) {
@@ -1455,6 +1461,8 @@
     if (chefFora.length) partes.push(chefFora.length + (chefFora.length === 1 ? ' menu do chef retirado' : ' menus do chef retirados'));
     if (secoesNovas.length) partes.push(secoesNovas.length + (secoesNovas.length === 1 ? ' subseção' : ' subseções'));
     if (secoesFora.length) partes.push(secoesFora.length + (secoesFora.length === 1 ? ' subseção retirada' : ' subseções retiradas'));
+    if (lojaLista !== null) partes.push('a vitrine da loja');
+    if (noticiasLista !== null) partes.push('as notícias');
     return partes;
   }
 
@@ -1627,7 +1635,7 @@
       })
       .then(function () {
         mudancas = {}; arquivos = []; novos = []; removidos = []; apagados = [];
-        chefNovos = []; chefFora = [];
+        chefNovos = []; chefFora = []; lojaLista = null; noticiasLista = null;
         secoesNovas = []; secoesFora = [];
         document.querySelectorAll('.me-apagada').forEach(function (e) { e.classList.remove('me-apagada'); });
         document.querySelectorAll('.me-trocada').forEach(function (e) { e.classList.remove('me-trocada'); });
@@ -1660,12 +1668,103 @@
       /* a fotografia de um prato novo não é um trecho da página: é um campo
          da receita, e viaja com ela */
       if (a.caminho.indexOf('prato:') === 0 || a.caminho.indexOf('chef:') === 0 ||
-          a.caminho.indexOf('secao:') === 0) return;
+          a.caminho.indexOf('secao:') === 0 || a.caminho.indexOf('loja:') === 0 ||
+          a.caminho.indexOf('noticia:') === 0) return;
       conteudo.pagina[chave][a.caminho] = { src: a.destino };
     });
     apagados.forEach(function (c) { conteudo.pagina[chave][c] = { removido: true }; });
     guardaCarta();
     guardaSecoes();
+    guardaLoja(enviados);
+    guardaNoticias(enviados);
+  }
+
+  /* ==================================================================
+     a loja: a vitrine é uma lista só, guardada inteira em conteudo.loja
+
+     Quem desenha e mexe nos cartões é a própria loja.html (window.__loja):
+     aqui só se recebe a lista nova a cada mudança e as fotografias
+     escolhidas, que sobem para img/enviadas junto com o resto.
+     ================================================================== */
+  function abreLoja() {
+    if (!window.__loja || !window.__loja.ligaEdicao) return;
+    window.__loja.ligaEdicao({
+      mudou: function (lista) { lojaLista = lista; pinta(); },
+      foto: function (id, arq) {
+        if (!arquivoAceito(arq)) { recusaArquivo(arq); return false; }
+        if (arq.size > LIMITE_MB * 1048576) {
+          fala('Essa foto tem ' + (arq.size / 1048576).toFixed(1) + ' MB. O limite aqui é ' + LIMITE_MB + ' MB.', true);
+          return false;
+        }
+        var caminho = 'loja:' + id;
+        arquivos = arquivos.filter(function (a) { return a.caminho !== caminho; });
+        arquivos.push({ caminho: caminho, nome: nomeLimpo(arq.name), arquivo: arq, url: URL.createObjectURL(arq) });
+        pinta();
+        return true;
+      },
+      fala: fala
+    });
+  }
+
+  function guardaLoja(enviados) {
+    if (lojaLista === null) return;
+    var fotos = {};
+    (enviados || []).forEach(function (a) {
+      if (a.caminho.indexOf('loja:') === 0) fotos[a.caminho.slice(5)] = a.destino;
+    });
+    var lista = lojaLista.map(function (p) {
+      var limpo = {};
+      Object.keys(p).forEach(function (k) { if (k !== 'fotoLocal') limpo[k] = p[k]; });
+      if (fotos[p.id]) limpo.foto = fotos[p.id];
+      return limpo;
+    });
+    var antes = conteudo.loja || {};
+    var novo = {};
+    Object.keys(antes).forEach(function (k) { novo[k] = antes[k]; });
+    novo.produtos = lista;
+    conteudo.loja = novo;
+  }
+
+  /* ==================================================================
+     Notícias & Histórias: as matérias são uma lista só, em conteudo.noticias
+
+     Quem desenha e mexe nas matérias é a própria página (window.__noticias):
+     aqui só se recebe a lista nova a cada mudança e as fotografias
+     escolhidas, que sobem para img/enviadas junto com o resto. Na hora de
+     gravar, a página devolve a lista final já com o endereço das fotos.
+     ================================================================== */
+  function abreNoticias() {
+    if (!window.__noticias || !window.__noticias.ligaEdicao) return;
+    window.__noticias.ligaEdicao({
+      mudou: function (lista) { noticiasLista = lista; pinta(); },
+      foto: function (chave, arq) {
+        if (!arquivoAceito(arq)) { recusaArquivo(arq); return false; }
+        if (arq.size > LIMITE_MB * 1048576) {
+          fala('Essa foto tem ' + (arq.size / 1048576).toFixed(1) + ' MB. O limite aqui é ' + LIMITE_MB + ' MB.', true);
+          return false;
+        }
+        var caminho = 'noticia:' + chave;
+        arquivos = arquivos.filter(function (a) { return a.caminho !== caminho; });
+        arquivos.push({ caminho: caminho, nome: nomeLimpo(arq.name), arquivo: arq, url: URL.createObjectURL(arq) });
+        pinta();
+        return true;
+      },
+      fala: fala
+    });
+  }
+
+  function guardaNoticias(enviados) {
+    if (noticiasLista === null) return;
+    var fotos = {};
+    (enviados || []).forEach(function (a) {
+      if (a.caminho.indexOf('noticia:') === 0) fotos[a.caminho.slice(8)] = a.destino;
+    });
+    var lista = (window.__noticias && window.__noticias.paraSalvar) ? window.__noticias.paraSalvar(fotos) : noticiasLista;
+    var antes = conteudo.noticias || {};
+    var novo = {};
+    Object.keys(antes).forEach(function (k) { novo[k] = antes[k]; });
+    novo.posts = lista;
+    conteudo.noticias = novo;
   }
 
   /* as decisões sobre a carta viram dois recados no conteudo.json: quem sai

@@ -230,7 +230,9 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 }
 .veu.is-aberto{ clip-path:inset(0 0 0 0); visibility:visible; }
 .veu__lista{ display:flex; flex-direction:column; gap:clamp(12px,2.4vh,24px); text-align:center; }
-.veu__lista a{ font-family:var(--serifa); font-weight:300; font-size:clamp(1.8rem,5.4vw,3.8rem); line-height:1.05; }
+/* a altura da tela também manda, para a lista não encostar no rodapé do menu */
+.veu__lista a{ font-family:var(--serifa); font-weight:300; font-size:clamp(1.8rem,min(5.4vw,6vh),3.8rem); line-height:1.05; }
+@media (max-height:500px){ .veu__lista{ gap:max(6px,1.6vh); } .veu__lista a{ font-size:max(20px,6vh); } .veu__pe{ bottom:12px; } }
 .veu__pe .veu__vila{ color:#3F7A4E; }
 .veu__fechar{ position:absolute; top:22px; right:var(--margem); font-family:var(--grot); font-size:11px; letter-spacing:.35em; text-indent:.35em; text-transform:uppercase; color:var(--marfim-mudo); }
 .veu__pe{ position:absolute; left:var(--margem); right:var(--margem); bottom:28px; display:flex; gap:26px; flex-wrap:wrap; justify-content:center; }
@@ -1077,6 +1079,7 @@ html.me-editando .rev{ clip-path:none !important; opacity:1 !important; }
     <a href="#arte">Nossas Artes</a>
     <a href="./casamentos_casa_lago.html">Casamentos</a>
     <a href="#experiencias">Experiências</a>
+    <a href="./noticias.html">Notícias &amp; Histórias</a>
     <a href="#reservas">Reservas</a>
   </div>
   <div class="veu__pe">

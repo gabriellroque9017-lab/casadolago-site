@@ -1,0 +1,201 @@
+{
+  "posts": [
+    {
+      "id": "manoel-congo-e-mariana-crioula",
+      "titulo": "Manoel Congo e Mariana Crioula: a memória que o Vale do Café não pode esquecer",
+      "chapeu": "Especial Consciência Negra",
+      "categoria": "historia",
+      "data": "2026-11-20",
+      "linhaFina": "Em 1839, Manoel Congo foi enforcado em Vassouras por liderar uma insurreição contra a escravidão. Quase dois séculos depois, sua história e a de Mariana Crioula nos obrigam a perguntar: de quem é a memória que preservamos no Vale do Café?",
+      "capa": {
+        "foto": "./img/noticias/vassouras-1858-1861.webp",
+        "legenda": "Vassouras, Rio de Janeiro, 1858–1861. Vista panorâmica da cidade durante o período de expansão da economia cafeeira no Vale do Paraíba.",
+        "credito": "Imagem: litografia de Eugène Cicéri, a partir de fotografia de Victor Frond. Fonte: Brasil Pitoresco. Acervo: Biblioteca Nacional."
+      },
+      "blocos": [
+        {
+          "id": "b1",
+          "tipo": "p",
+          "texto": "Em novembro de 1838, centenas de pessoas escravizadas haviam decidido que não permaneceriam em cativeiro. Entre suas lideranças estavam Manoel Congo e Mariana Crioula, uma mulher negra que também ousou desafiar a estrutura de poder das fazendas."
+        },
+        {
+          "id": "b2",
+          "tipo": "p",
+          "texto": "A repressão foi violenta. Manoel terminou na forca. Mariana foi absolvida no processo criminal, mas continuou sujeita à escravidão."
+        },
+        {
+          "id": "b3",
+          "tipo": "p",
+          "texto": "O movimento foi derrotado pelas armas."
+        },
+        {
+          "id": "b4",
+          "tipo": "p",
+          "texto": "Hoje, quando admiramos as antigas fazendas do Vale do Café, a história dos dois nos coloca diante de uma pergunta incômoda: Por que conhecemos tão bem os nomes de quem possuía as terras e tão pouco sobre quem foi obrigado a trabalhá-las?"
+        },
+        {
+          "id": "b6",
+          "tipo": "h2",
+          "texto": "A insurreição que desafiou os senhores do café"
+        },
+        {
+          "id": "b7",
+          "tipo": "p",
+          "texto": "Na madrugada de 6 de novembro de 1838, pessoas escravizadas das fazendas Freguesia e Maravilha, pertencentes ao capitão-mor Manuel Francisco Xavier, iniciaram uma fuga coletiva na região de Paty do Alferes, então vinculada a Vassouras."
+        },
+        {
+          "id": "b8",
+          "tipo": "p",
+          "texto": "O movimento ganhou rapidamente novas adesões. Segundo pesquisas históricas, entre 200 e 400 pessoas participaram da insurreição, refugiando-se nas matas da Serra de Santa Catarina, onde buscaram estabelecer um quilombo."
+        },
+        {
+          "id": "b11",
+          "tipo": "foto",
+          "foto": "./img/noticias/mariana-crioula.webp",
+          "posicao": "direita",
+          "legenda": "Mariana Crioula (século XIX). Representação artística de uma das lideranças femininas da insurreição de 1838, no Vale do Paraíba.",
+          "credito": "Ilustração contemporânea. Autoria e fonte original não identificadas."
+        },
+        {
+          "id": "b9",
+          "tipo": "p",
+          "texto": "Não se tratava apenas de escapar de uma propriedade. A formação de um quilombo representava a tentativa de construir uma existência fora do domínio dos senhores, em uma sociedade que reconhecia pessoas negras escravizadas como propriedade."
+        },
+        {
+          "id": "b10",
+          "tipo": "p",
+          "texto": "Manoel Congo, africano e ferreiro, destacou-se entre as lideranças. Mariana Crioula, mulher negra nascida no Brasil e escravizada no serviço doméstico, também assumiu papel importante na mobilização."
+        },
+        {
+          "id": "b12",
+          "tipo": "p",
+          "texto": "A tradição histórica os reconhece como rei e rainha do quilombo, títulos que simbolizam a autoridade conquistada entre aqueles que lutavam pela própria liberdade."
+        },
+        {
+          "id": "b13",
+          "tipo": "h2",
+          "texto": "Seis dias de resistência. Uma repressão exemplar."
+        },
+        {
+          "id": "b14",
+          "tipo": "p",
+          "texto": "A insurreição durou aproximadamente seis dias. Em 12 de novembro de 1838, forças da Guarda Nacional e grupos armados locais conseguiram desarticular o movimento."
+        },
+        {
+          "id": "b33",
+          "tipo": "foto",
+          "foto": "./img/noticias/manoel-congo.webp",
+          "posicao": "esquerda",
+          "legenda": "Manoel Congo (século XIX). Representação artística do líder da insurreição de pessoas escravizadas ocorrida em 1838, na região de Vassouras.",
+          "credito": "Ilustração contemporânea. Autoria e fonte original não identificadas."
+        },
+        {
+          "id": "b15",
+          "tipo": "p",
+          "texto": "Houve confrontos, mortes, feridos e capturas. O número exato de vítimas não é conhecido."
+        },
+        {
+          "id": "b16",
+          "tipo": "p",
+          "texto": "Em janeiro de 1839, os acusados foram julgados em Vassouras. Seis homens receberam penas de 650 açoites cada, além da obrigação de utilizar ferros no pescoço durante três anos. Mariana Crioula foi absolvida criminalmente, sem que isso significasse sua libertação do cativeiro."
+        },
+        {
+          "id": "b17",
+          "tipo": "p",
+          "texto": "Manoel Congo recebeu a sentença mais severa: a morte por enforcamento, executada publicamente em setembro de 1839."
+        },
+        {
+          "id": "b18",
+          "tipo": "p",
+          "texto": "A punição tinha uma finalidade que ultrapassava o condenado. Pretendia demonstrar a força dos proprietários e das instituições imperiais diante de qualquer tentativa de resistência."
+        },
+        {
+          "id": "b19",
+          "tipo": "p",
+          "texto": "É impossível ignorar a contradição: a mesma sociedade que celebrava a riqueza e o refinamento de suas fazendas considerava legítimo torturar e executar pessoas por reivindicarem a própria liberdade."
+        },
+        {
+          "id": "b20",
+          "tipo": "h2",
+          "texto": "A história que não pode permanecer à sombra dos casarões"
+        },
+        {
+          "id": "b5",
+          "tipo": "foto",
+          "foto": "./img/noticias/terreiro-secagem-cafe-1882.webp",
+          "posicao": "direita",
+          "legenda": "Trabalho no terreiro de secagem de café, Vale do Paraíba, c. 1882. Homens, mulheres e crianças, possivelmente escravizados, participam do beneficiamento do café em uma fazenda da região.",
+          "credito": "Fotografia: Marc Ferrez. Crédito: Coleção Gilberto Ferrez / Acervo Instituto Moreira Salles."
+        },
+        {
+          "id": "b21",
+          "tipo": "p",
+          "texto": "A insurreição de 1838 é um dos episódios mais significativos da resistência negra no Vale do Café. Mas Manoel Congo e Mariana Crioula representam também aqueles cujos nomes não sobreviveram aos registros oficiais."
+        },
+        {
+          "id": "b22",
+          "tipo": "p",
+          "texto": "Homens, mulheres e crianças que trabalharam compulsoriamente nas lavouras, sofreram castigos, foram separados de suas famílias e morreram sob a violência do sistema escravista."
+        },
+        {
+          "id": "b23",
+          "tipo": "p",
+          "texto": "A história dessas pessoas não pode ser tratada como uma nota de rodapé da prosperidade cafeeira."
+        },
+        {
+          "id": "b24",
+          "tipo": "p",
+          "texto": "Neste Dia da Consciência Negra, recordar Manoel Congo e Mariana Crioula significa reconhecer que o patrimônio histórico de Vassouras não se resume aos casarões dos barões. Ele também está nas trajetórias daqueles que resistiram à escravidão e nas marcas de uma violência cujas consequências atravessaram gerações."
+        },
+        {
+          "id": "b25",
+          "tipo": "p",
+          "texto": "Preservar essa memória é uma responsabilidade histórica, não apenas uma homenagem."
+        },
+        {
+          "id": "b26",
+          "tipo": "h2",
+          "texto": "Memorial Manoel Congo: um lugar para conhecer e refletir"
+        },
+        {
+          "id": "b27",
+          "tipo": "p",
+          "texto": "No Centro Histórico de Vassouras, o Memorial Manoel Congo ocupa o antigo Largo da Forca, local associado à execução do líder da insurreição."
+        },
+        {
+          "id": "b28",
+          "tipo": "foto",
+          "foto": "./img/noticias/memorial-manoel-congo.webp",
+          "posicao": "larga",
+          "legenda": "Memorial Manoel Congo, Vassouras (RJ). Espaço dedicado à memória da resistência negra e da insurreição de 1838, liderada por Manoel Congo e Mariana Crioula.",
+          "credito": "Fotografia: Prefeitura Municipal de Vassouras"
+        },
+        {
+          "id": "b29",
+          "tipo": "p",
+          "texto": "Inaugurado em 1996, o memorial homenageia Manoel Congo e mantém viva a lembrança da resistência negra na região."
+        },
+        {
+          "id": "b30",
+          "tipo": "p",
+          "texto": "Hoje, integra o patrimônio cultural e os pontos de interesse turístico de Vassouras. Sua visita oferece uma perspectiva indispensável para quem deseja conhecer o Vale do Café além da arquitetura das antigas fazendas."
+        },
+        {
+          "id": "b31",
+          "tipo": "p",
+          "texto": "Porque visitar uma cidade histórica também exige compreender as vidas que foram sacrificadas para construir sua riqueza."
+        },
+        {
+          "id": "b32",
+          "tipo": "p",
+          "texto": "Que a memória de Manoel Congo, Mariana Crioula e de tantos outros que lutaram e morreram pela liberdade não permaneça à sombra dos casarões. Que ocupe, definitivamente, seu lugar na história."
+        }
+      ],
+      "referencias": "Museu da Justiça do TJRJ; Projeto Impressões Rebeldes (UFF); Arquivo Nacional; Museu Casa da Hera.",
+      "destaque": true,
+      "visivel": true,
+      "referenciasTitulo": "Referências históricas",
+      "criadoEm": "2026-11-20T00:25:15.000Z"
+    }
+  ]
+}
